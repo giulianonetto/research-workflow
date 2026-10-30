@@ -1,0 +1,31 @@
+---
+title: "Analysis: <title> (#<N>)"
+format: html
+---
+
+Short walkthrough of the main results, to continue by hand. It does not re-run the experiment: what is where is in the Appendix of [RESULTS.md](RESULTS.md). Run it chunk by chunk.
+
+## Setup
+
+```{r setup}
+root <- system("git rev-parse --show-toplevel", intern = TRUE)
+out  <- Sys.getenv("OUT", file.path(root, "tmp/experiments/<task>"))
+need <- file.path(out, "<main object>.rds")
+if (!file.exists(need)) stop("Missing ", need, ": run `experiment/run.sh <stage>` first.")
+# source("experiment/<helpers>.R")   # reuse the experiment's own code
+obj <- readRDS(need)
+```
+
+## <Main result 1>
+
+```{r}
+# the few lines that lead to this result
+```
+
+## Continue from here
+
+Ready to use: `obj` (<what it is>), <other objects>. Ideas to try next: <one or two>.
+
+```{r}
+
+```

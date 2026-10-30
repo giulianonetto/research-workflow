@@ -1,0 +1,14 @@
+{
+  "name": "research-workflow",
+  "owner": { "name": "giulianonetto" },
+  "description": "Research workflow skills for Claude.",
+  "plugins": [
+    {
+      "name": "research-workflow",
+      "source": "./",
+      "description": "Plans, progress logs, DECISION lines and experiments for research repos.",
+      "category": "productivity",
+      "keywords": ["research", "planning", "experiments"]
+    }
+  ]
+}

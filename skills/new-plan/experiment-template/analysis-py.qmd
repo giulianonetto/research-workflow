@@ -1,0 +1,36 @@
+---
+title: "Analysis: <title> (#<N>)"
+format: html
+jupyter: python3
+---
+
+Short walkthrough of the main results, to continue by hand. It does not re-run the experiment: what is where is in the Appendix of [RESULTS.md](RESULTS.md). Run it cell by cell.
+
+## Setup
+
+```{python}
+import os, subprocess, sys
+from pathlib import Path
+root = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
+out = Path(os.environ.get("OUT", root / "tmp/experiments/<task>"))
+need = out / "<main object>.parquet"
+if not need.exists():
+    raise FileNotFoundError(f"Missing {need}: run `experiment/run.sh <stage>` first.")
+# sys.path.insert(0, "experiment")   # reuse the experiment's own code
+import pandas as pd
+obj = pd.read_parquet(need)
+```
+
+## <Main result 1>
+
+```{python}
+# the few lines that lead to this result
+```
+
+## Continue from here
+
+Ready to use: `obj` (<what it is>), <other objects>. Ideas to try next: <one or two>.
+
+```{python}
+
+```

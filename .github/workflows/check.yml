@@ -1,0 +1,13 @@
+name: check
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skills (frontmatter, manifest, versions, links, stale names)
+        run: python3 tests/check_skills.py
+      - name: Scripts (run.sh template, refresher) on a fake project
+        run: bash tests/check_scripts.sh

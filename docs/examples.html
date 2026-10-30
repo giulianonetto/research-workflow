@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Workflow Examples</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* layout: one reading column; each workflow is a vertical timeline split by session bands; forks shown as two side-by-side options */
+:root {
+  --bg:#ffffff; --fg:#1b2420; --muted:#5a6660; --line:#dfe4e0; --soft:#f3f6f4; --code:#eef2ef;
+  --accent:#2f6b4f; --accent-soft:#e3efe8;
+  --you:#5b4a8a; --you-soft:#ece8f5;
+  --drafting:#8a5a00; --drafting-bg:#fbf0d9; --planned:#1f5596; --planned-bg:#e2ecf8;
+  --inprog:#2f6b4f; --inprog-bg:#e3efe8; --done:#4c5752; --done-bg:#e9ecea;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#121715; --fg:#e2e8e4; --muted:#9aa6a0; --line:#2a332f; --soft:#18201c; --code:#1c2420;
+  --accent:#7cc4a0; --accent-soft:#1d2d25; --you:#b9a8ea; --you-soft:#272238;
+  --drafting:#f0c060; --drafting-bg:#33290f; --planned:#8ab8f0; --planned-bg:#16263a;
+  --inprog:#7cc4a0; --inprog-bg:#1d2d25; --done:#b3bdb8; --done-bg:#232a27; color-scheme:dark } }
+:root[data-theme="dark"] {
+  --bg:#121715; --fg:#e2e8e4; --muted:#9aa6a0; --line:#2a332f; --soft:#18201c; --code:#1c2420;
+  --accent:#7cc4a0; --accent-soft:#1d2d25; --you:#b9a8ea; --you-soft:#272238;
+  --drafting:#f0c060; --drafting-bg:#33290f; --planned:#8ab8f0; --planned-bg:#16263a;
+  --inprog:#7cc4a0; --inprog-bg:#1d2d25; --done:#b3bdb8; --done-bg:#232a27; color-scheme:dark }
+
+* { box-sizing:border-box }
+body { background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15.5px; line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:40px 64px; }
+main { max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:56px; }
+h1,h2,h3 { text-wrap:balance; margin:0; line-height:1.25 }
+h1 { font-size:2rem; font-weight:600; letter-spacing:-.01em }
+h2 { font-size:1.45rem; font-weight:600 }
+h3 { font-size:1rem; font-weight:600 }
+p { margin:0; max-width:68ch }
+code, .cmd { font-family:var(--mono); font-size:.9em }
+code { background:var(--code); padding:1px 5px; border-radius:4px }
+a { color:var(--accent) }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px }
+.lede { color:var(--muted); font-size:1.05rem }
+.intro { display:flex; flex-direction:column; gap:14px }
+
+/* key + nav */
+.key { display:flex; flex-wrap:wrap; gap:10px 18px; font-size:13.5px; color:var(--muted); align-items:center }
+.key span { display:inline-flex; gap:6px; align-items:center }
+.toc { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px }
+.toc a { display:flex; flex-direction:column; gap:2px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; text-decoration:none; color:var(--fg) }
+.toc a:hover { border-color:var(--accent) }
+.toc b { font-family:var(--mono); color:var(--accent); font-size:12px; font-weight:500 }
+.toc span { font-size:14px; line-height:1.35 }
+
+/* chips */
+.chip { font-family:var(--mono); font-size:12.5px; font-weight:500; padding:2px 8px; border-radius:5px; white-space:nowrap; display:inline-block }
+.chip.cmd { background:var(--accent-soft); color:var(--accent) }
+.chip.you { background:var(--you-soft); color:var(--you); font-family:var(--sans); font-weight:600; font-size:12px; letter-spacing:.03em; text-transform:uppercase }
+.st { font-family:var(--sans); font-size:11.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; padding:2px 8px; border-radius:999px; white-space:nowrap }
+.st.drafting { background:var(--drafting-bg); color:var(--drafting) }
+.st.planned { background:var(--planned-bg); color:var(--planned) }
+.st.inprog { background:var(--inprog-bg); color:var(--inprog) }
+.st.done { background:var(--done-bg); color:var(--done) }
+
+/* workflow */
+.wf { display:flex; flex-direction:column; gap:18px; scroll-margin-top:16px }
+.wf-head { display:flex; flex-direction:column; gap:8px; padding-bottom:14px; border-bottom:2px solid var(--fg) }
+.eyebrow { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent) }
+.scenario { color:var(--muted) }
+.uses { font-size:13.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px; align-items:center }
+
+.session { display:flex; align-items:center; gap:12px; font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:8px }
+.session::after { content:""; flex:1; height:1px; background:var(--line) }
+.steps { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0 }
+.step { display:grid; grid-template-columns:minmax(0,180px) minmax(0,1fr); gap:6px 18px; padding:12px 0; border-top:1px solid var(--line) }
+.step:first-child { border-top:0 }
+.who { display:flex; flex-direction:column; gap:6px; align-items:flex-start }
+.what { display:flex; flex-direction:column; gap:8px; min-width:0 }
+.what ul { margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:3px }
+.say { border-left:3px solid var(--line); padding:2px 0 2px 12px; color:var(--muted); font-size:14.5px }
+.say b { color:var(--fg); font-weight:600 }
+.transition { display:inline-flex; gap:6px; align-items:center; font-size:13px; color:var(--muted) }
+pre { margin:0; background:var(--code); border-radius:6px; padding:10px 12px; overflow-x:auto; font:12.5px/1.55 var(--mono); white-space:pre }
+
+.fork { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:10px }
+.opt { border:1px solid var(--line); border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:6px; min-width:0; font-size:14.5px }
+.opt h4 { margin:0; font-size:14px; font-weight:600 }
+.opt.rec { border-color:var(--accent) }
+.opt .tag { font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent) }
+
+.after { background:var(--soft); border-radius:8px; padding:14px 16px; display:flex; flex-direction:column; gap:8px }
+.after h3 { font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted) }
+.next { font-size:14.5px }
+
+.rules { display:flex; flex-direction:column; gap:12px }
+.rules dl { margin:0; display:grid; grid-template-columns:minmax(0,200px) minmax(0,1fr); gap:8px 18px }
+.rules dt { font-weight:600 }
+.rules dd { margin:0; color:var(--muted) }
+
+@media (max-width:600px) {
+  .step { grid-template-columns:minmax(0,1fr) }
+  .rules dl { grid-template-columns:minmax(0,1fr) }
+  .rules dd { margin-bottom:6px }
+  h1 { font-size:1.65rem }
+}
+</style>
+</head><body>
+
+<main>
+<header class="intro">
+  <h1>Workflow examples</h1>
+  <p class="lede">Five common situations, step by step, with the exact commands. The examples use research repos; the names are only illustrations.</p>
+  <div class="key">
+    <span><span class="chip cmd">/command</span> you type it in Claude</span>
+    <span><span class="chip you">You</span> you do it yourself (terminal, or plain talk)</span>
+    <span><span class="st drafting">drafting</span><span class="st planned">planned</span><span class="st inprog">in-progress</span><span class="st done">done</span> task status</span>
+  </div>
+  <nav class="toc" aria-label="Workflows">
+    <a href="#new-repo"><b>1</b><span>New repo from scratch</span></a>
+    <a href="#new-idea"><b>2</b><span>New task from your head, in an existing repo</span></a>
+    <a href="#from-issue"><b>3</b><span>Start on an existing GitHub issue</span></a>
+    <a href="#continue-draft"><b>4</b><span>Continue a plan that is still a draft</span></a>
+    <a href="#experiment"><b>5</b><span>Run an experiment</span></a>
+  </nav>
+</header>
+
+<!-- 1 -->
+<section class="wf" id="new-repo">
+  <div class="wf-head">
+    <span class="eyebrow">Workflow 1</span>
+    <h2>New repo from scratch</h2>
+    <p class="scenario">You start a benchmark of clustering methods on simulated data. Nothing exists yet.</p>
+    <div class="uses">Uses: <span class="chip you">You</span><span class="chip cmd">/setup-workflow</span> then workflow 2</div>
+  </div>
+
+  <div class="session">Session 1 · day 1</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what">
+        <p>Create the repo on GitHub first, so the setup can use GitHub Issues as the tracker.</p>
+<pre>gh repo create sim-bench --private --clone
+cd sim-bench</pre>
+        <p>No GitHub (a private scratch folder)? Use <code>mkdir sim-bench &amp;&amp; cd sim-bench &amp;&amp; git init</code>. Setup then chooses "no issue tracker".</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what"><p>Open Claude in the folder, as a new session.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/setup-workflow</span></div>
+      <div class="what">
+        <p>Claude looks at the folder (git? remote? existing files?) and asks three things, with recommended answers:</p>
+        <div class="say"><b>Project in one line?</b> "Benchmark of clustering methods on simulated data."<br><b>Language and tools?</b> "R, renv, Slurm on the cluster."<br><b>Issues?</b> "GitHub Issues on <code>you/sim-bench</code>" (recommended because there is a remote).</div>
+        <p>It shows you the drafts. You ask for changes until they look right; then it writes them and makes one commit, <code>workflow: plans/PROGRESS setup</code>. It does not push.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what"><p>Push when you are ready: <code>git push -u origin main</code> (or ask Claude to).</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/new-plan</span></div>
+      <div class="what"><p>Your first task starts here, exactly as in <a href="#new-idea">workflow 2</a>. Often the first task is "set up the project skeleton" or the first analysis.</p></div>
+    </li>
+  </ol>
+
+  <div class="after">
+    <h3>The folder after setup</h3>
+<pre>sim-bench/
+├── CLAUDE.md               planning rules, issue tracker, glossary rules
+├── README.md               + "Development workflow" section
+├── PROGRESS.md             folder log: Current state "no active task"
+├── plans/README.md         format rules, DECISION lines, status table (empty)
+├── docs/agents/domain.md   when to add a glossary term or an ADR
+└── .gitignore              tmp/ ignored</pre>
+    <p class="next"><code>GLOSSARY.md</code> and <code>docs/adr/</code> appear later, when you agree on the first term or decision.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="wf" id="new-idea">
+  <div class="wf-head">
+    <span class="eyebrow">Workflow 2</span>
+    <h2>New task from your head, in an existing repo</h2>
+    <p class="scenario">In a repo already set up, you have an idea: try a hurdle model for the zero-heavy taxa. Nothing is written down yet.</p>
+    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/new-plan</span><span class="chip cmd">progress</span> optional <span class="chip cmd">/grilling</span></div>
+  </div>
+
+  <div class="session">Session 1 · day 1</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/project-refresher</span><span class="transition">optional</span></div>
+      <div class="what"><p>Check that nothing else is half done (uncommitted files, another active task) before you start something new.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what"><p>Talk the idea through in plain words: what you want, why, what you already know, what worries you. For one hard point, <span class="chip cmd">/grilling</span> asks you questions round by round. Stop whenever you like; nothing needs to be settled.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/new-plan</span></div>
+      <div class="what">
+        <p>First Claude asks about the issue:</p>
+        <div class="say"><b>"Does this task have a GitHub issue? If not, create one or go without?"</b></div>
+        <div class="fork">
+          <div class="opt rec">
+            <span class="tag">Usually</span>
+            <h4>Create an issue</h4>
+            <p>When the task takes more than one session, will end in a PR, or others should see it. Claude runs <code>gh issue create</code> with a title and a short body from the conversation, e.g. <code>#41</code>.</p>
+            <p>Folder and branch: <code>issue-41-hurdle-model</code></p>
+          </div>
+          <div class="opt">
+            <span class="tag">Sometimes</span>
+            <h4>Go without</h4>
+            <p>For a quick, private exploration. Everything else works the same, but there is no issue to link the plan and the PR to, and no <code>/to-tickets</code>.</p>
+            <p>Folder and branch: <code>hurdle-model</code></p>
+          </div>
+        </div>
+        <p>Then Claude:</p>
+        <ul>
+          <li>reads the code and data the idea touches, so <b>Where things are now</b> is correct;</li>
+          <li>drafts <code>PLAN.md</code>: a short Goal, maybe a few steps, and everything unsettled under <b>Open questions</b>;</li>
+          <li>shows you the draft and changes it until you approve.</li>
+        </ul>
+        <p>Then Claude creates the branch from an up-to-date <code>main</code>, writes the task folder, logs any decisions you already made as DECISION lines, and commits <code>plan: start issue-41-hurdle-model</code>. It asks before pushing; once pushed, it comments on the issue with a link to the plan.</p>
+        <span class="transition">status <span class="st drafting">drafting</span></span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="what"><p>At the end of the session (or say "log progress"). The task log gets <b>Next</b>, e.g. "decide open question 1: how to model the zeros". The folder log gets one short section for the session.</p></div>
+    </li>
+  </ol>
+
+  <div class="after">
+    <h3>What you have now</h3>
+<pre>plans/issue-41-hurdle-model/
+├── PLAN.md       Goal · Where things are now · Steps · Open questions
+└── PROGRESS.md   **Status:** drafting · Current state · Next · entries</pre>
+    <p class="next">Next: keep working on the draft over the next days, as in <a href="#continue-draft">workflow 4</a>.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="wf" id="from-issue">
+  <div class="wf-head">
+    <span class="eyebrow">Workflow 3</span>
+    <h2>Start on an existing GitHub issue</h2>
+    <p class="scenario">Issue <code>#27</code>, "Simulator ignores coverage below 5x", is open. Maybe you wrote it weeks ago, maybe someone else did.</p>
+    <div class="uses">Uses: <span class="chip cmd">/new-plan</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">progress</span><span class="chip cmd">/code-review</span></div>
+  </div>
+
+  <div class="session">Session 1 · plan</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/new-plan</span></div>
+      <div class="what">
+        <div class="say"><b>You:</b> "/new-plan for issue #27"</div>
+        <p>Claude reads the issue, its body and comments (<code>gh issue view 27 --comments</code>), and the code it names. Then it drafts <code>PLAN.md</code>: the Goal comes from the issue, and points left open in the comments become Open questions. It shows you the draft, creates <code>issue-27-low-coverage</code> from <code>main</code> and commits. After you push, the issue gets a comment linking the plan.</p>
+        <span class="transition">status <span class="st drafting">drafting</span></span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what">
+        <p>Decide if the plan needs more thinking:</p>
+        <div class="fork">
+          <div class="opt">
+            <h4>Clear and small</h4>
+            <p>The issue already says what to do. Run <span class="chip cmd">/finalize-plan</span> now, in the same session.</p>
+          </div>
+          <div class="opt">
+            <h4>Needs thinking</h4>
+            <p>Run <span class="chip cmd">progress</span>, stop, and keep drafting over the next days as in <a href="#continue-draft">workflow 4</a>.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/finalize-plan</span></div>
+      <div class="what">
+        <p>Claude checks each item and shows <b>ok</b> or <b>gap</b>: Goal, Open questions, files that really exist, steps concrete enough, decisions written in the plan. You fix the gaps (or accept them), then:</p>
+        <div class="say"><b>"Set the status to planned?"</b> You: "yes"</div>
+        <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span></span>
+        <p>Building over several sessions? Run <code>/to-tickets plans/issue-27-low-coverage/PLAN.md</code> now.</p>
+      </div>
+    </li>
+  </ol>
+
+  <div class="session">Session 2, 3, … · build (always a fresh session)</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip you">You</span><span class="chip cmd">/project-refresher</span></div>
+      <div class="what"><p>Run <code>/clear</code> or open a new session, then the refresher. It shows the task's <b>Next</b>, e.g. "PLAN step 1: add the coverage filter in <code>R/simulate.R</code>".</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what">
+        <p>Build the step with Claude, or <code>/implement #&lt;ticket&gt;</code> if you made tickets. On the first build session, Claude asks once:</p>
+        <div class="say"><b>"Set the task to in-progress?"</b> You: "yes"</div>
+        <span class="transition">status <span class="st planned">planned</span> → <span class="st inprog">in-progress</span></span>
+        <p>If reality breaks the plan, run <span class="chip cmd">/update-plan</span>: it adds a <code>## Changes</code> line with the reason.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="what"><p>At the end of every build session: what was done (commits, job IDs), DECISION lines, and a new <b>Next</b>.</p></div>
+    </li>
+  </ol>
+
+  <div class="session">Last session · close</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/code-review</span><span class="chip you">You</span></div>
+      <div class="what"><p>Review against <code>main</code>, then open the PR: <code>gh pr create</code>, or ask Claude to. Check that the PR description says <code>Closes #27</code>, so merging closes the issue.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="what">
+        <p>When the PR is merged, tell it "merged, mark done". The folder log gets a one-line summary and the task leaves Current state.</p>
+        <span class="transition">status <span class="st inprog">in-progress</span> → <span class="st done">done</span></span>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- 4 -->
+<section class="wf" id="continue-draft">
+  <div class="wf-head">
+    <span class="eyebrow">Workflow 4</span>
+    <h2>Continue a plan that is still a draft</h2>
+    <p class="scenario">The hurdle-model plan from workflow 2 is in <span class="st drafting">drafting</span>. You come back to it on a new day, maybe a week later.</p>
+    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/update-plan</span><span class="chip cmd">sandbox</span><span class="chip cmd">progress</span><span class="chip cmd">/finalize-plan</span></div>
+  </div>
+
+  <div class="session">Any brainstorm session · repeat as many days as needed</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/project-refresher</span></div>
+      <div class="what">
+        <p>In a new session. Add <code>detailed</code> to also see the open questions and the last decisions.</p>
+<pre># At a glance
+Drafting the hurdle-model plan (#41); stopped after ruling out zero-inflated NB.
+## Next step
+Decide open question 2: which zero process to use.</pre>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what"><p>Brainstorm on that question: plain talk, or <span class="chip cmd">/grilling</span> if you want to be pushed. Ideas can go off in any direction; nothing is lost as long as <span class="chip cmd">progress</span> runs before you stop.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span><span class="chip cmd">sandbox</span></div>
+      <div class="what">
+        <div class="say"><b>You:</b> "I want to see how the zero fraction depends on read depth before I decide."</div>
+        <p>Claude writes <code>plans/issue-41-hurdle-model/sandbox/03-zero-fraction.R</code> (sections you run one by one, each with a <b>Look at:</b> note), runs its setup once to catch typos, and tells you what to open. You run it and look at the plots. Its outputs go to <code>tmp/sandbox/</code>, never your real results.</p>
+        <div class="say"><b>You:</b> "Zeros are about 80% in samples under 5k reads, and flat above that."</div>
+        <p>Claude fills in the sandbox Findings.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/update-plan</span></div>
+      <div class="what">
+        <p>Run it whenever the plan should change: after a decision, a new idea, or a new question. Claude shows the changes to <code>PLAN.md</code> (question 2 removed, a new step added), and you approve. The decision goes in the task log:</p>
+<pre>- **DECISION 2026-11-04 15:10:** model zeros with a depth-dependent hurdle, because the zero fraction falls with read depth up to 5k (sandbox 03)</pre>
+        <p>Run it with nothing specific ("just because") and Claude reviews the plan against your recent work, lists what looks stale, and asks what to change. While drafting, it adds no <code>## Changes</code> lines, and it never changes the status.</p>
+        <span class="transition">status stays <span class="st drafting">drafting</span></span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="what"><p>Before you stop. The task log gets what you explored, any decisions not yet logged, and a new <b>Next</b> (e.g. "open question 3: random effects for batch?"). The folder log gets one short section for the session.</p></div>
+    </li>
+  </ol>
+
+  <div class="session">The day you think it is ready</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/finalize-plan</span></div>
+      <div class="what">
+        <p>Claude shows each item as ok or gap. Example gap: "Open question 3 still open". You either settle it now (Claude edits the plan as <code>/update-plan</code> would) or accept it as an assumption the build can start with. Then, only on your "yes":</p>
+        <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span></span>
+        <p>From here, building is the same as the build sessions in <a href="#from-issue">workflow 3</a>.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/update-plan</span><span class="transition">later, if needed</span></div>
+      <div class="what">
+        <p>A new open question after the plan is <span class="st planned">planned</span> or <span class="st inprog">in-progress</span>? Claude asks once:</p>
+        <div class="say"><b>"Keep the status, or go back to drafting?"</b></div>
+        <p>Both answers are fine. Mid-build with one question open is normal in research.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- 5 -->
+<section class="wf" id="experiment">
+  <div class="wf-head">
+    <span class="eyebrow">Workflow 5</span>
+    <h2>Run an experiment</h2>
+    <p class="scenario">You want to know if a hurdle model beats zero-inflated NB on the simulated benchmark before you touch the main code. It will be messy: scripts, cluster runs, plots in the console.</p>
+    <div class="uses">Uses: <span class="chip cmd">/new-plan exp</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">/write-results</span><span class="chip cmd">progress</span> optional <span class="chip cmd">/update-plan</span><span class="chip cmd">sandbox</span></div>
+  </div>
+
+  <div class="session">Session 1 · start</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/new-plan</span></div>
+      <div class="what">
+        <div class="say"><b>You:</b> "/new-plan exp", or say in words that it's an experiment.</div>
+        <p>Without "exp", <code>/new-plan</code> makes a normal task. The issue question works as in <a href="#new-idea">workflow 2</a>; a good issue title is the question itself. The experiment can use any language or tool. Only <code>analysis.qmd</code> has a default, R; ask for Python if you want it.</p>
+        <p><code>PLAN.md</code> gets objectives instead of a Goal:</p>
+<pre>## Overall objective
+Decide if a hurdle model should replace ZINB for zero-heavy taxa.
+
+## Specific objectives
+1. Is FDR lower at equal power? Answered by results/fdr_power.csv (stage: summarize).
+2. How does runtime scale with sample size? To decide.</pre>
+        <p>Claude also creates the experiment's parts from templates:</p>
+<pre>plans/issue-52-hurdle-vs-zinb/
+├── PLAN.md  PROGRESS.md     **Kind:** experiment
+├── experiment/run.sh        the one entry point (stages to fill)
+├── results/                 small figures and tables, committed
+├── RESULTS.md               skeleton, filled at the end
+└── analysis.qmd             skeleton, filled at the end</pre>
+        <span class="transition">status <span class="st drafting">drafting</span></span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/finalize-plan</span></div>
+      <div class="what">
+        <p>After drafting (same as <a href="#continue-draft">workflow 4</a>, as long as you need). For an experiment it checks that the overall objective is there, that each specific objective says how it will be answered, and that <code>run.sh</code> names the planned stages, even if they are empty.</p>
+        <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span> → <span class="st inprog">in-progress</span> when you start</span>
+      </div>
+    </li>
+  </ol>
+
+  <div class="session">The messy middle · many sessions</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what">
+        <p>Work in <code>experiment/</code> any way you like: run scripts directly, try things in the console, use <span class="chip cmd">sandbox</span> for side questions. Two rules only: don't change the main code from here (a change it needs is its own commit, named in the log), and keep big outputs in <code>$OUT</code>, never in git.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what">
+        <p>As each part settles, it becomes a stage in <code>run.sh</code> (see <a href="#run-sh">run.sh, explained</a> below). Stages can call anything:</p>
+<pre>./run.sh                          # list the stages
+./run.sh simulate fit             # run two stages
+OUT=/scratch/$USER/hurdle ./run.sh fit   # big outputs on the cluster's scratch</pre>
+        <p>Every run adds the commit, uncommitted changes, host and stages to <code>$OUT/run-info.log</code>. That is where the provenance in RESULTS.md comes from.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span><span class="chip cmd">/update-plan</span></div>
+      <div class="what"><p>As in any task: <code>progress</code> at the end of each session, with DECISION lines and job IDs. If an objective changes, run <code>/update-plan</code>; once the plan is agreed, it adds a <code>## Changes</code> line, and RESULTS.md will list the changed objective.</p></div>
+    </li>
+  </ol>
+
+  <div class="session">Close · one or two sessions</div>
+  <ol class="steps">
+    <li class="step">
+      <div class="who"><span class="chip cmd">/write-results</span></div>
+      <div class="what">
+        <p>The first round writes the whole draft from the outputs and the log: <b>Answers</b> (high level, one per objective), a brief <b>Methods</b>, detailed <b>Results</b> with the figures and tables in <code>results/</code>, a very short <b>Discussion and conclusion</b>, and the <b>Appendix: what is where</b> (every path, what it is, which stage made it, whether it is in git, and the commit, environment, data and job IDs). Every number names the file it comes from.</p>
+        <p>It also writes the short <code>analysis.qmd</code>: load the main objects, show one or two main results, then "continue from here". You run it chunk by chunk in RStudio, Positron or VS Code, and keep playing in it whenever you like.</p>
+        <p>Every section it writes is marked <code>&lt;!-- unreviewed --&gt;</code> under its heading.</p>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span><span class="chip cmd">/write-results</span><span class="transition">repeat, any order</span></div>
+      <div class="what">
+        <p>Then you go round as often as you need, in any order, always with the same command:</p>
+<pre>/write-results                  update the draft after new runs
+/write-results results 2        redo one section
+/write-results interpret        propose the discussion and conclusion
+"Methods is fine. In Results 1, report the median, not the mean."</pre>
+        <p>A section loses its <code>unreviewed</code> mark only when you say it is reviewed. Text you edit by hand is never overwritten. Interpretation stays in Discussion and conclusion, and is a proposal until you review it. Each round is logged in one line, and the answer to the overall objective becomes a DECISION line.</p>
+        <div class="say"><b>Claude, after a round:</b> "Changed: Results 2, Discussion. Still unreviewed: Results 2, Discussion. Ready to close when those are reviewed."</div>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="what">
+        <div class="say"><b>You:</b> "mark done"</div>
+        <p>Because the task is an experiment, Claude first runs the close check and lists what is missing:</p>
+<pre>RESULTS.md     ok   5 sections, no placeholders, all reviewed
+Appendix       gap  results/runtime.png has no stage
+run.sh         ok   parses, lists 4 stages (nothing re-run)
+analysis.qmd   ok   setup chunk runs
+DECISION       gap  no final answer line yet</pre>
+        <p>You fix the gaps (or accept them, and they are named in the log). Then the final DECISION line and the status change:</p>
+<pre>- **DECISION 2026-11-20 16:40:** ruled out the hurdle model, because FDR was not lower on 5 of 6 settings (RESULTS.md, results/fdr_power.csv)</pre>
+        <span class="transition">status <span class="st inprog">in-progress</span> → <span class="st done">done</span> (a "no" is still an answer)</span>
+      </div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip you">You</span></div>
+      <div class="what"><p>Open a PR and merge it. Always merge, whatever the answer, so the record lands in <code>main</code>. It is safe: the experiment never changed the main code.</p></div>
+    </li>
+    <li class="step">
+      <div class="who"><span class="chip cmd">/new-plan</span><span class="transition">if the answer is yes</span></div>
+      <div class="what"><p>Putting the winner into the main code is a new, normal task ("integrate the hurdle model"), linked to the experiment's final DECISION line.</p></div>
+    </li>
+  </ol>
+
+  <div class="after" id="run-sh">
+    <h3>run.sh, explained</h3>
+    <p class="next">You don't need to know bash. The file has three parts, and you only edit the middle one. Each <b>stage</b> is a name, then <code>()</code>, then a block in <code>{ }</code> holding the commands you would type in the terminal. For this experiment, part 2 could be:</p>
+<pre>simulate() {
+  Rscript simulate.R "$OUT/sim"                     # writes simulated data (big)
+}
+
+fit() {
+  sbatch --wait fit.slurm "$OUT/sim" "$OUT/fit"     # cluster job; waits until it ends
+}
+
+summarize() {
+  Rscript summarize.R "$OUT/fit" "$RES"             # writes fdr_power.csv and 2 figures (small)
+}
+
+all() {
+  simulate
+  fit
+  summarize
+}</pre>
+    <p class="next">How to read it:</p>
+    <ul class="next">
+      <li><code>"$OUT"</code> and <code>"$RES"</code> are the two output folders (next box). Always keep the quotes around them.</li>
+      <li>Everything after <code>#</code> is a comment.</li>
+      <li><code>./run.sh simulate fit</code> runs those two stages in order. <code>./run.sh all</code> runs the <code>all</code> stage, which calls the others. <code>./run.sh</code> alone only lists the stages.</li>
+      <li>Your scripts can read the folders too: <code>Sys.getenv("OUT")</code> in R, <code>os.environ["OUT"]</code> in Python.</li>
+      <li>Part 1 (setup) stops at the first error and finds the folders. Part 3 (runner) checks the stage names and, before each run, adds a line to <code>$OUT/run-info.log</code>: date, computer, stages, commit, uncommitted files. That log is the provenance for RESULTS.md.</li>
+    </ul>
+  </div>
+
+  <div class="after" id="outputs">
+    <h3>Which outputs go to git</h3>
+    <p class="next">Nothing is chosen by file size. The <b>folder</b> a stage writes to decides it, and you choose the folder when you write the stage:</p>
+<pre>$RES  = plans/&lt;task&gt;/results/       committed      what RESULTS.md shows: summary tables, final figures
+$OUT  = tmp/experiments/&lt;task&gt;/     not in git     everything else: simulated data, fits, intermediate files
+        (or OUT=/scratch/... on the cluster)</pre>
+    <p class="next">The rule of thumb: if RESULTS.md shows it, write it to <code>$RES</code>; otherwise, write it to <code>$OUT</code>. <code>tmp/</code> is gitignored, and a scratch folder is outside the repo, so nothing in <code>$OUT</code> can reach git by mistake. The Appendix of RESULTS.md lists both kinds, so you can always find a big output again.</p>
+  </div>
+
+  <div class="after">
+    <h3>If you stop without an answer</h3>
+    <p class="next">Tell <code>progress</code> "drop it". You need only a short RESULTS.md: what was tried, what was seen, and why it stopped. No analysis.qmd. The status becomes <span class="st done">dropped</span>, and the folder is still merged as history.</p>
+  </div>
+</section>
+
+<section class="rules">
+  <div class="wf-head"><span class="eyebrow">Short version</span><h2>What to remember</h2></div>
+  <dl>
+    <dt>Start of a session</dt><dd><code>/project-refresher</code></dd>
+    <dt>End of a session</dt><dd><code>progress</code> (or "log progress")</dd>
+    <dt>New task</dt><dd><code>/new-plan</code>, with or without an issue</dd>
+    <dt>Plan text should change</dt><dd><code>/update-plan</code>, any time, any reason</dd>
+    <dt>Ready to build</dt><dd><code>/finalize-plan</code>, which changes the status only after your yes</dd>
+    <dt>Check something by hand</dt><dd>Ask for a sandbox</dd>
+    <dt>Try something out</dt><dd><code>/new-plan exp</code>; results come from <code>experiment/run.sh</code>; write up with <code>/write-results</code> (as many rounds as you like); close with "mark done"</dd>
+    <dt>All past decisions</dt><dd><code>grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md</code></dd>
+  </dl>
+</section>
+</main>
+</body></html>

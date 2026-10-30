@@ -1,0 +1,18 @@
+{
+  "name": "research-workflow",
+  "version": "0.1.0",
+  "description": "Plans, progress logs, DECISION lines and experiments for research repos: draft plans over many days, status changes only by your choice, and experiments that close with RESULTS.md and a short analysis.qmd.",
+  "author": { "name": "giulianonetto" },
+  "repository": "https://github.com/giulianonetto/research-workflow",
+  "keywords": ["research", "planning", "progress-log", "experiments", "reproducibility"],
+  "skills": [
+    "./skills/setup-workflow",
+    "./skills/new-plan",
+    "./skills/update-plan",
+    "./skills/finalize-plan",
+    "./skills/progress",
+    "./skills/write-results",
+    "./skills/sandbox",
+    "./skills/project-refresher"
+  ]
+}
