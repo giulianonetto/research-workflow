@@ -36,11 +36,66 @@ plans/<task>/analysis.qmd   experiments: short walkthrough to continue by hand
 
 ## Install
 
-**Claude Code** (as a plugin): add this repo as a plugin marketplace and install `research-workflow` from it (see the Claude Code docs on plugins for the exact commands). Skills from a plugin may show with a `research-workflow:` prefix.
+### Claude Code (laptop, cluster, any machine)
 
-**claude.ai**: download the zips from the [latest release](../../releases/latest) (or run `scripts/build-zips.sh`), then upload each one in Settings → Capabilities → Skills, replacing older versions.
+The repo is private, so git on that machine must already be signed in to GitHub. Once per machine:
 
-**In each project**: run `/setup-workflow`. In a project set up with an older version, run it again: it shows what changed and updates only with your agreement.
+```bash
+gh auth login          # skip if `gh auth status` already shows you logged in
+gh auth setup-git      # lets git (and so Claude Code) use that login
+```
+
+Then install, in your shell (Claude Code 2.1.275 or later):
+
+```bash
+claude plugin install research-workflow --marketplace giulianonetto/research-workflow
+```
+
+Or inside a Claude Code session:
+
+```
+/plugin install research-workflow --marketplace giulianonetto/research-workflow
+```
+
+On older Claude Code versions, use two steps:
+
+```bash
+claude plugin marketplace add giulianonetto/research-workflow
+claude plugin install research-workflow@research-workflow
+```
+
+Check it worked: `claude plugin list` shows `research-workflow@research-workflow` as enabled. Start a new session to use it.
+
+In Claude Code, plugin commands carry the plugin's name as a prefix: type `/research-workflow:new-plan`, `/research-workflow:setup-workflow`, and so on. Typing `/new-plan` and choosing from the list also works.
+
+**No SSH key for GitHub on that machine** (common on a cluster)? Run `export CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` first; the `gh` login above is then enough.
+
+**Update** to a new version:
+
+```bash
+claude plugin update research-workflow@research-workflow
+```
+
+Or turn on automatic updates once: in a session, `/plugin` → **Marketplaces** → `research-workflow` → **Enable auto-update**. Then restart Claude Code.
+
+**Remove:** `claude plugin marketplace remove research-workflow`
+
+### claude.ai (web, desktop app, cloud sessions)
+
+1. Get the zips, one per skill. From the [latest release](https://github.com/giulianonetto/research-workflow/releases/latest), or in a shell:
+   ```bash
+   gh release download --repo giulianonetto/research-workflow --pattern '*.zip' --dir research-workflow-zips
+   ```
+   Or build them from a clone: `scripts/build-zips.sh` (they land in `dist/`).
+2. In claude.ai, open **Settings → Capabilities**. Code execution and file creation must be on.
+3. In the **Skills** section, click **Upload skill** and choose one zip. Repeat for each of the 8 zips.
+4. **Updating:** delete the old version of a skill from the Skills list first, then upload the new zip.
+
+Here the commands have no prefix: `/new-plan`, `/setup-workflow`, and so on.
+
+### In each project
+
+Open Claude in the project folder and run `/setup-workflow`. In a project set up with an older version, run it again: it shows what changed and updates only with your agreement.
 
 ## Dependencies
 
