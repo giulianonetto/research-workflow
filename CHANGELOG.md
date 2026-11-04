@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-11-04)
+
+- A `done` or `dropped` task keeps no **Next**: `progress` writes `None: task <status>.` in the task log and moves follow-up work to the folder log's Next. Rule added to `plans/README.md`.
+
 ## 0.1.0 (2026-10-30)
 
 First version.

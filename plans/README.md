@@ -1,6 +1,6 @@
 # Plans
 
-Workflow version: 0.1.0 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
+Workflow version: 0.1.1 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
 
 One folder per task: `plans/<task>/PLAN.md` (what and how) and `plans/<task>/PROGRESS.md` (what was done and decided). Optional `plans/<task>/sandbox/`: code for manual inspection, indexed in its `README.md`; its outputs go to `tmp/sandbox/<task>/` (not in git). The workflow is in the [README](../README.md#development-workflow).
 
@@ -20,6 +20,7 @@ A task can be an **experiment** (tries something out and ends in an answer): sam
   `**Status:** <status> · **Kind:** <task | experiment> · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** <link, or none>`
 - **Current state** is rewritten, not appended, at every update (with its date): at most ~6 one-line bullets, readable in a few seconds. Explanations go in the dated entries.
 - The folder's **Current state** names the active task(s) with a link to their folder. Details stay in the task log. The folder log gets one short time-tagged section per work session (2-3 bullets + a link to the task's `PROGRESS.md`), plus status changes, PRs, and work outside any task. A plan update alone does not touch it.
+- **Next** lives where the work is open: in the task log while the task is open, in the folder log for anything else. A `done` or `dropped` task's Next is `None: task <status>.`; follow-up work goes in the folder log's Next.
 - Times are local. Newest first: dates, and within a date the time-tagged sections (after the summary and Next).
 
 ## DECISION lines
