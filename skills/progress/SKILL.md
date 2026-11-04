@@ -21,7 +21,7 @@ Two logs: the folder's `PROGRESS.md` (what is active; one short section per sess
 3. **Task log** (`plans/<task>/PROGRESS.md`):
    - Today's dated entry (create it if missing): a new time-tagged section right below **Next**, with what changed and its evidence: commits, job IDs, check results, file paths, the `PLAN.md` steps finished. Don't mark steps in `PLAN.md`: status lives only in the logs.
    - **DECISION lines** for every major decision made since the last entry and not yet logged (an option chosen or ruled out, with its reason), in the exact format of `plans/README.md`. Never edit or delete an old DECISION line: a changed decision gets a new line that says which one it replaces.
-   - Rewrite **Next**, starting with the exact first action of the next session (the `PLAN.md` step or open question, the file to open, the command to run): the next session starts fresh and reads this first.
+   - Rewrite **Next** (open tasks only: a `done` or `dropped` task has none, see step 5), starting with the exact first action of the next session (the `PLAN.md` step or open question, the file to open, the command to run): the next session starts fresh and reads this first.
    - Rewrite the **Current state** block and its date.
 
 4. **Folder log** (`PROGRESS.md`), when the rules above call for it:
@@ -31,7 +31,7 @@ Two logs: the folder's `PROGRESS.md` (what is active; one short section per sess
 5. **Status.** Change it only when the user says so, or when `/new-plan` or `/finalize-plan` asks after the user confirmed. Use only the six statuses in `plans/README.md`. If this session built steps of a `planned` task, ask once whether to set it to `in-progress`. Set the status in both places (the `plans/README.md` table and the task header line). Also:
    - **New task** (from `/new-plan`): create the task `PROGRESS.md` (the title and header line exactly as in `plans/README.md`, Current state, a first dated entry, same structure as the folder log), add the row to the `plans/README.md` table, and link the folder from the folder Current state.
    - **PR opened / merged** (events, not statuses): name the PR and the merge commit in both Current state blocks.
-   - **Done or dropped:** one-line summary (or reason) in the folder log; drop the task from the folder Current state.
+   - **Done or dropped:** one-line summary (or reason) in the folder log; drop the task from the folder Current state. The task log keeps no Next: its Current state bullet and its last `### Next` become `None: task <status>.` with a link to the folder log. Any follow-up work (a run, a new task, open issues) moves to the folder log's **Next**, because a Next nobody reads again goes stale without anyone noticing.
    - **Experiment done or dropped** (`**Kind:** experiment`): first run the **Close check** in `plans/EXPERIMENTS.md` and show what is missing; help fill it if the user wants. Change the status only when it passes, or when the user explicitly accepts the gaps (name them in the task log). `done` means the objective was answered, whatever the answer; the final DECISION line states it. `dropped` needs only the short `RESULTS.md`.
 
 6. **Plan change** (a `## Changes` line was added by `/update-plan`): the task log gets a time-tagged section titled `plan change` giving what changed, the evidence (link), and **what the planning missed**, one line each.
