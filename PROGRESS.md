@@ -1,11 +1,14 @@
 # Progress log
 
-## Current state (updated 2026-11-04)
-- **Now:** no active task. Version 0.1.1 released (PR #1 merged, `f889652`; tag `v0.1.1`).
-- Last task: [initial-design](plans/initial-design/PROGRESS.md) (done).
-- Next: try it on a real project; rough edges become issues.
+## Current state (updated 2026-11-17)
+- **Now:** [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md) (drafting): `/prep-implementation`, `implement-next`, "what is next?" in the refresher ([#2](https://github.com/giulianonetto/research-workflow/issues/2)).
+- Last release: 0.1.1 (tag `v0.1.1`).
 
 Times are local.
+
+## 2026-11-17: right-size the build
+### 14:15: task started
+- Real-project review turned into issue [#2](https://github.com/giulianonetto/research-workflow/issues/2) and task [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md), status `drafting`; the review's decisions are logged there.
 
 ## 2026-11-04: version 0.1.1 (no Next on done tasks)
 ### 16:24: 0.1.1 merged and tagged

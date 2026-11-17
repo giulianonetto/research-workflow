@@ -50,4 +50,5 @@ A status changes only by your choice: `/new-plan` (→ `drafting`), `/finalize-p
 
 | Task | Status | Started |
 |---|---|---|
+| [issue-2-right-size-build](issue-2-right-size-build/) | drafting | 2026-11-17 |
 | [initial-design](initial-design/) | done | 2026-10-29 |
