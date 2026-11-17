@@ -13,6 +13,7 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 - No sub-issue concept anywhere: no parent issue table, no status rule for sub-issues, no merge rule.
 - `project-refresher` is read-only and makes one tool call (one bash script). It reads the folder and task `PROGRESS.md`, plus the task's **Next**. It makes no `gh` calls.
 - `progress` writes PRs and merge commits into both Current state blocks.
+- `new-plan` step 3 shows the `PLAN.md` draft in the chat; step 4 writes it to `plans/<task>/` only after approval. A long draft is hard to review in the chat. `/setup-workflow` adds `tmp/` to `.gitignore`.
 - `Workflow version:` line: `skills/setup-workflow/PLANS-README.md:3` (template) and this repo's own `plans/README.md:3`.
 - Checks: `tests/check_skills.py` (manifest = skill folders, `STALE` patterns) and `tests/check_scripts.sh` (runs the refresher on a fake project).
 
@@ -51,7 +52,12 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 ### 6. `progress` follows the status rule
 - Sub-issue status goes in the parent issue table only. The logs keep events and links.
 
-### 7. Docs, checks, version
+### 7. `new-plan` drafts in a file, not in the chat
+- Step 3: write the draft to `tmp/new-plan/<task>/PLAN.md`, give the user the path, and iterate on the file (the user can edit it too). The order stays: nothing goes into `plans/` or git before the user approves.
+- Step 4 (after approval): create the branch, move the file to `plans/<task>/PLAN.md`, delete the tmp copy, then log and commit as now.
+- Step 1: if `tmp/new-plan/<task>/PLAN.md` already exists (a session ended before approval), offer to continue from it.
+
+### 8. Docs, checks, version
 - `README-SECTION.md` flow and steps 4-5, `CLAUDE-SECTION.md`, `README.md`, `docs/examples.html`: new flow; drop `/to-tickets` and `/implement` from the flow.
 - `plugin.json` skills list; `check_scripts.sh` covers the refresher's new part.
 - New version (template change): bump `plugin.json` and both `Workflow version:` lines; add a CHANGELOG section.

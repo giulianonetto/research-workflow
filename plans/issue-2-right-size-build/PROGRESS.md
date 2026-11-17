@@ -2,13 +2,16 @@
 **Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-17)
-- Drafting. The shape is agreed (from a real-project review); 8 open questions in [PLAN.md](PLAN.md) are about how to build it.
+- Drafting. The shape is agreed (from a real-project review), plus step 7 (`new-plan` drafts in `tmp/`); 8 open questions in [PLAN.md](PLAN.md) are about how to build it.
 - Nothing built yet.
 
 ## 2026-11-17: plan started
 Started from the workflow review of a real project (2026-11-16/17), where a medium task was split into 10 sub-issues. The decisions made in that review are logged below.
 ### Next
 - Settle the open questions in `PLAN.md` with `/update-plan` (start with 1: can `finalize-plan` call `prep-implementation`?), then run `/finalize-plan`.
+### 14:53: plan update: new-plan drafts in a file
+- New step 7 in `PLAN.md` (docs, checks, version became step 8). Came up while running `/new-plan` for this task: the 90-line draft was shown in the chat.
+- **DECISION 2026-11-17 14:53:** `/new-plan` writes the draft to `tmp/new-plan/<task>/PLAN.md` and iterates on that file, keeping the approve-then-write order, because a long plan is hard to review in the chat, and `tmp/` is gitignored, survives sessions and does not depend on the branch; ruled out the session scratchpad (can be cleared on reboot) and writing into `plans/` on the branch before approval (user)
 ### 14:15: plan started
 - Issue [#2](https://github.com/giulianonetto/research-workflow/issues/2), branch `issue-2-right-size-build`, `PLAN.md` drafted from `real-project/tmp/skill-building/workflow-review-2026-11-16.md`.
 - **DECISION 2026-11-17 14:15:** by default a task is built on one branch with one PR, and each extra sub-issue needs a reason (parallel work, a separate review unit, or a user gate), because 10 sub-issues for a medium task were hard to follow (from draft, 2026-11-16; review note)
