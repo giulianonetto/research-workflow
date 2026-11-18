@@ -3,6 +3,7 @@
 
 ## Current state (updated 2026-11-18)
 - All 6 steps done; version 0.3.0. Full review of the whole branch done before the step 6 commit: 9 of 10 findings fixed.
+- README rewritten after step 6, at the user's request: shorter, with two figures.
 - Stopped at step 6's Stop: the PR into `main` is next, after the user's yes.
 - Next: open the PR into `main` (`Closes #5`); the user merges it, then tag `v0.3.0`.
 
@@ -10,6 +11,9 @@
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
 - Open the PR from `issue-5-build-runs` into `main` (`gh pr create`, `Closes #5`), after the user says yes. After the user merges it: `/progress` "merged, mark done" (one folder-log entry, plan link to `main`), then tag `v0.3.0`.
+### 14:47: step 6, README with figures
+- The user found the README overwhelming and asked for prettier diagrams. New README: pitch, flow figure, "Why use it", a runs figure, a 3-line start, the command table; the file tree and install details are folded in `<details>`. Figures: `docs/img/{flow,runs}-{light,dark}.svg`, drawn by `docs/figures.py`, checked by rendering them in headless Chrome.
+- **DECISION 2026-11-18 14:47:** the README figures are SVG files drawn by a script (`docs/figures.py`) in a light and a dark version, shown with `<picture>`, ruling out Mermaid and screenshots, because Mermaid cannot match the look of `docs/workflow.html` and screenshots go stale, while a script redraws both versions from one place (user asked for prettier diagrams; Claude chose the form)
 ### 14:25: step 6, docs, checks, version 0.3.0
 - One full review of the whole branch, run before the step 6 commit, served both as step 6's review (it changes `tests/check_skills.py`) and as the review before the PR. Fixed: params/config files and notebooks count as files that set results; an early stop writes its question into Next; "Still needed?" for the first step joins the run question; the CLAUDE.md push override is named in `/new-plan` and `/implement-next`; `docs/workflow.html` is now scanned by `check_skills.py` and its Close card says Claude offers the PR; a stray blank line; the order of the status change in examples workflow 3; the step count left out of the folder Current state. Not fixed: the folder-log commit at the merge lands on `main`, as it already did for "mark done" in 0.2.0.
 - Also changed, not named in the plan: `skills/setup-workflow/README-SECTION.md` ("/implement-next in runs"), and `STALE` gained "ask(s) before pushing" and "agent per worktree".

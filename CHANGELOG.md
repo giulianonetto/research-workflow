@@ -11,6 +11,7 @@ Build in runs that stop where the plan says, with lighter build rules ([#5](http
 - **Logs:** a step's entry is the commit plus only what the diff can't show: at most 2 bullets, plus DECISION lines. The task's PR into `main` gets one folder-log entry, at the merge.
 - **Removed:** parallel builds of big steps (only when you ask).
 - `/setup-workflow` says that plans from 0.2.x have no Stop lines yet.
+- **README:** shorter, with two figures (the life of a task, a build in runs) in light and dark versions, drawn by `docs/figures.py`; the details are folded away.
 
 ## 0.2.0 (2026-11-18)
 
