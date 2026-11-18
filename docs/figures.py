@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Draw the README figures, in a light and a dark version: python3 docs/figures.py
 
-Writes docs/img/flow-{light,dark}.svg (the life of a task) and docs/img/runs-{light,dark}.svg
-(a build in runs, with its stops). Colors follow docs/workflow.html. Text does not wrap in SVG,
+Writes docs/img/flow-{light,dark}.svg (the life of a task), docs/img/runs-{light,dark}.svg
+(a build in runs, with its stops) and docs/img/start-{light,dark}.svg (get started). Colors follow docs/workflow.html. Text does not wrap in SVG,
 so every line is written by hand: keep card lines under about 22 characters.
 """
 from pathlib import Path
@@ -170,6 +170,30 @@ def runs():
     return W, ly + 12, "A build in runs: Claude builds steps 1-2, stops for you, then builds steps 3-6 and stops for the PR into main.", out
 
 
+def start():
+    W, CW, GAP, CH = 1000, 290, 65, 150
+    cards = [
+        ("Install", ("Claude Desktop", "you"), ["Customize → Plugins:", "add the plugin once."]),
+        ("Set up a repo", ("/setup-workflow", "cmd"), ["Once per repo.", "Needs a GitHub remote."]),
+        ("Start a task", ("/new-plan", "cmd"), ["Say the idea.", "Claude drafts the plan."]),
+    ]
+    out = []
+    for i, (title, (label, kind), lines) in enumerate(cards):
+        x = i * (CW + GAP)
+        out.append(f'<rect x="{x + .5}" y=".5" width="{CW - 1}" height="{CH}" rx="12" fill="{{card}}" stroke="{{line}}"/>')
+        out.append(f'<circle cx="{x + 30}" cy="32" r="14" fill="{{accent_bg}}"/>')
+        out.append(text(x + 30, 37, str(i + 1), 14, "accent", 600, SANS, "middle"))
+        out.append(text(x + 52, 37.5, title, 16, "fg", 600))
+        svg, _ = chip(x + 16, 58, label, kind)
+        out.append(svg)
+        for j, line in enumerate(lines):
+            out.append(text(x + 16, 112 + j * 19, line, 13, "muted"))
+        if i:
+            ax, ay = x - GAP / 2 + 3, CH / 2
+            out.append(f'<path d="M{ax - 4} {ay - 8} l8 8 l-8 8" fill="none" stroke="{{arrow}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+    return W, CH + 1, "Get started: install the plugin, run /setup-workflow once per repo, then /new-plan for each task.", out
+
+
 def write(name, fig):
     W, H, title, parts = fig()
     for theme, colors in THEMES.items():
@@ -185,4 +209,5 @@ if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
     write("flow", flow)
     write("runs", runs)
+    write("start", start)
     print(f"wrote {sorted(p.name for p in OUT.glob('*.svg'))}")
