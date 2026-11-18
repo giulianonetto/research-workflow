@@ -13,6 +13,14 @@ STALE = [  # (pattern, files allowed to contain it, why it is stale)
     (r"`/pr`|/pr\b(?![a-z-])", set(), "/pr is not published in the mattpocock plugin"),
     (r"/retro\b", set(), "/retro is not published in the mattpocock plugin"),
     (r"NOTES\.md", set(), "NOTES.md was dropped: brainstorm goes in PROGRESS.md"),
+    (r"/update-plan\b", {"skills/setup-workflow/SKILL.md"}, "update-plan was removed: plan changes follow the rules in plans/README.md"),
+    (r"/to-tickets\b", {"skills/setup-workflow/SKILL.md"}, "mattpocock-skills is no longer used: /finalize-plan prepares the build"),
+    (r"/implement(?![-\w])", {"skills/setup-workflow/SKILL.md"}, "mattpocock-skills is no longer used: /implement-next builds"),
+    (r"/grilling\b|/grill-with-docs\b", {"skills/setup-workflow/SKILL.md"}, "mattpocock-skills is no longer used: /grill-plan"),
+    (r"/domain-modeling\b", {"skills/setup-workflow/SKILL.md"}, "mattpocock-skills is no longer used: the glossary rules are in plans/README.md"),
+    (r"\bpaused\b", {"skills/setup-workflow/SKILL.md"}, "the paused status was removed: a task on hold stays in-progress"),
+    (r"## Changes", {"skills/setup-workflow/SKILL.md"}, "## Changes in PLAN.md was replaced by the (plan change) DECISION tag"),
+    (r"docs/adr", {"skills/setup-workflow/SKILL.md"}, "ADRs were removed: DECISION lines do the job"),
 ]
 errors = []
 
@@ -84,6 +92,13 @@ for f in list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "READ
     for pat, allowed, why in STALE:
         if rel not in allowed and re.search(pat, text):
             err(f"{rel}: matches {pat!r} ({why})")
+
+# 5. skill names are always written /name: flag `name`, <code>name</code> and chips without the slash
+bare = re.compile(r"`(%s)`|<code>(%s)</code>|chip cmd\">(%s)<" % ((("|".join(map(re.escape, names))),) * 3))
+for f in list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md", ROOT / "CLAUDE.md"]:
+    for i, line in enumerate(f.read_text().splitlines(), 1):
+        for m in bare.finditer(line):
+            err(f"{f.relative_to(ROOT)}:{i}: skill name without the slash: {m.group(0)}")
 
 if errors:
     print("FAILED:")

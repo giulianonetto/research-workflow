@@ -8,22 +8,27 @@ Claude skills for research repos: plans that start as drafts and grow over many 
 
 | When | Command |
 |---|---|
-| Once per repo | `/setup-workflow` |
-| Start of a session | `/project-refresher` |
-| New task / experiment | `/new-plan` / `/new-plan exp` |
-| Plan ready to build (status changes only after your yes) | `/finalize-plan` |
+| Once per repo (needs a GitHub remote) | `/setup-workflow` |
+| Start of a session, or "what is next?" (never starts work) | `/project-refresher` |
+| All tasks with their status | `/project-refresher tasks` |
+| New task / experiment (drafts the plan in `tmp/` first) | `/new-plan` / `/new-plan exp` |
+| Hard questions about a draft plan, in rounds | `/grill-plan` |
+| Plan ready to build (status changes only after your yes; then the issue checklist and sub-issues) | `/finalize-plan` |
+| Build the next step (one commit, reviewed, log in the same commit) | `/implement-next` |
 | Write up an experiment (as many rounds as you like) | `/write-results` |
-| Check something by hand | ask for a sandbox (`sandbox`) |
-| End of a session | `progress` (or "log progress") |
+| Check something by hand | ask for a sandbox (`/sandbox`) |
+| Log work, change a status | `/progress` (or "log progress") |
+
+The plan changes at any time, for any reason: just say what to change. The rules for that, and for everything else, are in the project's `plans/README.md`.
 
 All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 
 ## What it writes in a project
 
 ```
-CLAUDE.md, README.md        + a section on the workflow
-PROGRESS.md                 the folder log: what is active, one section per session
-plans/README.md             format rules, DECISION lines, statuses (and the workflow version)
+CLAUDE.md, README.md        + a short section on the workflow
+PROGRESS.md                 the folder log: what is active, status changes, PRs, releases
+plans/README.md             all the rules: build, issues, review, plan changes, logs, statuses
 plans/EXPERIMENTS.md        rules for experiment tasks
 plans/<task>/PLAN.md        the plan (Goal, or Objectives for an experiment)
 plans/<task>/PROGRESS.md    the task log: work, DECISION lines, Next

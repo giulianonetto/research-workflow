@@ -3,13 +3,20 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-9 built. Next: step 10 (docs, checks, version).
+- Steps 1-10 built. Next: the PR into `main`.
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 10 of `PLAN.md`: docs, checks, version 0.2.0. One commit, with the log update in it; then the PR into `main`.
+- Review the whole branch against `main`, then open the PR into `main` (`Closes #2`); the user merges it. After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+### 12:12: step 10: docs, checks, version 0.2.0
+- `README.md` (commands table, what it writes), `docs/examples.html` (all five workflows and the short version), this repo's `CLAUDE.md`: the new flow and commands. Skill names written `/name` everywhere (`progress` and `sandbox` were bare in 6 skill files and the page).
+- This repo's `plans/README.md` is the new template plus a "Tasks in this repo" list (no status table); `plans/EXPERIMENTS.md` matches its template.
+- `tests/check_skills.py`: `STALE` gains `/update-plan`, `/to-tickets`, `/implement` (not `-next`), `/grilling`, `/grill-with-docs`, `/domain-modeling`, `paused`, `## Changes`, `docs/adr` (allowed in `setup-workflow/SKILL.md`); new check 5 flags a skill name without the slash (in backticks, `<code>` or a chip).
+- `/setup-workflow`: an "Upgrading from 0.1.x" list (status table, `paused` tasks, `## Changes`, `docs/agents/domain.md` and the `## Agent skills` block, open tasks without an issue), each changed only if the user agrees.
+- Version 0.2.0: `plugin.json`, both `Workflow version:` lines, CHANGELOG section (mentions #3).
+- "Done when" met: both checks pass, `check_scripts.sh` covers `/project-refresher tasks`, and `STALE` finds no removed command or status in any skill or template.
 ### 12:08: step 9: short project sections
 - `CLAUDE-SECTION.md`: 5 bullets: read `plans/README.md`; start from the Current state; log every decision (same commit); status only by the user; one line for the project's language and tools (the facts `/setup-workflow` asks for need a place).
 - `README-SECTION.md`: one line, the flow diagram, the link to `plans/README.md`, and one line on experiments.

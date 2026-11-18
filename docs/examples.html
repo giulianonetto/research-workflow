@@ -136,10 +136,9 @@ pre { margin:0; background:var(--code); border-radius:6px; padding:10px 12px; ov
     <li class="step">
       <div class="who"><span class="chip you">You</span></div>
       <div class="what">
-        <p>Create the repo on GitHub first, so the setup can use GitHub Issues as the tracker.</p>
+        <p>Create the repo on GitHub first: the workflow needs a GitHub remote, because every task has an issue.</p>
 <pre>gh repo create sim-bench --private --clone
 cd sim-bench</pre>
-        <p>No GitHub (a private scratch folder)? Use <code>mkdir sim-bench &amp;&amp; cd sim-bench &amp;&amp; git init</code>. Setup then chooses "no issue tracker".</p>
       </div>
     </li>
     <li class="step">
@@ -149,8 +148,8 @@ cd sim-bench</pre>
     <li class="step">
       <div class="who"><span class="chip cmd">/setup-workflow</span></div>
       <div class="what">
-        <p>Claude looks at the folder (git? remote? existing files?) and asks three things, with recommended answers:</p>
-        <div class="say"><b>Project in one line?</b> "Benchmark of clustering methods on simulated data."<br><b>Language and tools?</b> "R, renv, Slurm on the cluster."<br><b>Issues?</b> "GitHub Issues on <code>you/sim-bench</code>" (recommended because there is a remote).</div>
+        <p>Claude looks at the folder (git? GitHub remote? existing files?) and asks two things, with recommended answers:</p>
+        <div class="say"><b>Project in one line?</b> "Benchmark of clustering methods on simulated data."<br><b>Language and tools?</b> "R, renv, Slurm on the cluster."</div>
         <p>It shows you the drafts. You ask for changes until they look right; then it writes them and makes one commit, <code>workflow: plans/PROGRESS setup</code>. It does not push.</p>
       </div>
     </li>
@@ -167,13 +166,12 @@ cd sim-bench</pre>
   <div class="after">
     <h3>The folder after setup</h3>
 <pre>sim-bench/
-├── CLAUDE.md               planning rules, issue tracker, glossary rules
-├── README.md               + "Development workflow" section
+├── CLAUDE.md               + a short section: read plans/README.md, start from PROGRESS.md
+├── README.md               + "Development workflow": the flow and a link to the rules
 ├── PROGRESS.md             folder log: Current state "no active task"
-├── plans/README.md         format rules, DECISION lines, status table (empty)
-├── docs/agents/domain.md   when to add a glossary term or an ADR
+├── plans/README.md         all the rules: build, issues, review, plan changes, logs, statuses
 └── .gitignore              tmp/ ignored</pre>
-    <p class="next"><code>GLOSSARY.md</code> and <code>docs/adr/</code> appear later, when you agree on the first term or decision.</p>
+    <p class="next"><code>GLOSSARY.md</code> appears later, when you agree on the first key term.</p>
   </div>
 </section>
 
@@ -183,7 +181,7 @@ cd sim-bench</pre>
     <span class="eyebrow">Workflow 2</span>
     <h2>New task from your head, in an existing repo</h2>
     <p class="scenario">In a repo already set up, you have an idea: try a hurdle model for the zero-heavy taxa. Nothing is written down yet.</p>
-    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/new-plan</span><span class="chip cmd">progress</span> optional <span class="chip cmd">/grilling</span></div>
+    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/new-plan</span><span class="chip cmd">/progress</span></div>
   </div>
 
   <div class="session">Session 1 · day 1</div>
@@ -194,40 +192,25 @@ cd sim-bench</pre>
     </li>
     <li class="step">
       <div class="who"><span class="chip you">You</span></div>
-      <div class="what"><p>Talk the idea through in plain words: what you want, why, what you already know, what worries you. For one hard point, <span class="chip cmd">/grilling</span> asks you questions round by round. Stop whenever you like; nothing needs to be settled.</p></div>
+      <div class="what"><p>Talk the idea through in plain words: what you want, why, what you already know, what worries you. Stop whenever you like; nothing needs to be settled.</p></div>
     </li>
     <li class="step">
       <div class="who"><span class="chip cmd">/new-plan</span></div>
       <div class="what">
-        <p>First Claude asks about the issue:</p>
-        <div class="say"><b>"Does this task have a GitHub issue? If not, create one or go without?"</b></div>
-        <div class="fork">
-          <div class="opt rec">
-            <span class="tag">Usually</span>
-            <h4>Create an issue</h4>
-            <p>When the task takes more than one session, will end in a PR, or others should see it. Claude runs <code>gh issue create</code> with a title and a short body from the conversation, e.g. <code>#41</code>.</p>
-            <p>Folder and branch: <code>issue-41-hurdle-model</code></p>
-          </div>
-          <div class="opt">
-            <span class="tag">Sometimes</span>
-            <h4>Go without</h4>
-            <p>For a quick, private exploration. Everything else works the same, but there is no issue to link the plan and the PR to, and no <code>/to-tickets</code>.</p>
-            <p>Folder and branch: <code>hurdle-model</code></p>
-          </div>
-        </div>
+        <p>Every task has a GitHub issue. You name one, or Claude creates it with <code>gh issue create</code>: the title, and a body that is only the problem in 2-3 lines (the issue says why, the plan says how), e.g. <code>#41</code>. Folder and branch: <code>issue-41-hurdle-model</code>.</p>
         <p>Then Claude:</p>
         <ul>
           <li>reads the code and data the idea touches, so <b>Where things are now</b> is correct;</li>
-          <li>drafts <code>PLAN.md</code>: a short Goal, maybe a few steps, and everything unsettled under <b>Open questions</b>;</li>
-          <li>shows you the draft and changes it until you approve.</li>
+          <li>writes the draft to <code>tmp/new-plan/issue-41-hurdle-model/PLAN.md</code> and gives you the path: a short Goal, maybe a few steps, and everything unsettled under <b>Open questions</b>;</li>
+          <li>changes the file until you approve; you can edit it too. Nothing goes into git before your yes.</li>
         </ul>
-        <p>Then Claude creates the branch from an up-to-date <code>main</code>, writes the task folder, logs any decisions you already made as DECISION lines, and commits <code>plan: start issue-41-hurdle-model</code>. It asks before pushing; once pushed, it comments on the issue with a link to the plan.</p>
+        <p>Then Claude creates the branch from an up-to-date <code>main</code>, moves the draft into the task folder, logs any decisions you already made as DECISION lines, and commits <code>plan: start issue-41-hurdle-model</code>. It asks before pushing; once pushed, it puts the plan link in the issue body.</p>
         <span class="transition">status <span class="st drafting">drafting</span></span>
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">progress</span></div>
-      <div class="what"><p>At the end of the session (or say "log progress"). The task log gets <b>Next</b>, e.g. "decide open question 1: how to model the zeros". The folder log gets one short section for the session.</p></div>
+      <div class="who"><span class="chip cmd">/progress</span></div>
+      <div class="what"><p>At the end of the session, if anything is not logged yet (or say "log progress"). The task log gets <b>Next</b>, e.g. "decide open question 1: how to model the zeros". The folder log only gets status changes, PRs and work outside a task, so it stays short.</p></div>
     </li>
   </ol>
 
@@ -246,7 +229,7 @@ cd sim-bench</pre>
     <span class="eyebrow">Workflow 3</span>
     <h2>Start on an existing GitHub issue</h2>
     <p class="scenario">Issue <code>#27</code>, "Simulator ignores coverage below 5x", is open. Maybe you wrote it weeks ago, maybe someone else did.</p>
-    <div class="uses">Uses: <span class="chip cmd">/new-plan</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">progress</span><span class="chip cmd">/code-review</span></div>
+    <div class="uses">Uses: <span class="chip cmd">/new-plan</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">/implement-next</span><span class="chip cmd">/progress</span></div>
   </div>
 
   <div class="session">Session 1 · plan</div>
@@ -255,7 +238,7 @@ cd sim-bench</pre>
       <div class="who"><span class="chip cmd">/new-plan</span></div>
       <div class="what">
         <div class="say"><b>You:</b> "/new-plan for issue #27"</div>
-        <p>Claude reads the issue, its body and comments (<code>gh issue view 27 --comments</code>), and the code it names. Then it drafts <code>PLAN.md</code>: the Goal comes from the issue, and points left open in the comments become Open questions. It shows you the draft, creates <code>issue-27-low-coverage</code> from <code>main</code> and commits. After you push, the issue gets a comment linking the plan.</p>
+        <p>Claude reads the issue, its body and comments (<code>gh issue view 27 --comments</code>), and the code it names. Then it drafts <code>PLAN.md</code> in <code>tmp/new-plan/</code>: the Goal comes from the issue, and points left open in the comments become Open questions. After your yes, it creates <code>issue-27-low-coverage</code> from <code>main</code> and commits. After you push, the plan link goes into the issue body.</p>
         <span class="transition">status <span class="st drafting">drafting</span></span>
       </div>
     </li>
@@ -270,7 +253,7 @@ cd sim-bench</pre>
           </div>
           <div class="opt">
             <h4>Needs thinking</h4>
-            <p>Run <span class="chip cmd">progress</span>, stop, and keep drafting over the next days as in <a href="#continue-draft">workflow 4</a>.</p>
+            <p>Run <span class="chip cmd">/progress</span>, stop, and keep drafting over the next days as in <a href="#continue-draft">workflow 4</a>.</p>
           </div>
         </div>
       </div>
@@ -278,10 +261,10 @@ cd sim-bench</pre>
     <li class="step">
       <div class="who"><span class="chip cmd">/finalize-plan</span></div>
       <div class="what">
-        <p>Claude checks each item and shows <b>ok</b> or <b>gap</b>: Goal, Open questions, files that really exist, steps concrete enough, decisions written in the plan. You fix the gaps (or accept them), then:</p>
+        <p>Claude checks each item and shows <b>ok</b> or <b>gap</b>: Goal, Open questions, files that really exist, steps concrete enough, decisions written in the plan, the issue (title matches the plan, no solution text), and the build shape (each step one commit, or a big step with sub-steps). You fix the gaps (or accept them), then:</p>
         <div class="say"><b>"Set the status to planned?"</b> You: "yes"</div>
         <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span></span>
-        <p>Building over several sessions? Run <code>/to-tickets plans/issue-27-low-coverage/PLAN.md</code> now.</p>
+        <p>Then Claude shows the GitHub structure the plan implies, and creates it after your yes: a checklist of the plan's steps in the issue body, and a sub-issue with its own branch for each big step (none here: three small steps).</p>
       </div>
     </li>
   </ol>
@@ -293,17 +276,12 @@ cd sim-bench</pre>
       <div class="what"><p>Run <code>/clear</code> or open a new session, then the refresher. It shows the task's <b>Next</b>, e.g. "PLAN step 1: add the coverage filter in <code>R/simulate.R</code>".</p></div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip you">You</span></div>
+      <div class="who"><span class="chip cmd">/implement-next</span></div>
       <div class="what">
-        <p>Build the step with Claude, or <code>/implement #&lt;ticket&gt;</code> if you made tickets. On the first build session, Claude asks once:</p>
-        <div class="say"><b>"Set the task to in-progress?"</b> You: "yes"</div>
+        <p>Claude builds the next unchecked step. Before the commit it reviews the change: <code>/code-review</code> for bugs, then <b>Spec</b> (against the plan step), <b>Research</b> (lost rows, missing values, units, seeds, numbers that look wrong) and <b>Style</b>. Then one commit for the step, with the log update in it (what was done, DECISION lines, a new <b>Next</b>), and it ticks the box in the issue. Running it on the first step is your choice to start:</p>
         <span class="transition">status <span class="st planned">planned</span> → <span class="st inprog">in-progress</span></span>
-        <p>If reality breaks the plan, run <span class="chip cmd">/update-plan</span>: it adds a <code>## Changes</code> line with the reason.</p>
+        <p>If reality breaks the plan, say so. Claude shows the change to <code>PLAN.md</code>, and after your yes logs it as a DECISION line with the <code>(plan change)</code> tag and what the plan missed.</p>
       </div>
-    </li>
-    <li class="step">
-      <div class="who"><span class="chip cmd">progress</span></div>
-      <div class="what"><p>At the end of every build session: what was done (commits, job IDs), DECISION lines, and a new <b>Next</b>.</p></div>
     </li>
   </ol>
 
@@ -311,12 +289,12 @@ cd sim-bench</pre>
   <ol class="steps">
     <li class="step">
       <div class="who"><span class="chip cmd">/code-review</span><span class="chip you">You</span></div>
-      <div class="what"><p>Review against <code>main</code>, then open the PR: <code>gh pr create</code>, or ask Claude to. Check that the PR description says <code>Closes #27</code>, so merging closes the issue.</p></div>
+      <div class="what"><p>When every box is ticked: the same review on the whole branch, then the PR into <code>main</code> (<code>gh pr create</code>, or ask Claude to). Check that the PR description says <code>Closes #27</code>, so merging closes the issue. You merge it.</p></div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="who"><span class="chip cmd">/progress</span></div>
       <div class="what">
-        <p>When the PR is merged, tell it "merged, mark done". The folder log gets a one-line summary and the task leaves Current state. The task's <b>Next</b> becomes "None"; what comes after goes in the folder log's Next.</p>
+        <p>When the PR is merged, tell it "merged, mark done". The plan link in the issue now points to <code>main</code>. The folder log gets a one-line summary and the task leaves Current state. The task's <b>Next</b> becomes "None"; what comes after goes in the folder log's Next.</p>
         <span class="transition">status <span class="st inprog">in-progress</span> → <span class="st done">done</span></span>
       </div>
     </li>
@@ -329,7 +307,7 @@ cd sim-bench</pre>
     <span class="eyebrow">Workflow 4</span>
     <h2>Continue a plan that is still a draft</h2>
     <p class="scenario">The hurdle-model plan from workflow 2 is in <span class="st drafting">drafting</span>. You come back to it on a new day, maybe a week later.</p>
-    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/update-plan</span><span class="chip cmd">sandbox</span><span class="chip cmd">progress</span><span class="chip cmd">/finalize-plan</span></div>
+    <div class="uses">Uses: <span class="chip cmd">/project-refresher</span><span class="chip cmd">/grill-plan</span><span class="chip cmd">/sandbox</span><span class="chip cmd">/progress</span><span class="chip cmd">/finalize-plan</span></div>
   </div>
 
   <div class="session">Any brainstorm session · repeat as many days as needed</div>
@@ -346,10 +324,10 @@ Decide open question 2: which zero process to use.</pre>
     </li>
     <li class="step">
       <div class="who"><span class="chip you">You</span></div>
-      <div class="what"><p>Brainstorm on that question: plain talk, or <span class="chip cmd">/grilling</span> if you want to be pushed. Ideas can go off in any direction; nothing is lost as long as <span class="chip cmd">progress</span> runs before you stop.</p></div>
+      <div class="what"><p>Brainstorm on that question: plain talk, or <span class="chip cmd">/grill-plan</span> if you want to be pushed (Claude asks about the plan in rounds, each question with a recommended answer, and looks up facts itself). Ideas can go off in any direction; nothing is lost as long as <span class="chip cmd">/progress</span> runs before you stop.</p></div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip you">You</span><span class="chip cmd">sandbox</span></div>
+      <div class="who"><span class="chip you">You</span><span class="chip cmd">/sandbox</span></div>
       <div class="what">
         <div class="say"><b>You:</b> "I want to see how the zero fraction depends on read depth before I decide."</div>
         <p>Claude writes <code>plans/issue-41-hurdle-model/sandbox/03-zero-fraction.R</code> (sections you run one by one, each with a <b>Look at:</b> note), runs its setup once to catch typos, and tells you what to open. You run it and look at the plots. Its outputs go to <code>tmp/sandbox/</code>, never your real results.</p>
@@ -358,17 +336,17 @@ Decide open question 2: which zero process to use.</pre>
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">/update-plan</span></div>
+      <div class="who"><span class="chip you">You</span></div>
       <div class="what">
-        <p>Run it whenever the plan should change: after a decision, a new idea, or a new question. Claude shows the changes to <code>PLAN.md</code> (question 2 removed, a new step added), and you approve. The decision goes in the task log:</p>
+        <p>Say what should change, whenever it should: after a decision, a new idea, or a new question. Claude shows the changes to <code>PLAN.md</code> (question 2 removed, a new step added), and you approve. The decision goes in the task log:</p>
 <pre>- **DECISION 2026-11-04 15:10:** model zeros with a depth-dependent hurdle, because the zero fraction falls with read depth up to 5k (sandbox 03)</pre>
-        <p>Run it with nothing specific ("just because") and Claude reviews the plan against your recent work, lists what looks stale, and asks what to change. While drafting, it adds no <code>## Changes</code> lines, and it never changes the status.</p>
+        <p>While drafting, the plan is edited freely, and a plan change never changes the status. The rules are in <code>plans/README.md</code>.</p>
         <span class="transition">status stays <span class="st drafting">drafting</span></span>
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">progress</span></div>
-      <div class="what"><p>Before you stop. The task log gets what you explored, any decisions not yet logged, and a new <b>Next</b> (e.g. "open question 3: random effects for batch?"). The folder log gets one short section for the session.</p></div>
+      <div class="who"><span class="chip cmd">/progress</span></div>
+      <div class="what"><p>Before you stop. The task log gets what you explored, any decisions not yet logged, and a new <b>Next</b> (e.g. "open question 3: random effects for batch?"). The folder log is not touched.</p></div>
     </li>
   </ol>
 
@@ -377,15 +355,15 @@ Decide open question 2: which zero process to use.</pre>
     <li class="step">
       <div class="who"><span class="chip cmd">/finalize-plan</span></div>
       <div class="what">
-        <p>Claude shows each item as ok or gap. Example gap: "Open question 3 still open". You either settle it now (Claude edits the plan as <code>/update-plan</code> would) or accept it as an assumption the build can start with. Then, only on your "yes":</p>
+        <p>If weak spots remain, Claude first offers <code>/grill-plan</code>. Then it shows each item as ok or gap. Example gap: "Open question 3 still open". You either settle it now (Claude edits the plan under the plan-change rules) or accept it as an assumption the build can start with. Then, only on your "yes":</p>
         <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span></span>
         <p>From here, building is the same as the build sessions in <a href="#from-issue">workflow 3</a>.</p>
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">/update-plan</span><span class="transition">later, if needed</span></div>
+      <div class="who"><span class="chip you">You</span><span class="transition">later, if needed</span></div>
       <div class="what">
-        <p>A new open question after the plan is <span class="st planned">planned</span> or <span class="st inprog">in-progress</span>? Claude asks once:</p>
+        <p>Once the plan is agreed, a decision that changes it is logged with the <code>(plan change)</code> tag and what the plan missed. A new open question after the plan is <span class="st planned">planned</span> or <span class="st inprog">in-progress</span>? Claude asks once:</p>
         <div class="say"><b>"Keep the status, or go back to drafting?"</b></div>
         <p>Both answers are fine. Mid-build with one question open is normal in research.</p>
       </div>
@@ -399,7 +377,7 @@ Decide open question 2: which zero process to use.</pre>
     <span class="eyebrow">Workflow 5</span>
     <h2>Run an experiment</h2>
     <p class="scenario">You want to know if a hurdle model beats zero-inflated NB on the simulated benchmark before you touch the main code. It will be messy: scripts, cluster runs, plots in the console.</p>
-    <div class="uses">Uses: <span class="chip cmd">/new-plan exp</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">/write-results</span><span class="chip cmd">progress</span> optional <span class="chip cmd">/update-plan</span><span class="chip cmd">sandbox</span></div>
+    <div class="uses">Uses: <span class="chip cmd">/new-plan exp</span><span class="chip cmd">/finalize-plan</span><span class="chip cmd">/write-results</span><span class="chip cmd">/progress</span> optional <span class="chip cmd">/sandbox</span></div>
   </div>
 
   <div class="session">Session 1 · start</div>
@@ -440,7 +418,7 @@ Decide if a hurdle model should replace ZINB for zero-heavy taxa.
     <li class="step">
       <div class="who"><span class="chip you">You</span></div>
       <div class="what">
-        <p>Work in <code>experiment/</code> any way you like: run scripts directly, try things in the console, use <span class="chip cmd">sandbox</span> for side questions. Two rules only: don't change the main code from here (a change it needs is its own commit, named in the log), and keep big outputs in <code>$OUT</code>, never in git.</p>
+        <p>Work in <code>experiment/</code> any way you like: run scripts directly, try things in the console, use <span class="chip cmd">/sandbox</span> for side questions. Two rules only: don't change the main code from here (a change it needs is its own commit, named in the log), and keep big outputs in <code>$OUT</code>, never in git.</p>
       </div>
     </li>
     <li class="step">
@@ -454,8 +432,8 @@ OUT=/scratch/$USER/hurdle ./run.sh fit   # big outputs on the cluster's scratch<
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">progress</span><span class="chip cmd">/update-plan</span></div>
-      <div class="what"><p>As in any task: <code>progress</code> at the end of each session, with DECISION lines and job IDs. If an objective changes, run <code>/update-plan</code>; once the plan is agreed, it adds a <code>## Changes</code> line, and RESULTS.md will list the changed objective.</p></div>
+      <div class="who"><span class="chip cmd">/progress</span></div>
+      <div class="what"><p>As in any task: the log goes in the same commit as the work, with DECISION lines and job IDs. If an objective changes, say so; once the plan is agreed, the DECISION line gets the <code>(plan change)</code> tag, and RESULTS.md will list the changed objective.</p></div>
     </li>
   </ol>
 
@@ -482,7 +460,7 @@ OUT=/scratch/$USER/hurdle ./run.sh fit   # big outputs on the cluster's scratch<
       </div>
     </li>
     <li class="step">
-      <div class="who"><span class="chip cmd">progress</span></div>
+      <div class="who"><span class="chip cmd">/progress</span></div>
       <div class="what">
         <div class="say"><b>You:</b> "mark done"</div>
         <p>Because the task is an experiment, Claude first runs the close check and lists what is missing:</p>
@@ -547,18 +525,19 @@ $OUT  = tmp/experiments/&lt;task&gt;/     not in git     everything else: simula
 
   <div class="after">
     <h3>If you stop without an answer</h3>
-    <p class="next">Tell <code>progress</code> "drop it". You need only a short RESULTS.md: what was tried, what was seen, and why it stopped. No analysis.qmd. The status becomes <span class="st done">dropped</span>, and the folder is still merged as history.</p>
+    <p class="next">Tell <code>/progress</code> "drop it". You need only a short RESULTS.md: what was tried, what was seen, and why it stopped. No analysis.qmd. The status becomes <span class="st done">dropped</span>, and the folder is still merged as history.</p>
   </div>
 </section>
 
 <section class="rules">
   <div class="wf-head"><span class="eyebrow">Short version</span><h2>What to remember</h2></div>
   <dl>
-    <dt>Start of a session</dt><dd><code>/project-refresher</code></dd>
-    <dt>End of a session</dt><dd><code>progress</code> (or "log progress")</dd>
-    <dt>New task</dt><dd><code>/new-plan</code>, with or without an issue</dd>
-    <dt>Plan text should change</dt><dd><code>/update-plan</code>, any time, any reason</dd>
-    <dt>Ready to build</dt><dd><code>/finalize-plan</code>, which changes the status only after your yes</dd>
+    <dt>Start of a session, or "what is next?"</dt><dd><code>/project-refresher</code> (never starts work); <code>/project-refresher tasks</code> lists every task with its status</dd>
+    <dt>New task</dt><dd><code>/new-plan</code>; every task has a GitHub issue</dd>
+    <dt>Plan should change</dt><dd>Say what to change, any time, any reason; <code>/grill-plan</code> for the hard questions</dd>
+    <dt>Ready to build</dt><dd><code>/finalize-plan</code>, which changes the status only after your yes, then puts the step checklist in the issue</dd>
+    <dt>Build</dt><dd><code>/implement-next</code>: one reviewed commit per step, with the log in it</dd>
+    <dt>Log work</dt><dd><code>/progress</code> (or "log progress"), in the same commit as the work</dd>
     <dt>Check something by hand</dt><dd>Ask for a sandbox</dd>
     <dt>Try something out</dt><dd><code>/new-plan exp</code>; results come from <code>experiment/run.sh</code>; write up with <code>/write-results</code> (as many rounds as you like); close with "mark done"</dd>
     <dt>All past decisions</dt><dd><code>grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md</code></dd>

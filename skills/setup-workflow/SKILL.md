@@ -4,7 +4,7 @@ description: Set up a folder for the plans/PROGRESS workflow (task folders, prog
 disable-model-invocation: true
 ---
 
-Scaffold the files the workflow's skills rely on. Explore, show the drafts, confirm, then write. Never overwrite what exists: add to it, and leave the user's own text alone. The one exception: files or sections written by an older version of this workflow (`plans/README.md`, `plans/EXPERIMENTS.md`, the CLAUDE.md `## Planning and progress` section, the README `## Development workflow` section, mentions of `/to-plan`). Show what differs and replace them only if the user agrees; keep the task table and any lines the user added. The `Workflow version:` line in `plans/README.md` tells which version wrote them: if it is missing or older than the one in [PLANS-README.md](PLANS-README.md), say so first.
+Scaffold the files the workflow's skills rely on. Explore, show the drafts, confirm, then write. Never overwrite what exists: add to it, and leave the user's own text alone. The one exception: files or sections written by an older version of this workflow (`plans/README.md`, `plans/EXPERIMENTS.md`, the CLAUDE.md `## Planning and progress` section, the README `## Development workflow` section, mentions of `/to-plan`). Show what differs and replace them only if the user agrees; keep any lines the user added. The `Workflow version:` line in `plans/README.md` tells which version wrote them: if it is missing or older than the one in [PLANS-README.md](PLANS-README.md), say so first.
 
 ## Steps
 
@@ -16,7 +16,13 @@ Scaffold the files the workflow's skills rely on. Explore, show the drafts, conf
 
 3. **Draft and show** (the templates are in this folder; fill the `<...>` parts):
    - `plans/EXPERIMENTS.md` from [EXPERIMENTS.md](EXPERIMENTS.md), if missing (the rules for experiment tasks).
-   - `plans/README.md` from [PLANS-README.md](PLANS-README.md). If it already exists from an older version of this workflow, show what differs (commands, DECISION lines, header line, status rules) and update it only if the user agrees; keep its task table.
+   - `plans/README.md` from [PLANS-README.md](PLANS-README.md). If it already exists from an older version of this workflow, show what differs (commands, rules, header line, statuses) and update it only if the user agrees.
+   - **Upgrading from 0.1.x:** list what 0.2.0 changes in the project and change each only if the user agrees:
+     - the status table in `plans/README.md` goes (the status lives only in each task's header line; `/project-refresher tasks` lists them); first check that each row matches its task header, and show any mismatch;
+     - tasks with status `paused` (grep the task headers): the status no longer exists; propose `in-progress` with the reason in the task's Current state, or `dropped`;
+     - `## Changes` sections in `PLAN.md` files: keep them as history, or turn each line into a DECISION line with the `(plan change)` tag in the task log;
+     - `docs/agents/domain.md`, `docs/adr/` and the CLAUDE.md `## Agent skills` block: the glossary rules are now in `plans/README.md`; offer to delete `docs/agents/domain.md` and the block, keep `GLOSSARY.md`, and leave existing ADRs alone (link them from DECISION lines if the user wants);
+     - an open task with no GitHub issue: offer to create one.
    - `PROGRESS.md` (if missing): `# Progress log`, a `## Current state (updated <date>)` block with one bullet `- **Now:** no active task`, the times line from the template, and a first dated entry `## <date>: workflow set up`.
    - `CLAUDE.md`: the section in [CLAUDE-SECTION.md](CLAUDE-SECTION.md).
    - `README.md`: the section in [README-SECTION.md](README-SECTION.md), at the end.

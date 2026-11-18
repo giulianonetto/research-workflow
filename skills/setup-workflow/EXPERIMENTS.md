@@ -66,7 +66,7 @@ A `dropped` experiment needs only a short `RESULTS.md`: Answers ("stopped withou
 
 ## Close check
 
-Before an experiment is set to `done`, `progress` checks, and lists what is missing:
+Before an experiment is set to `done`, `/progress` checks, and lists what is missing:
 - `RESULTS.md` has the five sections, filled (no `<...>` left), every section reviewed (no `<!-- unreviewed -->` left), with the Appendix covering every file in `results/`;
 - `experiment/run.sh` parses (`bash -n`) and lists its stages when run with no arguments (nothing is re-run);
 - `analysis.qmd` exists and its setup chunk runs, or says clearly which `run.sh` stage recreates missing objects;

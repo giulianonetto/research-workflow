@@ -2,7 +2,7 @@
 
 An experiment is a task that tries something out and ends in an answer: is it worth putting into the main code, or how does it behave? It is messy by design. The rules apply only at its edges: the objectives before it runs, the result package when it closes, and its code kept out of the main code. Inside `experiment/`, anything goes.
 
-It is a normal task in every other way (`/new-plan`, `/update-plan`, `/finalize-plan`, `progress`, same statuses), with `**Kind:** experiment` in its header line.
+It is a normal task in every other way (`/new-plan`, `/finalize-plan`, `/progress`, the plan-change rules in `plans/README.md`, same statuses), with `**Kind:** experiment` in its header line.
 
 ## Folder
 
@@ -20,7 +20,7 @@ Big outputs live outside git, under `$OUT` (default `tmp/experiments/<task>/` at
 
 ## Rules
 
-1. **Objectives first.** `PLAN.md` has one **Overall objective** and one or more **Specific objectives**, each saying how it will be answered (which output, which `run.sh` stage). Objectives may change with `/update-plan`; `RESULTS.md` answers the final ones and lists the changed or dropped ones.
+1. **Objectives first.** `PLAN.md` has one **Overall objective** and one or more **Specific objectives**, each saying how it will be answered (which output, which `run.sh` stage). Objectives may change under the plan-change rules in `plans/README.md`; `RESULTS.md` answers the final ones and lists the changed or dropped ones.
 2. **One entry point.** `experiment/run.sh` is the only documented way to produce `results/` and the big outputs. Its stages are bash functions and can call anything (`Rscript`, `python`, `nextflow run`, `targets::tar_make()`, `make`, a binary, `sbatch`). While exploring you may run things directly; at close, every file in `results/` and every number in `RESULTS.md` comes from a stage, or is marked "by hand" in the Appendix. Each run appends the commit, uncommitted changes, host and arguments to `$OUT/run-info.log`, and keeps a copy of the latest in `tmp/experiments/<task>/last-run.txt` at the repo root (always local, even when `OUT` is elsewhere).
 3. **Out of the main code.** Experiment code calls the project's code but doesn't change it. A change the experiment needs in the main code is its own commit, named in `PROGRESS.md`. This is what lets the branch always merge.
 4. **Always merge.** Whatever the answer, the task folder goes to `main` (a PR with the folder only is fine), so the record survives.
@@ -66,7 +66,7 @@ A `dropped` experiment needs only a short `RESULTS.md`: Answers ("stopped withou
 
 ## Close check
 
-Before an experiment is set to `done`, `progress` checks, and lists what is missing:
+Before an experiment is set to `done`, `/progress` checks, and lists what is missing:
 - `RESULTS.md` has the five sections, filled (no `<...>` left), every section reviewed (no `<!-- unreviewed -->` left), with the Appendix covering every file in `results/`;
 - `experiment/run.sh` parses (`bash -n`) and lists its stages when run with no arguments (nothing is re-run);
 - `analysis.qmd` exists and its setup chunk runs, or says clearly which `run.sh` stage recreates missing objects;
