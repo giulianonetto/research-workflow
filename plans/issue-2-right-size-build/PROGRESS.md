@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Step 1 built: `skills/setup-workflow/PLANS-README.md` is the only rules file. Next: step 2 (`/finalize-plan`).
+- Steps 1-2 built. Next: step 3 (`/grill-plan`).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- In a fresh session, build step 2 of `PLAN.md`: `/finalize-plan` prepares the build (`skills/finalize-plan/SKILL.md`; the rules it points to are now in `skills/setup-workflow/PLANS-README.md`). One commit, with the log update in it.
+- In a fresh session, build step 3 of `PLAN.md`: new skill `/grill-plan`. One commit, with the log update in it.
+### 12:02: step 2: `/finalize-plan` prepares the build
+- `skills/finalize-plan/SKILL.md`: new step 1 offers `/grill-plan` when weak spots remain; readiness check gains **Issue** and **Build shape**; after `planned`, step 5 shows and (on a yes) creates the issue checklist and a sub-issue and branch per big step; step 6 logs and commits once. The `/to-tickets` suggestion is gone; no separate skill.
+- Issue #2 (by hand, on the user's yes, 11:58): its body got the step checklist, step 1 ticked.
+- **DECISION 2026-11-18 12:02:** a big step's branch is `issue-<M>-<slug>`, with `<M>` the sub-issue number, made from the task branch, because it matches the `issue-<N>-<slug>` task branches and the plan named no pattern (Claude, within "go on" from the user)
 ### 11:56: step 1: `plans/README.md` is the only rules file
 - `skills/setup-workflow/PLANS-README.md` rewritten: new sections Build, The task issue, Review (with the merge rule), Plan changes (the `(plan change)` tag replaces `## Changes`), Logs (folder-log and same-commit rules), five statuses kept only in the header (no table), Glossary (the three tests copied from `DOMAIN.md`), skill names always `/name`. `Workflow version:` line unchanged (bumped in step 10).
 - Also, following the 11:26 and 11:46 DECISION lines: the command list drops `/update-plan` and names `/grill-plan`, `/implement-next`, `/project-refresher` and `/sandbox`; ADR mentions gone; header line `**Issue:** <link>` (no "or none"); a task on hold stays `in-progress`; a plan change also updates the issue checklist or title.
