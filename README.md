@@ -65,6 +65,10 @@ Open Claude in the project folder and run `/setup-workflow` (in Claude Code, plu
 
 Everything works on its own. These optional commands come from the [mattpocock-skills](https://github.com/mattpocock/skills) plugin, and the workflow mentions them where they help: `/grilling` and `/grill-with-docs` (stress-test an idea), `/domain-modeling` (glossary and ADRs), `/to-tickets` and `/implement` (multi-session builds), `/code-review`. Opening PRs uses `gh pr create`.
 
+## Credits
+
+`/grill-plan` and the Spec part of the review rules are adapted from Matt Pocock's [mattpocock-skills](https://github.com/mattpocock/skills) (MIT License); see [NOTICE](NOTICE).
+
 ## Development
 
 This repo uses its own workflow: see [PROGRESS.md](PROGRESS.md) and [plans/](plans/). Every design decision is a DECISION line.

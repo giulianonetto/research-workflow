@@ -8,6 +8,7 @@
   "skills": [
     "./skills/setup-workflow",
     "./skills/new-plan",
+    "./skills/grill-plan",
     "./skills/update-plan",
     "./skills/finalize-plan",
     "./skills/progress",

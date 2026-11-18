@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-2 built. Next: step 3 (`/grill-plan`).
+- Steps 1-3 built. Next: step 4 (`/implement-next`).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- In a fresh session, build step 3 of `PLAN.md`: new skill `/grill-plan`. One commit, with the log update in it.
+- Build step 4 of `PLAN.md`: new skill `/implement-next`. One commit, with the log update in it.
+### 12:03: step 3: new skill `/grill-plan`
+- `skills/grill-plan/SKILL.md`: reads the plan, task log, glossary and code first; asks in rounds over a design tree (numbered questions, each with a recommended answer); looks up facts itself; records answers under the plan-change rules; glossary terms only through the three tests. No `disable-model-invocation` flag.
+- Attribution: a line in the skill, a Credits section in `README.md`, and `NOTICE` with Matt Pocock's MIT notice (covers the review's Spec part too). `plugin.json` lists the skill now, because `check_skills.py` fails otherwise.
+- Both checks pass.
 ### 12:02: step 2: `/finalize-plan` prepares the build
 - `skills/finalize-plan/SKILL.md`: new step 1 offers `/grill-plan` when weak spots remain; readiness check gains **Issue** and **Build shape**; after `planned`, step 5 shows and (on a yes) creates the issue checklist and a sub-issue and branch per big step; step 6 logs and commits once. The `/to-tickets` suggestion is gone; no separate skill.
 - Issue #2 (by hand, on the user's yes, 11:58): its body got the step checklist, step 1 ticked.
