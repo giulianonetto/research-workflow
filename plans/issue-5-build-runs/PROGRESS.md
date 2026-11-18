@@ -2,14 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- In progress: step 1 of 6 done (the stop, run, review, push and log rules in `plans/README.md` and its template).
-- Stopped after step 1 so the user can read the new rules before steps 2-5 copy them into the skills.
-- Next: steps 2-5 with `/implement-next` (no Stop until step 6).
+- In progress: steps 1-2 of 6 done (rules file; `/finalize-plan` proposes the stops).
+- Run of steps 2-5 under way; it stops before step 6.
+- Next: step 3, `/implement-next` builds a run.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Read the new rules in `plans/README.md` (Build, Review, Logs). If they are right, run `/implement-next`: steps 2-5 (`skills/finalize-plan/SKILL.md`, `skills/implement-next/SKILL.md`, `skills/progress/SKILL.md`, `skills/new-plan/SKILL.md`), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+- Step 3: rewrite `skills/implement-next/SKILL.md` for runs (PLAN.md step 3), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+### 14:14: step 2, `/finalize-plan` proposes the stops
+- Run of steps 2-5 started: the user re-ran `/implement-next` after the Next note named the run, so no separate question was asked.
 ### 14:09: step 1, rules file
 - Status `planned` → `in-progress`. Also changed the `/implement-next` line in Commands ("builds the next steps, up to the next stop"); the "Same commit" example (a PR built in another worktree) stays, since parallel builds are still allowed when the user asks.
 ### 14:04: plan finalized
