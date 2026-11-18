@@ -2,13 +2,20 @@
 **Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- Drafting: 6 small steps (rules file, `/finalize-plan`, `/implement-next`, `/progress`, `/new-plan` skeleton, docs and version 0.3.0). No open questions.
+- Drafting: 6 small steps (rules file, `/finalize-plan`, `/implement-next`, `/progress`, `/new-plan` skeleton, docs and version 0.3.0). Grilled once (5 answers); no open questions.
 - Next: `/finalize-plan` (it should also propose the stops for this plan's own steps, once step 1 is agreed).
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
 - `/finalize-plan`, in a fresh session.
+### 13:54: grill round 1
+- `/grill-plan` found 5 weak spots; the user accepted all 5 recommended answers ("yes to all"). `PLAN.md` steps 1, 2, 3 and 5 updated.
+- **DECISION 2026-11-18 13:54:** a `**Stop:**` line always means stop after its step (build, commit, push, report); a step that must not start without the user puts its Stop on the step before, because the plan's stop reasons pointed both ways and its example said "stop before step 6" (user: "yes to all")
+- **DECISION 2026-11-18 13:54:** `/finalize-plan` always puts a Stop on the last step (review the branch and open the PR into `main`), so a plan with no Stop lines is always one made before 0.3.0, because otherwise a new plan with no step needing the user would ask before every step (user: "yes to all")
+- **DECISION 2026-11-18 13:54:** a big step counts as one step toward the run limit, and a merge-rule question before merging its PR is one more early stop, because the plan did not say how big steps count (user: "yes to all")
+- **DECISION 2026-11-18 13:54:** `/new-plan` drops "(ask before pushing)" for the first push of the task branch, keeping `/setup-workflow`'s "Don't push" (its commit is on `main`), because the plan's Done-when rules out any skill asking before pushing the task branch (`skills/new-plan/SKILL.md:54`) (user: "yes to all")
+- **DECISION 2026-11-18 13:54:** step 3 rewrites `/implement-next`'s frontmatter description to say it builds the next steps up to the next stop, because it still says "Build the next step" (user: "yes to all")
 ### 12:58: plan started
 - Issue [#5](https://github.com/giulianonetto/research-workflow/issues/5) (problem only), branch `issue-5-build-runs`; `PLAN.md` drafted in `tmp/new-plan/issue-5-build-runs/` and approved by the user.
 - **DECISION 2026-11-18 12:58:** a step that needs the user carries a `- **Stop:** <why>` line in `PLAN.md`, proposed by `/finalize-plan` and confirmed by the user, and `/implement-next` builds up to the next stop after asking once, because then the user agrees to the stops in advance and Claude never judges alone that a step is safe, as happened in #2 under "go on" (second chat's proposal; user: "go ahead")

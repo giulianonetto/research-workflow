@@ -21,19 +21,19 @@ Source: building #2 (2026-11-18) and the talk after it, in this session and in a
 
 ## Steps
 ### 1. Rules file (`setup-workflow/PLANS-README.md` and this repo's `plans/README.md`)
-- **Stops:** a step that needs the user ends with `- **Stop:** <why>`. Every other step means "Claude may go on". A step needs a stop when: the user must judge the result (numbers, plots, a method choice that tests can't catch); it needs a user-run check; it is hard to undo (deletes, migrations, a push or merge into `main`); or the plan leaves a design choice open. The PR into `main` is always a stop.
-- **Runs:** `/implement-next` builds up to the next stop, at most 5 steps per run, because the context fills up. The limit is written as a number in `plans/README.md`, so a project can change it there. It stops early when a test fails and the fix is not clear, the review finds something to ask about, the "Still needed?" check fires, or a decision comes up that the plan does not cover. A plan with no stop markers (made before this version): ask before each step.
+- **Stops:** a step that needs the user ends with `- **Stop:** <why>`. Every other step means "Claude may go on". A step needs a stop when: the user must judge the result (numbers, plots, a method choice that tests can't catch); it needs a user-run check; it is hard to undo (deletes, migrations, a push or merge into `main`); or the plan leaves a design choice open. A Stop always means after its step: build it, commit, push, report, then stop. A step that must not start without the user puts its Stop on the step before, and the why names the next step (the first step of a run is covered by the question at the start of the run). The PR into `main` is always a stop: the last step always carries `- **Stop:** review the branch and open the PR into main`, so every finalized plan has at least one Stop line.
+- **Runs:** `/implement-next` builds up to the next stop, at most 5 steps per run, because the context fills up. The limit is written as a number in `plans/README.md`, so a project can change it there. A big step counts as one step. It stops early when a test fails and the fix is not clear, the review finds something to ask about, the "Still needed?" check fires, the merge rule says to ask before merging a big step's PR, or a decision comes up that the plan does not cover. A plan with no stop markers (made before this version): ask before each step (a finalized plan always has a Stop on its last step, so no Stop lines means an old plan).
 - **Review:** full review (`/code-review` for bugs, then Spec, Research, Style) for a step that changes a file that runs (code, scripts, pipelines, tests); a Spec check only for a step that changes only text (docs, plans, comments). Before every PR: always the full review, on the whole branch. Skip a heading that does not apply.
 - **Push:** after each step commit, push the task branch and tick the step's box, so GitHub is at most one step behind and a ticked box is always on GitHub. Pushing the task branch needs no question; pushing or merging into `main` does. A project's `CLAUDE.md` can override this.
 - **No parallel builds** unless the user asks.
 - **Logs:** a step's entry is the commit plus only what the diff can't show (deviations from the plan, what was left for later), at most 2 bullets, plus DECISION lines. The folder log gets one entry per task PR, written when it is merged; while it is open, only the Current state names it.
 
 ### 2. `/finalize-plan` proposes the stops
-- Readiness check gains **Stops:** Claude proposes a `**Stop:**` line for each step that meets the rule in step 1, the user confirms or changes them, and they are written into `PLAN.md`.
+- Readiness check gains **Stops:** Claude proposes a `**Stop:**` line for each step that meets the rule in step 1, always a Stop on the last step (the PR into `main`); the user confirms or changes them, and they are written into `PLAN.md`.
 
 ### 3. `/implement-next` builds a run
-- Keeps `disable-model-invocation: true` (only the user starts a build). The name stays.
-- At the start, asks once: "I will build steps 3, 4 and 5, then stop before step 6 (Stop: look at the plots). OK, or one step at a time?"
+- Keeps `disable-model-invocation: true` (only the user starts a build). The name stays. The frontmatter description changes to say it builds the next steps of a task's `PLAN.md`, up to the next stop.
+- At the start, asks once: "I will build steps 3, 4 and 5, then stop after step 5 (Stop: look at the plots). OK, or one step at a time?"
 - Each step still gets its review (per step 1), one commit with its log update, a push and a ticked box.
 - Stops at the stop, at the run limit, or early (step 1 list). At the end, one summary: each step, its review result, and every decision Claude made alone.
 - Drop the parallel rule (step 4 and the "Parallel big steps" bullet), and "Ask before pushing".
@@ -44,6 +44,7 @@ Source: building #2 (2026-11-18) and the talk after it, in this session and in a
 
 ### 5. `/new-plan` skeleton shows a stop
 - The `PLAN.md` skeleton gets a step with a `- **Stop:** <why>` line.
+- Step 5 drops "(ask before pushing)": the first push of the task branch needs no question either. `/setup-workflow`'s "Don't push" stays (that commit is on `main`).
 
 ### 6. Docs, checks, version
 - `README.md`, `docs/examples.html` (workflow 3: a run with a stop; the short version), this repo's `CLAUDE.md` if needed. `README.md` gets one line on allowing `git push` in Claude Code's own settings, so pushes to the task branch don't stop at a prompt; `/setup-workflow` does not change those settings.
