@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-5 built. Next: step 6 (`/progress`).
+- Steps 1-6 built. Next: step 7 (`/new-plan`).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 6 of `PLAN.md`: `/progress` follows the new rules. One commit, with the log update in it.
+- Build step 7 of `PLAN.md`: `/new-plan` drafts in a file, not in the chat. One commit, with the log update in it.
+### 12:05: step 6: `/progress` follows the new rules
+- `skills/progress/SKILL.md`: "Which log" (task work → task log only; the folder log only for status changes, PRs, releases and work outside a task; no section per session), a "Same commit" section, step status ticked in the issue checklist, the `(plan change)` tag instead of the "plan change" section, five statuses in the header only (no table row for a new task), the plan link switched to `main` after the merge, no "set `in-progress`?" question.
+- Description: callers are now `/new-plan`, `/finalize-plan`, `/grill-plan` and `/implement-next` (`/update-plan` gone).
+- Both checks pass.
 ### 12:05: step 5: `/project-refresher`
 - `skills/project-refresher/SKILL.md`: new `tasks` mode (one line per task: status · folder · title, from the task headers, open tasks first); rules say no `gh` calls or network, and asking "what is next?" never starts work; the `plans/README.md` table is no longer read.
 - `tests/check_scripts.sh`: covers `tasks` mode (a done task listed last), and the fake project no longer writes a status table. Both were planned for step 10; done here so the new code has its test in the same commit.
