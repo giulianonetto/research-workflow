@@ -1,15 +1,15 @@
 # Progress: Build in runs that stop where the plan says, with lighter build rules (#5)
-**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
+**Status:** done · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- All 6 steps done; version 0.3.0. [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) into `main` is open (`Closes #5`); the user merges it.
-- README rewritten after step 6 at the user's request: shorter, three figures, experiments left out.
-- Next: after the merge, `/progress` "merged, mark done", then tag `v0.3.0`.
+- None: task done. Follow-up work is in the [folder log](../../PROGRESS.md).
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Wait for the user to merge [PR #6](https://github.com/giulianonetto/research-workflow/pull/6). Then `/progress` "merged, mark done" (one folder-log entry, plan link in #5 to `main`), and tag `v0.3.0` (`git tag v0.3.0 && git push origin v0.3.0`).
+- None: task done. Follow-up work is in the [folder log](../../PROGRESS.md).
+### 15:05: merged, done
+- [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`8c4c736`); #5 closed by the merge, its plan link now points to `main`. Status `in-progress` → `done`. Tag `v0.3.0` pushed for the release workflow.
 ### 15:02: PR into main opened
 - [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) opened from `issue-5-build-runs` into `main`, `Closes #5`.
 ### 14:59: step 6, README round 3

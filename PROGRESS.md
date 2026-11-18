@@ -1,16 +1,18 @@
 # Progress log
 
 ## Current state (updated 2026-11-18)
-- **Now:** [issue-5-build-runs](plans/issue-5-build-runs/PROGRESS.md) (in-progress, [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) into `main` open): build in runs that stop where the plan says, with lighter build rules ([#5](https://github.com/giulianonetto/research-workflow/issues/5)).
-- Last release: 0.2.0 (tag `v0.2.0`): one rules file, the build follows the plan's shape ([#2](plans/issue-2-right-size-build/PROGRESS.md)).
+- **Now:** no active task.
+- Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
 
-## 2026-11-18: workflow review; version 0.2.0
-[#2](plans/issue-2-right-size-build/PROGRESS.md) done: simpler workflow, released as 0.2.0.
+## 2026-11-18: workflow review; versions 0.2.0 and 0.3.0
+[#2](plans/issue-2-right-size-build/PROGRESS.md) done: simpler workflow, released as 0.2.0. [#5](plans/issue-5-build-runs/PROGRESS.md) done: build in runs that stop where the plan says, released as 0.3.0.
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 15:05: #5 done; 0.3.0 merged and tagged
+- [#5](plans/issue-5-build-runs/PROGRESS.md): [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`8c4c736`); status `done`; tag `v0.3.0` pushed for the release workflow.
 ### 14:09: #5 in-progress
 - [#5](plans/issue-5-build-runs/PROGRESS.md): step 1 built; status `planned` → `in-progress`.
 ### 14:04: #5 planned
