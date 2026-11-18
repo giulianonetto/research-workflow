@@ -2,6 +2,7 @@
 
 Claude skills for research repos: plans that start as drafts and grow over many days, a progress log that every session starts from, major decisions one grep away, and experiments that close with a written result and a short notebook to continue by hand.
 
+**The workflow on one page:** [docs/workflow.html](docs/workflow.html).
 **Step-by-step examples:** [docs/examples.html](docs/examples.html) (new repo, new task, existing issue, continuing a draft, running an experiment).
 
 ## Commands

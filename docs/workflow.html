@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Workflow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* one page, one flow: five stage cards in a row (stacked on phones), a status track above, a session band below */
+:root {
+  --bg:#ffffff; --fg:#1b2420; --muted:#66716b; --line:#e4e8e5; --soft:#f6f8f7;
+  --accent:#2f6b4f; --accent-soft:#e6f1ea;
+  --you:#5b4a8a; --you-soft:#eeeaf6;
+  --drafting:#a06a00; --drafting-bg:#fcf2dc;
+  --planned:#1f5596; --planned-bg:#e4edf9;
+  --inprog:#2f6b4f; --inprog-bg:#e6f1ea;
+  --done:#4c5752; --done-bg:#eceeed;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15px; line-height:1.5; padding:56px 16px 72px }
+main { max-width:1080px; margin:0 auto; display:flex; flex-direction:column; gap:48px }
+h1, h2, p { margin:0 }
+a { color:var(--accent) }
+
+header { text-align:center; display:flex; flex-direction:column; gap:10px; align-items:center }
+h1 { font-size:2.1rem; font-weight:600; letter-spacing:-.015em }
+.lede { color:var(--muted); font-size:1.05rem; max-width:56ch }
+
+.chip { font-family:var(--mono); font-size:12.5px; font-weight:500; padding:3px 9px; border-radius:6px; white-space:nowrap; display:inline-block; background:var(--accent-soft); color:var(--accent) }
+.chip.you { background:var(--you-soft); color:var(--you); font-family:var(--sans); font-weight:600; font-size:11.5px; letter-spacing:.04em; text-transform:uppercase }
+.st { font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:999px; white-space:nowrap }
+.drafting { --c:var(--drafting); --cb:var(--drafting-bg) }
+.planned  { --c:var(--planned);  --cb:var(--planned-bg) }
+.inprog   { --c:var(--inprog);   --cb:var(--inprog-bg) }
+.done     { --c:var(--done);     --cb:var(--done-bg) }
+.st { color:var(--c); background:var(--cb) }
+
+/* status track + stages share one 5-column grid */
+.flow { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); column-gap:28px; row-gap:14px }
+.track { grid-row:1; display:flex; flex-direction:column; align-items:center; gap:8px }
+.track::before { content:""; align-self:stretch; height:4px; border-radius:2px; background:var(--c) }
+.t-draft { grid-column:1 / 3 } .t-plan { grid-column:3 } .t-prog { grid-column:4 } .t-done { grid-column:5 }
+
+.stage { grid-row:2; position:relative; display:flex; flex-direction:column; gap:12px; padding:18px 16px 16px;
+  border:1px solid var(--line); border-radius:12px; background:var(--bg) }
+.stage + .stage::before { /* arrow from the previous card */
+  content:""; position:absolute; left:-21px; top:38px; width:14px; height:14px;
+  border-top:2px solid #b9c2bd; border-right:2px solid #b9c2bd; transform:rotate(45deg) }
+.num { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-weight:600; font-size:14px; color:var(--c); background:var(--cb) }
+.stage h2 { font-size:1.08rem; font-weight:600 }
+.stage p { color:var(--muted); font-size:14px }
+.cmds { display:flex; flex-wrap:wrap; gap:6px }
+.loop { margin-top:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500; color:var(--c);
+  border-top:1px dashed var(--line); padding-top:10px }
+.loop svg { flex:none }
+.m-st { display:none; align-self:flex-start }
+
+/* every session */
+.session { display:flex; flex-direction:column; gap:16px; align-items:center }
+.eyebrow { font-size:12px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--muted) }
+.band { display:grid; grid-template-columns:auto minmax(40px,1fr) auto minmax(40px,1fr) auto; align-items:center; gap:14px; width:100%; max-width:760px }
+.band .end { display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center }
+.band .end span:last-child { font-size:13px; color:var(--muted) }
+.band .mid { font-size:14px; color:var(--fg); padding:8px 16px; border-radius:999px; background:var(--soft); white-space:nowrap }
+.dash { height:2px; background:repeating-linear-gradient(90deg, #c7cec9 0 6px, transparent 6px 11px) }
+
+/* small notes */
+.notes { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px }
+.note { background:var(--soft); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:6px; font-size:14px; color:var(--muted) }
+.note b { color:var(--fg); font-weight:600; font-size:14.5px }
+code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px 5px; border-radius:4px; color:var(--fg) }
+.foot { text-align:center; font-size:14px; color:var(--muted) }
+
+@media (max-width:860px) {
+  body { padding-top:40px }
+  .flow { grid-template-columns:minmax(0,1fr); row-gap:30px; max-width:440px; margin:0 auto; width:100% }
+  .track { display:none }
+  .stage { grid-row:auto; flex-direction:column }
+  .stage + .stage::before { left:50%; top:-24px; margin-left:-7px; transform:rotate(135deg) }
+  .m-st { display:inline-block }
+  .band { grid-template-columns:minmax(0,1fr); justify-items:center; gap:10px }
+  .dash { width:2px; height:20px; background:repeating-linear-gradient(180deg, #c7cec9 0 5px, transparent 5px 9px) }
+  h1 { font-size:1.75rem }
+}
+</style>
+</head><body>
+<main>
+
+<header>
+  <h1>The workflow</h1>
+  <p class="lede">One task, from idea to merged. Each step is one command. Nothing changes status without your yes.</p>
+</header>
+
+<section class="flow" aria-label="The five stages of a task">
+  <div class="track t-draft drafting"><span class="st">drafting</span></div>
+  <div class="track t-plan planned"><span class="st">planned</span></div>
+  <div class="track t-prog inprog"><span class="st">in-progress</span></div>
+  <div class="track t-done done"><span class="st">done</span></div>
+
+  <article class="stage drafting">
+    <span class="num">1</span>
+    <h2>Start a plan</h2>
+    <div class="cmds"><span class="chip">/new-plan</span></div>
+    <p>Say the idea in plain words. Claude opens a GitHub issue and writes a draft plan. Nothing goes into git before your yes.</p>
+    <span class="st m-st">drafting</span>
+  </article>
+
+  <article class="stage drafting">
+    <span class="num">2</span>
+    <h2>Shape it</h2>
+    <div class="cmds"><span class="chip you">Talk</span><span class="chip">/grill-plan</span><span class="chip">/sandbox</span></div>
+    <p>Think it through, answer the hard questions, check data by hand. Each decision becomes a DECISION line.</p>
+    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>as many days as you need</span>
+  </article>
+
+  <article class="stage planned">
+    <span class="num">3</span>
+    <h2>Finalize</h2>
+    <div class="cmds"><span class="chip">/finalize-plan</span></div>
+    <p>Claude marks each part <b>ok</b> or <b>gap</b>. You fix the gaps or accept them. Then the steps go into the issue as a checklist.</p>
+    <span class="st m-st">planned</span>
+  </article>
+
+  <article class="stage inprog">
+    <span class="num">4</span>
+    <h2>Build</h2>
+    <div class="cmds"><span class="chip">/implement-next</span></div>
+    <p>One step, one reviewed commit, with the log in it. Claude ticks the box in the issue.</p>
+    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>until every box is ticked</span>
+  </article>
+
+  <article class="stage done">
+    <span class="num">5</span>
+    <h2>Close</h2>
+    <div class="cmds"><span class="chip you">PR &amp; merge</span><span class="chip">/progress</span></div>
+    <p>Open the PR and merge it. Then say “merged, mark done”. The issue closes.</p>
+    <span class="st m-st">done</span>
+  </article>
+</section>
+
+<section class="session" aria-label="Every session">
+  <span class="eyebrow">Every session</span>
+  <div class="band">
+    <div class="end"><span class="chip">/project-refresher</span><span>where was I?</span></div>
+    <div class="dash"></div>
+    <div class="mid">work on the next step</div>
+    <div class="dash"></div>
+    <div class="end"><span class="chip">/progress</span><span>log it, set the next step</span></div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="note"><b>The plan can change</b><span>Say what to change, at any time. Claude shows the edit and logs it as a DECISION line.</span></div>
+  <div class="note"><b>An experiment?</b><span>Start with <code>/new-plan exp</code>. Before you close, write it up with <code>/write-results</code>.</span></div>
+  <div class="note"><b>All past decisions</b><span>One grep away: <code>grep -rn DECISION PROGRESS.md plans/</code></span></div>
+</section>
+
+<p class="foot">Step-by-step examples for five common situations: <a href="examples.html">examples.html</a></p>
+
+</main>
+</body></html>
