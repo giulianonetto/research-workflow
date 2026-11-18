@@ -5,7 +5,7 @@ description: Ask the hard questions about a task's plan in rounds - numbered que
 
 Adapted from Matt Pocock's grilling skill (mattpocock-skills, MIT License, Copyright (c) 2026 Matt Pocock; full notice in the plugin's `NOTICE` file).
 
-Use it any time while a plan is drafting, as often as the user likes; `/finalize-plan` offers it when weak spots remain. If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask.
+Use it any time while a plan is drafting, as often as the user likes; `/finalize-plan` offers it when weak spots remain. If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name (`issue-<N>-<slug>`, or a big step's `issue-<N>-<slug>-step-<n>`: the part before `-step-`) or the folder's Current state; if that is not clear, ask.
 
 ## Steps
 

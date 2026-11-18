@@ -85,8 +85,9 @@ for f in SKILLS.glob("*/SKILL.md"):
         if not (f.parent / target).exists():
             err(f"{f.relative_to(ROOT)}: link to missing file {target}")
 
-# 4. stale names
-for f in list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md"]:
+# 4. stale names (the same files as check 5)
+DOCS = list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md", ROOT / "CLAUDE.md"]
+for f in DOCS:
     rel = str(f.relative_to(ROOT))
     text = f.read_text()
     for pat, allowed, why in STALE:
@@ -95,7 +96,7 @@ for f in list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "READ
 
 # 5. skill names are always written /name: flag `name`, <code>name</code> and chips without the slash
 bare = re.compile(r"`(%s)`|<code>(%s)</code>|chip cmd\">(%s)<" % ((("|".join(map(re.escape, names))),) * 3))
-for f in list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md", ROOT / "CLAUDE.md"]:
+for f in DOCS:
     for i, line in enumerate(f.read_text().splitlines(), 1):
         for m in bare.finditer(line):
             err(f"{f.relative_to(ROOT)}:{i}: skill name without the slash: {m.group(0)}")

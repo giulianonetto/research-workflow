@@ -20,9 +20,9 @@ A task can be an **experiment** (tries something out and ends in an answer): sam
 
 ## Build
 
-- **One branch per task.** Each step of `PLAN.md` is one commit on it. Never several commits for one step by default. Review fixes made before the commit go into it. A fix after the push is one commit, named after the step.
-- **Big step:** a step that would pass about 400 changed lines of code (tests and logs not counted), or would touch unrelated parts of the code. It lists clear sub-steps in `PLAN.md`. It gets a sub-issue and its own branch, one commit per sub-step, and a PR into the task branch. More lines are fine for mechanical changes (renames, generated fixtures, moved code) if the commit or PR says so. The number is a guide from code-review studies (SmartBear/Cisco: about 200-400 lines per review); Claude uses judgment.
-- **At the end:** one PR from the task branch into `main`.
+- **One branch per task**, named like its folder: `issue-<N>-<slug>`. Each step of `PLAN.md` is one commit on it. Never several commits for one step by default. Review fixes made before the commit go into it. A fix after the push is one commit, named after the step.
+- **Big step:** a step that would pass about 400 changed lines of code (tests and logs not counted), or would touch unrelated parts of the code. It lists clear sub-steps in `PLAN.md`. It gets a sub-issue and its own branch, `<task branch>-step-<n>` (made from the task branch), one commit per sub-step, and a PR into the task branch. More lines are fine for mechanical changes (renames, generated fixtures, moved code) if the commit or PR says so. The number is a guide from code-review studies (SmartBear/Cisco: about 200-400 lines per review); Claude uses judgment.
+- **At the end:** one PR from the task branch into `main`. Its description says `Closes #<N>`, so merging closes the task issue.
 
 ## The task issue
 
@@ -64,8 +64,8 @@ For any reason, in any status, at any time:
   `**Status:** <status> · **Kind:** <task | experiment> · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** <link>`
 - **Current state** is rewritten, not appended, at every update (with its date): at most ~6 one-line bullets, readable in a few seconds. Explanations go in the dated entries.
 - **The task log** keeps the work, its evidence and every decision of the task.
-- **The folder log** keeps only its Current state (the active tasks, with links) and what no task log has: status changes, PRs and releases, work outside any task. No section per session. A step or a plan change alone does not touch it.
-- **Same commit:** a log update goes into the same commit as the work it describes. A commit for the log alone only when nothing else changed. When you ask Claude to commit work (also work done by hand), Claude updates the logs in that commit.
+- **The folder log** keeps only its Current state (the active tasks, with links) and what no task log has: status changes, the task's PR into `main`, releases, work outside any task. No section per session. A step, a big step's PR into the task branch, or a plan change alone does not touch it.
+- **Same commit:** a log update goes into the same commit as the work it describes. A commit for the log alone only when nothing else changed (for example, right after merging a PR built in another worktree). When you ask Claude to commit work (also work done by hand), Claude updates the logs in that commit.
 - **Next** lives where the work is open: in the task log while the task is open, in the folder log for anything else. A `done` or `dropped` task's Next is `None: task <status>.`; follow-up work goes in the folder log's Next.
 - Times are local.
 
@@ -91,7 +91,7 @@ All decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 - The status is kept in one place only: the header line of the task's `PROGRESS.md`. Not in `PLAN.md`, not in a table. `/project-refresher tasks` lists every task with its status.
 - It changes only by your choice: `/new-plan` (→ `drafting`), `/finalize-plan` (→ `planned`, after you confirm), `/implement-next` (→ `in-progress` on the first step of a `planned` task: running it is your choice to start), your answer to the question in Plan changes, or telling `/progress`.
 - A task on hold stays `in-progress`, with the reason in its Current state.
-- A PR opened or merged is an event, logged in the folder log, not a status. When a task is finished, keep its folder as history.
+- A PR opened or merged is an event, not a status: the task's PR into `main` goes in the folder log, a big step's PR only in the task log. When a task is finished, keep its folder as history.
 
 ## Glossary
 

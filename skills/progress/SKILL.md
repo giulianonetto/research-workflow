@@ -8,7 +8,7 @@ Two logs: one `plans/<task>/PROGRESS.md` per task (the work, its evidence and ev
 ## Which log
 
 - **Work on a task** (a step, a plan change, a work session): the task log only.
-- **A status change, a PR opened or merged, a release:** the task log and the folder log.
+- **A status change, the task's PR into `main` opened or merged, a release:** the task log and the folder log. A big step's PR into the task branch goes in the task log only.
 - **Work outside any task:** the folder log only, DECISION lines included.
 
 The folder log never gets a section per session.
@@ -19,7 +19,7 @@ A log update goes into the same commit as the work it describes. When the user a
 
 ## Steps
 
-1. **Find the task.** The branch name or the folder Current state names it.
+1. **Find the task.** The branch name (`issue-<N>-<slug>`, or a big step's `issue-<N>-<slug>-step-<n>`: the part before `-step-`) or the folder Current state names it.
 
 2. **Catch work done outside this session.** The user also works by hand. Check what changed since the last logged entry (its date and time): `git log --since=<that time> --stat`, `git status --short`, `git diff --stat`. Any change this session didn't make goes in the log too, marked **(by hand)**, with its commit or file paths. If its purpose isn't clear from the commit message or the diff, ask the user in one line; don't guess. Not a git repo: ask the user if they changed anything by hand.
 
@@ -36,7 +36,7 @@ A log update goes into the same commit as the work it describes. When the user a
 
 5. **Status.** Change it only when the user says so, or when `/new-plan`, `/finalize-plan` or `/implement-next` asks after the user's choice. Use only the five statuses in `plans/README.md`. The status lives only in the task header line. Also:
    - **New task** (from `/new-plan`): create the task `PROGRESS.md` (the title and header line exactly as in `plans/README.md`, Current state, a first dated entry, same structure as the folder log), and link the folder from the folder Current state.
-   - **PR opened / merged** (events, not statuses): name the PR and the merge commit in both Current state blocks. When the task's PR into `main` is merged, change the plan link in the task issue's body to point to `main` (`gh issue edit <N> --body-file ...`).
+   - **The task's PR into `main` opened / merged** (events, not statuses): name the PR and the merge commit in both Current state blocks; its description says `Closes #<N>`. When the task's PR into `main` is merged, change the plan link in the task issue's body to point to `main` (`gh issue edit <N> --body-file ...`).
    - **Done or dropped:** one-line summary (or reason) in the folder log; drop the task from the folder Current state. The task log keeps no Next: its Current state bullet and its last `### Next` become `None: task <status>.` with a link to the folder log. Any follow-up work (a run, a new task, open issues) moves to the folder log's **Next**, because a Next nobody reads again goes stale without anyone noticing.
    - **Experiment done or dropped** (`**Kind:** experiment`): first run the **Close check** in `plans/EXPERIMENTS.md` and show what is missing; help fill it if the user wants. Change the status only when it passes, or when the user explicitly accepts the gaps (name them in the task log). `done` means the objective was answered, whatever the answer; the final DECISION line states it. `dropped` needs only the short `RESULTS.md`.
 

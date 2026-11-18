@@ -10,7 +10,7 @@ Builds one step (or, for big steps that don't touch the same files, up to 2-3 at
 
 1. **Read first.** `plans/README.md`. If the user names a task, read only that task's `PROGRESS.md` (Current state, Next, recent DECISION lines); if not, take the active task from the folder `PROGRESS.md`, and ask in one line if more than one is active. Then read its `PLAN.md` and the task issue's checklist (`gh issue view <N>`). Check git for work not yet logged, as `/progress` does (`git log --since=<last logged entry> --stat`, `git status --short`); ask in one line about anything unclear.
 
-2. **Pick what to build.** Unfinished work first (Next, uncommitted changes, an open sub-issue branch). Otherwise the next unchecked step in the checklist. On the first step of a `planned` task, set the status to `in-progress` (logged with this step, as a status change).
+2. **Pick what to build.** Unfinished work first (Next, uncommitted changes, an open big-step branch). Otherwise the next unchecked step in the checklist. On the first step of a `planned` task, set the status to `in-progress` (logged with this step, as a status change).
 
 3. **Still needed?** Compare the step with the findings and DECISION lines logged after it was written. If one may make the step obsolete or change it, ask in one line before building; a change goes through the plan-change rules.
 
@@ -18,10 +18,11 @@ Builds one step (or, for big steps that don't touch the same files, up to 2-3 at
 
 5. **Build.**
    - **Simple step:** on the task branch: build, review (step 6), then one commit with the log update in it (`/progress`), named after the step. Tick its box in the checklist.
-   - **Big step:** on its branch (`issue-<M>-<slug>`): one commit per sub-step, then review and a PR into the task branch. Merge it or ask, per the merge rule. Close the sub-issue with a one-line comment and tick the step's box.
+   - **Big step:** on its branch (`<task branch>-step-<n>`, from the task branch; make it if `/finalize-plan` did not): one commit per sub-step, each with its log update in the task log (`/progress`), then review and a PR into the task branch. Merge it or ask, per the merge rule. Close the sub-issue with a one-line comment and tick the step's box.
+   - **Parallel big steps:** the agents commit code only; after merging each PR, this session logs it in one commit (nothing else changed, so a log-only commit is right here).
 
    Keep test discipline: write or update tests with the code, and run them before the commit. Tests are cheap once written and catch real bugs. Ask before pushing.
 
 6. **Review** before each commit of a step and before each PR, as `plans/README.md` says: `/code-review` for bugs, then **Spec**, **Research** and **Style** under their own headings. Fix what is clear before the commit; ask about the rest.
 
-7. **After building.** Write the next pick into the task's **Next** (the step, the file to open, the command to run), in the same commit. Add a user-run check to the task issue only if its answer could change a decision. Tell the user what was built, the review result and what is next.
+7. **After building.** Write the next pick into the task's **Next** (the step, the file to open, the command to run), in the same commit. Add a user-run check to the task issue only if its answer could change a decision. When every box is ticked, review the whole task branch the same way and offer to open the PR into `main` (`Closes #<N>` in its description); the user merges it. Tell the user what was built, the review result and what is next.

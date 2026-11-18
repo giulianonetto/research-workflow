@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 The user decides when a plan is ready; this skill checks it, makes the status change and prepares the build. It changes nothing without the user's confirmation.
 
-If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask. Read `plans/README.md`, `PLAN.md` and the task's `PROGRESS.md`. If the status is not `drafting`, say what it is and stop (a later change follows the plan-change rules in `plans/README.md`).
+If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name (`issue-<N>-<slug>`, or a big step's `issue-<N>-<slug>-step-<n>`: the part before `-step-`) or the folder's Current state; if that is not clear, ask. Read `plans/README.md`, `PLAN.md` and the task's `PROGRESS.md`. If the status is not `drafting`, say what it is and stop (a later change follows the plan-change rules in `plans/README.md`).
 
 ## Steps
 
@@ -27,10 +27,10 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
 
 5. **Prepare the build.** Show the GitHub structure the plan implies, and create it only after the user confirms:
    - the task issue's checklist: one checkbox per `PLAN.md` step, below the plan link in the body (`gh issue edit <N> --body-file ...`; keep the problem text and the link);
-   - for each big step: a sub-issue (3 lines: what, done when, what to review, plus a link to its `PLAN.md` step), linked from its checklist line, and its branch `issue-<M>-<slug>` (`<M>` is the sub-issue number), made from the task branch.
+   - for each big step: a sub-issue (3 lines: what, done when, what to review, plus a link to its `PLAN.md` step), linked from its checklist line, and its branch `<task branch>-step-<n>`, made in step 6.
 
    If the user wants another split later, they ask; the rules are in `plans/README.md`. No separate skill is needed.
 
-6. **Log and commit.** Run `/progress` for the status change (both logs; name any accepted gaps and what was created on GitHub in the task log). Commit: `plan: finalized`.
+6. **Log and commit.** Run `/progress` for the status change (both logs; in the task log, name any accepted gaps and what was created on GitHub, or what was not, if the user said no or `gh` failed: the status change stands either way). Commit: `plan: finalized`. Then make each big step's branch from the task branch, so it starts from this commit.
 
 7. **Next.** Tell the user to start building in a fresh session with `/implement-next`.

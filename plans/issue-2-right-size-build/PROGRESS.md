@@ -3,13 +3,18 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-10 built. Next: the PR into `main`.
+- Steps 1-10 built and reviewed. Next: the PR into `main`.
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Review the whole branch against `main`, then open the PR into `main` (`Closes #2`); the user merges it. After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+- Open the PR into `main` (`Closes #2`); the user merges it. After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+### 12:15: review of the whole branch before the PR
+- `/code-review` (medium) on `main..HEAD`: 10 findings. Fixed 8: big-step branches did not map to a task folder; big-step and parallel commits had no logging rule; `/finalize-plan` made branches before its commit, and was unclear when the user declines the GitHub structure; `Closes #<N>` was no longer stated anywhere; a big step's PR reached the folder log; `/new-plan` named the issue after a plan not yet written; check 4 skipped `CLAUDE.md` (both checks now share one file list).
+- Not changed: the refresher cannot see the issue checklist (no `gh`, by the 11:26 DECISION: Next holds the pick); this repo's "Tasks in this repo" list (step 10 says to keep it as plain lines).
+- Files: `PLANS-README.md` and this repo's `plans/README.md` (Build, Logs, Status), `/finalize-plan`, `/grill-plan`, `/progress`, `/implement-next`, `/new-plan`, `tests/check_skills.py`. Both checks pass.
+- **DECISION 2026-11-18 12:15:** a big step's branch is `<task branch>-step-<n>` (e.g. `issue-12-foo-step-3`), made from the task branch after the `plan: finalized` commit, replaces 2026-11-18 12:02, because with `issue-<M>-<slug>` the skills that find the task from the branch name found no folder (Claude, from the review)
 ### 12:12: step 10: docs, checks, version 0.2.0
 - `README.md` (commands table, what it writes), `docs/examples.html` (all five workflows and the short version), this repo's `CLAUDE.md`: the new flow and commands. Skill names written `/name` everywhere (`progress` and `sandbox` were bare in 6 skill files and the page).
 - This repo's `plans/README.md` is the new template plus a "Tasks in this repo" list (no status table); `plans/EXPERIMENTS.md` matches its template.
