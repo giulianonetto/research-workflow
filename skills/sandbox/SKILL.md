@@ -31,4 +31,4 @@ Code lives in `plans/<task>/sandbox/` (committed). Everything it writes goes to 
 
 5. **Hand it over.** Give the user the file to open or the command to run, and what to look at first.
 
-When the user reports what they saw: fill in **Findings**, then run `progress` (with a DECISION line if the findings settled something). If they change what the plan should say, suggest `/update-plan`.
+When the user reports what they saw: fill in **Findings**, then run `progress` (with a DECISION line if the findings settled something). If they change what the plan should say, offer to change it under the plan-change rules in `plans/README.md`.

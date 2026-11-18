@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 The user decides when a plan is ready; this skill checks it, makes the status change and prepares the build. It changes nothing without the user's confirmation.
 
-If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask. Read `plans/README.md`, `PLAN.md` and the task's `PROGRESS.md`. If the status is not `drafting`, say what it is and stop (a later change goes through `/update-plan`).
+If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask. Read `plans/README.md`, `PLAN.md` and the task's `PROGRESS.md`. If the status is not `drafting`, say what it is and stop (a later change follows the plan-change rules in `plans/README.md`).
 
 ## Steps
 
@@ -21,7 +21,7 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
    - **Issue:** the task has a GitHub issue; its title matches the plan's title (offer to update it if not); its body holds the problem and the plan link, and no solution text (rules in `plans/README.md`).
    - **Build shape:** each step is one commit, or a big step that lists its sub-steps (the size rule in `plans/README.md`: about 400 changed lines of code, or unrelated parts of the code). Recommend the fewest big steps.
 
-3. **Show the report.** For gaps, offer to fix them now (as `/update-plan` would, and log them the same way) or to stop and keep drafting. Done when every item is **ok**, or the user explicitly says to go ahead with the gaps listed.
+3. **Show the report.** For gaps, offer to fix them now (under the plan-change rules in `plans/README.md`) or to stop and keep drafting. Done when every item is **ok**, or the user explicitly says to go ahead with the gaps listed.
 
 4. **Confirm.** Ask: "Set the status to `planned`?" Only on a yes, go on.
 

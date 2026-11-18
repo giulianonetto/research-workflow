@@ -4,15 +4,15 @@ description: Start a new task or experiment as a draft - GitHub issue, a draft P
 disable-model-invocation: true
 ---
 
-Starts a task in status `drafting`. Nothing needs to be settled yet: the plan then grows with `/update-plan`, over as many sessions and days as needed, and is made ready with `/finalize-plan`. Run it as soon as an idea is worth tracking.
+Starts a task in status `drafting`. Nothing needs to be settled yet: the plan then grows under the plan-change rules in `plans/README.md` (`/grill-plan` helps), over as many sessions and days as needed, and is made ready with `/finalize-plan`. Run it as soon as an idea is worth tracking.
 
 If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` first and stop. Read `plans/README.md` first: it holds the format rules (task header line, DECISION lines).
 
 ## Steps
 
-1. **Name the task.** Every task has a GitHub issue: use the one the user names, or create one (`gh issue create`, with the plan's title and a body that is the problem only, in 2-3 lines; never the solution). The folder and branch are always `issue-<N>-<slug>`. If `tmp/new-plan/<task>/PLAN.md` exists (a session ended before approval), offer to continue from it. If `plans/<task>/` already exists, stop and suggest `/update-plan`. It is a normal task unless the user says it is an **experiment** (tries something out and ends in an answer; see `plans/EXPERIMENTS.md`), e.g. `/new-plan exp`, `/new-plan experiment`, or in words; don't ask. If it is an experiment and `plans/EXPERIMENTS.md` is missing, tell them to re-run `/setup-workflow` first and stop. Done when the folder name, the kind and the issue number are fixed.
+1. **Name the task.** Every task has a GitHub issue: use the one the user names, or create one (`gh issue create`, with the plan's title and a body that is the problem only, in 2-3 lines; never the solution). The folder and branch are always `issue-<N>-<slug>`. If `tmp/new-plan/<task>/PLAN.md` exists (a session ended before approval), offer to continue from it. If `plans/<task>/` already exists, stop: that plan changes under the plan-change rules in `plans/README.md`. It is a normal task unless the user says it is an **experiment** (tries something out and ends in an answer; see `plans/EXPERIMENTS.md`), e.g. `/new-plan exp`, `/new-plan experiment`, or in words; don't ask. If it is an experiment and `plans/EXPERIMENTS.md` is missing, tell them to re-run `/setup-workflow` first and stop. Done when the folder name, the kind and the issue number are fixed.
 
-2. **Gather the starting material.** This conversation so far, the issue's title, body and comments when it already existed (`gh issue view <N> --comments`), and/or a draft the user points to (a file, a note, pasted text). Read the code and data it names, and the glossary and decision records in that area if the folder has them (`GLOSSARY.md`, `docs/adr/`), enough to write **Where things are now** correctly. Don't interview: anything unsettled becomes an open question. Done when every file, function and dataset the draft names has been checked.
+2. **Gather the starting material.** This conversation so far, the issue's title, body and comments when it already existed (`gh issue view <N> --comments`), and/or a draft the user points to (a file, a note, pasted text). Read the code and data it names, and `GLOSSARY.md` if the folder has one, enough to write **Where things are now** correctly. Don't interview: anything unsettled becomes an open question. Done when every file, function and dataset the draft names has been checked.
 
 3. **Draft `PLAN.md` in a file.** Write the draft to `tmp/new-plan/<task>/PLAN.md` (`tmp/` is not in git and survives sessions), give the user the path, and iterate on that file; the user can edit it too. Nothing goes into `plans/` or git before the user approves. If other `plans/*/PLAN.md` exist, match their shape. Otherwise:
 
@@ -53,4 +53,4 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
 
 5. **Commit and link.** One commit, `plan: start <task>`. Once the branch is on GitHub (ask before pushing), put the plan link in the issue body, below the problem text, not in a comment: `gh issue edit <N> --body-file ...` with `Plan: <blob URL of PLAN.md on the branch>`. If not pushed yet, say the link is pending.
 
-6. **Next.** Tell the user: change the plan with `/update-plan` at any time; run `/finalize-plan` when they think it is ready to build.
+6. **Next.** Tell the user: the plan can change at any time (just say what to change; `/grill-plan` asks the hard questions); run `/finalize-plan` when they think it is ready to build.

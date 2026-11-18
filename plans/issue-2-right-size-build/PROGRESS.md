@@ -3,13 +3,19 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-7 built. Next: step 8 (removals).
+- Steps 1-8 built. Next: step 9 (short project sections).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 8 of `PLAN.md`: remove what the reviews found unneeded (`/update-plan`, ADRs and `docs/agents/`, the `## Agent skills` block, mattpocock commands, no-tracker branch, `paused`). One commit, with the log update in it.
+- Build step 9 of `PLAN.md`: short project sections (`CLAUDE-SECTION.md` about 4 lines; `README-SECTION.md` the flow and a link). One commit, with the log update in it.
+### 12:08: step 8: removals
+- Deleted `skills/update-plan/` (out of `plugin.json`) and `skills/setup-workflow/DOMAIN.md`. `/finalize-plan`, `/new-plan`, `/sandbox`, `/write-results` and `EXPERIMENTS.md` (the "normal task" line and rule 1, nothing else) point to the plan-change rules in `plans/README.md`.
+- `/setup-workflow`: a GitHub remote is required (stops without one, offers `gh repo create`); no issue-tracker question, no `docs/agents/` or `docs/adr/`, no `docs/` un-ignore step, no mattpocock config, no `git init` branch; "with an empty task table" gone.
+- `CLAUDE-SECTION.md`: `## Agent skills` block, `/to-tickets`, `/grilling` and `/update-plan` gone. `README-SECTION.md`: flow without mattpocock commands, `/update-plan` or `paused` (both sections get shortened in step 9). `README.md`: "Dependencies" section and the `/update-plan` row gone.
+- Left for step 10: `docs/examples.html` still names them.
+- Both checks pass.
 ### 12:06: step 7: `/new-plan` drafts in a file
 - `skills/new-plan/SKILL.md`: every task has an issue (body = the problem, 2-3 lines) and the folder and branch are always `issue-<N>-<slug>`; offers to continue an unapproved `tmp/new-plan/<task>/PLAN.md`; step 3 drafts in that file and iterates there; step 4 (after approval) moves it to `plans/<task>/` and deletes the tmp copy; step 5 puts the plan link in the issue body; the skeleton shows a big step with sub-steps (`2a`, `2b`).
 - Both checks pass.

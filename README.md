@@ -11,7 +11,6 @@ Claude skills for research repos: plans that start as drafts and grow over many 
 | Once per repo | `/setup-workflow` |
 | Start of a session | `/project-refresher` |
 | New task / experiment | `/new-plan` / `/new-plan exp` |
-| Plan text should change (any time, any reason) | `/update-plan` |
 | Plan ready to build (status changes only after your yes) | `/finalize-plan` |
 | Write up an experiment (as many rounds as you like) | `/write-results` |
 | Check something by hand | ask for a sandbox (`sandbox`) |
@@ -60,10 +59,6 @@ Use only one of the two on the same machine; with both, every command appears tw
 ### In each project
 
 Open Claude in the project folder and run `/setup-workflow` (in Claude Code, plugin commands carry the plugin's name: `/research-workflow:setup-workflow`). In a project set up with an older version, run it again: it shows what changed and updates only with your agreement.
-
-## Dependencies
-
-Everything works on its own. These optional commands come from the [mattpocock-skills](https://github.com/mattpocock/skills) plugin, and the workflow mentions them where they help: `/grilling` and `/grill-with-docs` (stress-test an idea), `/domain-modeling` (glossary and ADRs), `/to-tickets` and `/implement` (multi-session builds), `/code-review`. Opening PRs uses `gh pr create`.
 
 ## Credits
 

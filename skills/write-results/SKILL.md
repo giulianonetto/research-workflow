@@ -4,7 +4,7 @@ description: Write or revise an experiment's RESULTS.md and analysis.qmd - a fir
 disable-model-invocation: true
 ---
 
-For experiment tasks (`**Kind:** experiment`). Writing up is iterative: draft, review, interpret, review again, in any order. This one command covers every round, the way `/update-plan` covers every change to a plan. Closing is not here: when every section is reviewed, the close check in `progress` ("mark done") finishes the experiment.
+For experiment tasks (`**Kind:** experiment`). Writing up is iterative: draft, review, interpret, review again, in any order. This one command covers every round. Closing is not here: when every section is reviewed, the close check in `progress` ("mark done") finishes the experiment.
 
 If the folder has no `plans/EXPERIMENTS.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask. If it is not an experiment, say so and stop.
 
