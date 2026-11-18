@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-4 built. Next: step 5 (`/project-refresher`).
+- Steps 1-5 built. Next: step 6 (`/progress`).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 5 of `PLAN.md`: `/project-refresher` (Next holds the pick; new `tasks` mode; no plans table). One commit, with the log update in it.
+- Build step 6 of `PLAN.md`: `/progress` follows the new rules. One commit, with the log update in it.
+### 12:05: step 5: `/project-refresher`
+- `skills/project-refresher/SKILL.md`: new `tasks` mode (one line per task: status · folder · title, from the task headers, open tasks first); rules say no `gh` calls or network, and asking "what is next?" never starts work; the `plans/README.md` table is no longer read.
+- `tests/check_scripts.sh`: covers `tasks` mode (a done task listed last), and the fake project no longer writes a status table. Both were planned for step 10; done here so the new code has its test in the same commit.
+- Both checks pass.
 ### 12:04: step 4: new skill `/implement-next`
 - `skills/implement-next/SKILL.md`: read first (named task, or the active one), pick (unfinished work, then the next unchecked step; sets `in-progress` on the first step), still-needed check, parallel big steps (2-3 worktrees, agents don't log), simple and big step builds, review per `plans/README.md`, Next written in the same commit. Asks before pushing. Listed in `plugin.json`.
 - Both checks pass.
