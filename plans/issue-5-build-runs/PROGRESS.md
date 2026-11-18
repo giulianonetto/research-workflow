@@ -11,6 +11,9 @@
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
 - Open the PR from `issue-5-build-runs` into `main` (`gh pr create`, `Closes #5`), after the user says yes. After the user merges it: `/progress` "merged, mark done" (one folder-log entry, plan link to `main`), then tag `v0.3.0`.
+### 14:53: step 6, experiments off the README
+- Removed from `README.md`: the experiments bullet, `/new-plan exp` and `/write-results` in the command table, the experiment files in the file tree, and the experiment example in the link line. The skills, `docs/examples.html` and `docs/workflow.html` still describe experiments.
+- **DECISION 2026-11-18 14:53:** the README leaves experiments out for now, because the user did not like how they read there and experiments are frozen until the first real one (user)
 ### 14:47: step 6, README with figures
 - The user found the README overwhelming and asked for prettier diagrams. New README: pitch, flow figure, "Why use it" (cut to 4 one-line bullets at the user's request), a runs figure, a 3-line start, the command table; the file tree and install details are folded in `<details>`. Figures: `docs/img/{flow,runs}-{light,dark}.svg`, drawn by `docs/figures.py`, checked by rendering them in headless Chrome.
 - **DECISION 2026-11-18 14:47:** the README figures are SVG files drawn by a script (`docs/figures.py`) in a light and a dark version, shown with `<picture>`, ruling out Mermaid and screenshots, because Mermaid cannot match the look of `docs/workflow.html` and screenshots go stale, while a script redraws both versions from one place (user asked for prettier diagrams; Claude chose the form)

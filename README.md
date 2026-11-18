@@ -12,7 +12,6 @@
 - **Pick up where you left off**, even after weeks.
 - **Keep every decision**, with its reason, one `grep` away.
 - **Decide where Claude stops.** Between stops, it builds alone.
-- **End experiments with a written answer.**
 
 ## How a build runs
 
@@ -35,17 +34,16 @@ Each `/implement-next` asks once, then builds up to the next **Stop** in the pla
 |---|---|
 | Start of a session: "where was I? what is next?" | `/project-refresher` |
 | All tasks with their status | `/project-refresher tasks` |
-| A new task or experiment | `/new-plan` · `/new-plan exp` |
+| A new task | `/new-plan` |
 | Hard questions about a draft plan | `/grill-plan` |
 | The plan is ready to build | `/finalize-plan` |
 | Build up to the next stop | `/implement-next` |
 | Check something by hand | `/sandbox` |
-| Write up an experiment | `/write-results` |
 | Log work, change a status | `/progress` (or "log progress") |
 
 The plan can change at any time: just say what to change. All rules live in one file in your project, `plans/README.md`. All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 
-More: [the workflow on one page](docs/workflow.html) and [step-by-step examples](docs/examples.html) (new repo, new task, existing issue, continuing a draft, running an experiment). Download them and open them in a browser.
+More: [the workflow on one page](docs/workflow.html) and [step-by-step examples](docs/examples.html) (new repo, new task, existing issue, continuing a draft). Download them and open them in a browser.
 
 <details>
 <summary><b>What it writes in a project</b></summary>
@@ -54,13 +52,9 @@ More: [the workflow on one page](docs/workflow.html) and [step-by-step examples]
 CLAUDE.md, README.md        + a short section on the workflow
 PROGRESS.md                 the folder log: what is active, status changes, PRs, releases
 plans/README.md             all the rules: build, issues, review, plan changes, logs, statuses
-plans/EXPERIMENTS.md        rules for experiment tasks
-plans/<task>/PLAN.md        the plan (Goal, or Objectives for an experiment)
+plans/<task>/PLAN.md        the plan: Goal, steps, stops
 plans/<task>/PROGRESS.md    the task log: work, DECISION lines, Next
 plans/<task>/sandbox/       code for you to run and inspect by hand
-plans/<task>/experiment/    experiments: code, with run.sh as the one entry point
-plans/<task>/RESULTS.md     experiments: answers, methods, results, discussion, appendix
-plans/<task>/analysis.qmd   experiments: short walkthrough to continue by hand
 ```
 
 </details>
