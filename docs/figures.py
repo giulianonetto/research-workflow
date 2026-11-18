@@ -10,6 +10,7 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent / "img"
 SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+PAD = 24  # empty space under each figure: GitHub puts no margin under an image
 
 THEMES = {
     "light": dict(fg="#1b2420", muted="#66716b", line="#dfe4e1", card="#ffffff", soft="#f3f6f4", arrow="#b9c2bd",
@@ -200,7 +201,7 @@ def write(name, fig):
         body = "\n".join(parts)
         for k, v in colors.items():
             body = body.replace("{" + k + "}", v)
-        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 {W + 4} {H + 4}" width="{W + 4}" height="{H + 4}" '
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 {W + 4} {H + 4 + PAD}" width="{W + 4}" height="{H + 4 + PAD}" '
                f'role="img" aria-label="{esc(title)}">\n<title>{esc(title)}</title>\n{body}\n</svg>\n')
         (OUT / f"{name}-{theme}.svg").write_text(svg)
 

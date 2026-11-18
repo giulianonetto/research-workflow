@@ -13,7 +13,7 @@ Started from building #2 and the talk after it, in this session and in a second 
 - Open the PR from `issue-5-build-runs` into `main` (`gh pr create`, `Closes #5`), after the user says yes. After the user merges it: `/progress` "merged, mark done" (one folder-log entry, plan link to `main`), then tag `v0.3.0`.
 ### 14:59: step 6, README round 3
 - At the user's request: a Get started figure (install → `/setup-workflow` → `/new-plan`, `docs/img/start-*.svg`) with 3 short steps; install cut to Claude Desktop, with Claude Code in a toggle; Command first in the table; the file list as a tree; Credits say the project is heavily inspired by mattpocock-skills; Development folded in a toggle under its heading.
-- Dropped from the README: install in chat and Cowork, and the claude.ai route; the push-permission line moved under "How a build runs".
+- Dropped from the README: install in chat and Cowork, and the claude.ai route; the push-permission line moved under "How a build runs". Then 24px of space added under each figure (`PAD` in `docs/figures.py`): on GitHub the text sat right against them.
 ### 14:53: step 6, experiments off the README
 - Removed from `README.md`: the experiments bullet, `/new-plan exp` and `/write-results` in the command table, the experiment files in the file tree, and the experiment example in the link line. The skills, `docs/examples.html` and `docs/workflow.html` still describe experiments.
 - **DECISION 2026-11-18 14:53:** the README leaves experiments out for now, because the user did not like how they read there and experiments are frozen until the first real one (user)
