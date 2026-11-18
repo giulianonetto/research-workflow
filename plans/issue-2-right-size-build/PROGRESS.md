@@ -1,14 +1,24 @@
 # Progress: Right-size the build: /prep-implementation, implement-next, "what is next?" (#2)
 **Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
-## Current state (updated 2026-11-17)
-- Drafting. The shape is agreed (from a real-project review), plus step 7 (`new-plan` drafts in `tmp/`); 8 open questions in [PLAN.md](PLAN.md) are about how to build it.
+## Current state (updated 2026-11-18)
+- Drafting. The shape is agreed; open question 1 (old numbering) is settled, and a new step 8 removes `/update-plan` (plan changes follow a contract rule). 7 open questions left in [PLAN.md](PLAN.md).
 - Nothing built yet.
+
+## 2026-11-18: plan update: prep-implementation callable, /update-plan removed
+Settled the old open question 1 and decided to remove `/update-plan`, which came up because running it with nothing to write felt unnecessary.
+### Next
+- Settle the open questions in `PLAN.md` (start with 1: where the parent table lives without an issue tracker), then run `/finalize-plan`.
+### 10:05: plan update
+- `PLAN.md`: Goal adds "fewer commands"; new bullet in "Where things are now" on `/update-plan`; step 2 says `prep-implementation` has no `disable-model-invocation` flag; new step 8 (remove `/update-plan`, contract in `plans/README.md`); docs, checks, version became step 9; open question 1 removed, the rest renumbered 1-7.
+- Evidence: `finalize-plan`, `new-plan` and `update-plan` have the flag and already run `progress`, which has none (`skills/*/SKILL.md` frontmatter); `progress` already has a "plan update" kind (`skills/progress/SKILL.md:11`); `CLAUDE-SECTION.md:6` already has a plan-changes line.
+- **DECISION 2026-11-18 10:05:** `prep-implementation` has no `disable-model-invocation` flag, so `/finalize-plan` can call it, because the flagged planning skills already call `progress` this way, and it creates nothing before the user confirms (user, this session)
+- **DECISION 2026-11-18 10:05:** remove `/update-plan`; a plan change follows a contract in `plans/README.md`, pointed to from the always-loaded `CLAUDE-SECTION.md`, that keeps its guards (only what the user decided; show before writing), partly replacing 2026-10-29 22:17, because the command was mostly a rule, it made a discussion feel like it needed a command, and nobody types it in a build session (user, this session)
 
 ## 2026-11-17: plan started
 Started from the workflow review of a real project (2026-11-16/17), where a medium task was split into 10 sub-issues. The decisions made in that review are logged below.
 ### Next
-- Settle the open questions in `PLAN.md` with `/update-plan` (start with 1: can `finalize-plan` call `prep-implementation`?), then run `/finalize-plan`.
+- See 2026-11-18.
 ### 14:53: plan update: new-plan drafts in a file
 - New step 7 in `PLAN.md` (docs, checks, version became step 8). Came up while running `/new-plan` for this task: the 90-line draft was shown in the chat.
 - **DECISION 2026-11-17 14:53:** `/new-plan` writes the draft to `tmp/new-plan/<task>/PLAN.md` and iterates on that file, keeping the approve-then-write order, because a long plan is hard to review in the chat, and `tmp/` is gitignored, survives sessions and does not depend on the branch; ruled out the session scratchpad (can be cleared on reboot) and writing into `plans/` on the branch before approval (user)

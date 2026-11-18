@@ -3,7 +3,7 @@
 **Started:** 2026-11-17 · **Status and progress:** [PROGRESS.md](PROGRESS.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2) · **Branch:** `issue-2-right-size-build`
 
 ## Goal
-The build stage is sized to the task. By default a task is built on one branch with one PR. It is split into sub-issues only when that is needed, and then into the fewest that keep each PR reviewable. The user follows the build from one table, asking "what is next?" never starts work, and "implement next" follows fixed rules. Out of scope here: how a project runs its user-run checks (sbatch, containers, paths). That belongs in the project's own `CLAUDE.md` or docs.
+The build stage is sized to the task. By default a task is built on one branch with one PR. It is split into sub-issues only when that is needed, and then into the fewest that keep each PR reviewable. The user follows the build from one table, asking "what is next?" never starts work, and "implement next" follows fixed rules. Fewer commands: a plan change follows a rule, not a command (`/update-plan` goes). Out of scope here: how a project runs its user-run checks (sbatch, containers, paths). That belongs in the project's own `CLAUDE.md` or docs.
 
 Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-building/workflow-review-2026-11-16.md`, not in git). There, a medium task (a few hundred lines) was split into 10 sub-issues.
 
@@ -13,6 +13,7 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 - No sub-issue concept anywhere: no parent issue table, no status rule for sub-issues, no merge rule.
 - `project-refresher` is read-only and makes one tool call (one bash script). It reads the folder and task `PROGRESS.md`, plus the task's **Next**. It makes no `gh` calls.
 - `progress` writes PRs and merge commits into both Current state blocks.
+- `/update-plan` is mostly a rule: log decisions, add `## Changes` lines once `planned`, ask the reopen question, update tickets, never write a decision the user didn't make, show the change before writing. `progress` already has a "plan update" kind, `plans/README.md` already has the `## Changes` rule, and `CLAUDE-SECTION.md:6` points plan changes to `/update-plan`. About 20 places name `/update-plan` (the three planning skills, `progress`, `setup-workflow` and its templates, `README.md`, `docs/examples.html`).
 - `new-plan` step 3 shows the `PLAN.md` draft in the chat; step 4 writes it to `plans/<task>/` only after approval. A long draft is hard to review in the chat. `/setup-workflow` adds `tmp/` to `.gitignore`.
 - `Workflow version:` line: `skills/setup-workflow/PLANS-README.md:3` (template) and this repo's own `plans/README.md:3`.
 - Checks: `tests/check_skills.py` (manifest = skill folders, `STALE` patterns) and `tests/check_scripts.sh` (runs the refresher on a fake project).
@@ -27,6 +28,7 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 
 ### 2. New skill `prep-implementation`
 - Runs after the plan is final; can also run alone (e.g. to re-split after a plan change).
+- No `disable-model-invocation` flag, so `finalize-plan` can call it (as the planning skills call `progress`). A narrow description: "Use when `/finalize-plan` calls it, or when the user asks to prepare or re-split the build."
 - Default: no sub-issues. Claude checks critically whether a split is needed: easier review, parallel work, or a user gate between parts. Then it recommends the fewest sub-issues, with a reason for each split.
 - Review size drives the split: aim for under about 400 changed lines of code per PR (tests and logs not counted), or split when one PR would touch unrelated parts of the code. More is fine for mechanical changes (renames, generated fixtures, moved code) if the PR body says so. The number is a guide, from code-review studies (SmartBear/Cisco: about 200-400 lines per review), and Claude uses judgment.
 - The user and Claude decide together; a DECISION line records the choice. No issue is created before the user confirms N.
@@ -57,17 +59,24 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 - Step 4 (after approval): create the branch, move the file to `plans/<task>/PLAN.md`, delete the tmp copy, then log and commit as now.
 - Step 1: if `tmp/new-plan/<task>/PLAN.md` already exists (a session ended before approval), offer to continue from it.
 
-### 8. Docs, checks, version
-- `README-SECTION.md` flow and steps 4-5, `CLAUDE-SECTION.md`, `README.md`, `docs/examples.html`: new flow; drop `/to-tickets` and `/implement` from the flow.
-- `plugin.json` skills list; `check_scripts.sh` covers the refresher's new part.
+### 8. Remove `/update-plan`: plan changes follow a contract
+- **The contract**, in the "PLAN.md changes" section of the `plans/README.md` template: when `PLAN.md` changes, for any reason and in any status: change it only for what the user said or decided (never a decision the user didn't make); show the change before writing; log with `progress` (DECISION lines; a `## Changes` line once `planned`); if an open question is added to a `planned` or `in-progress` task, ask once whether to go back to `drafting`; if the task has sub-issues, run `prep-implementation` to update them. Commit: `plan: <short summary>`.
+- `CLAUDE-SECTION.md:6` (always loaded in a project): replace the `/update-plan` line with one line that points to the contract.
+- `progress`: the "plan update" and "plan change" kinds no longer say "called by `/update-plan`".
+- `finalize-plan` (step 2, "as `/update-plan` would") and `new-plan` (intro, step 6): point to the contract. The status list in `plans/README.md` and `README-SECTION.md`: the reopen question is part of the contract.
+- Delete `skills/update-plan/`. Add `/update-plan` to `STALE` (allowed in `setup-workflow/SKILL.md`, which names it to replace old sections).
+- Done when: no skill or template names `/update-plan` except that one, and both checks pass.
+
+### 9. Docs, checks, version
+- `README-SECTION.md` flow and steps 4-5, `CLAUDE-SECTION.md`, `README.md`, `docs/examples.html`: new flow; drop `/to-tickets`, `/implement` and `/update-plan` from the flow.
+- `plugin.json` skills list (two new, one removed); `check_scripts.sh` covers the refresher's new part.
 - New version (template change): bump `plugin.json` and both `Workflow version:` lines; add a CHANGELOG section.
 
 ## Open questions
-1. **Can `finalize-plan` call `prep-implementation`?** A skill with `disable-model-invocation: true` cannot be invoked by Claude. Plan assumes `prep-implementation` leaves the flag off (as `progress` does), so `finalize-plan` can call it.
-2. **Where does the parent table live without a GitHub issue?** (A task with no issue, or no tracker.) Plan assumes: no sub-issues without an issue tracker; the build stays one branch.
-3. **How does `project-refresher` read the parent table?** It needs `gh issue view` (network) inside its one script. Plan assumes: only when the task header links an issue, with a short timeout, and the section is skipped silently if offline.
-4. **Version number.** Plan assumes 0.2.0 (two new skills and a template change).
-5. **`/to-tickets` and `/implement`.** Plan assumes they leave the flow but stay in the README list of optional mattpocock commands. Add `/to-tickets` to `STALE` for the skill files.
-6. **Experiments.** Plan assumes `prep-implementation` runs for them too, but they usually stay at one branch; it lists their user-run checks the same way.
-7. **Merge rule as a default.** Plan assumes the rule in `plans/README.md` is a default that a project's `CLAUDE.md` can override.
-8. **Which `/code-review`.** Both Claude Code and mattpocock-skills have one. Plan assumes `implement-next` uses whichever is installed and says "review the diff" if neither is.
+1. **Where does the parent table live without a GitHub issue?** (A task with no issue, or no tracker.) Plan assumes: no sub-issues without an issue tracker; the build stays one branch.
+2. **How does `project-refresher` read the parent table?** It needs `gh issue view` (network) inside its one script. Plan assumes: only when the task header links an issue, with a short timeout, and the section is skipped silently if offline.
+3. **Version number.** Plan assumes 0.2.0 (two new skills, one removed, and a template change).
+4. **`/to-tickets` and `/implement`.** Plan assumes they leave the flow but stay in the README list of optional mattpocock commands. Add `/to-tickets` to `STALE` for the skill files.
+5. **Experiments.** Plan assumes `prep-implementation` runs for them too, but they usually stay at one branch; it lists their user-run checks the same way.
+6. **Merge rule as a default.** Plan assumes the rule in `plans/README.md` is a default that a project's `CLAUDE.md` can override.
+7. **Which `/code-review`.** Both Claude Code and mattpocock-skills have one. Plan assumes `implement-next` uses whichever is installed and says "review the diff" if neither is.
