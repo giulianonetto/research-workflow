@@ -1,12 +1,18 @@
 # Progress log
 
 ## Current state (updated 2026-11-18)
-- **Now:** [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md) (in-progress): simplify the workflow and right-size the build ([#2](https://github.com/giulianonetto/research-workflow/issues/2)); all 10 steps built, [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` open (version 0.2.0).
-- Last release: 0.1.1 (tag `v0.1.1`).
+- **Now:** no active task.
+- Last release: 0.2.0 (tag `v0.2.0`): one rules file, the build follows the plan's shape ([#2](plans/issue-2-right-size-build/PROGRESS.md)).
+- Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
 
-## 2026-11-18: workflow review
+## 2026-11-18: workflow review; version 0.2.0
+[#2](plans/issue-2-right-size-build/PROGRESS.md) done: simpler workflow, released as 0.2.0.
+### Next
+- [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 12:25: #2 done; 0.2.0 merged and tagged
+- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`37d63c5`); [#2](plans/issue-2-right-size-build/PROGRESS.md) `done`; tag `v0.2.0` pushed for the release workflow.
 ### 12:22: #2 PR opened
 - [#2](plans/issue-2-right-size-build/PROGRESS.md): [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened (0.2.0).
 ### 11:56: #2 in-progress

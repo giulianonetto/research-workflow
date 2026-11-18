@@ -1,15 +1,17 @@
 # Progress: Simplify the workflow and right-size the build (#2)
-**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
+**Status:** done · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-18)
-- Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-10 built and reviewed; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened. Next: the user merges it.
-- Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
+- Done: all 10 steps built; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`37d63c5`); released as 0.2.0 (tag `v0.2.0`).
+- None: task done. Follow-up ([#3](https://github.com/giulianonetto/research-workflow/issues/3)) is in the [folder log](../../PROGRESS.md).
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- The user merges [PR #4](https://github.com/giulianonetto/research-workflow/pull/4). After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+- None: task done. Follow-up work is in the [folder log](../../PROGRESS.md).
+### 12:25: merged, done, 0.2.0
+- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` by Claude on the user's "you can merge using gh" (merge commit `37d63c5`, checks green); issue #2 closed by it; its plan link now points to `main`.
+- Status `in-progress` → `done`, tag `v0.2.0` pushed, branch `issue-2-right-size-build` deleted (user: "yes, both, and delete the branch").
 ### 12:22: PR #4 opened
 - Pushed the branch; issue #2 checklist: steps 2-10 ticked; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened with `Closes #2` (user: "yes, push, tick the boxes, open the PR").
 ### 12:15: review of the whole branch before the PR
