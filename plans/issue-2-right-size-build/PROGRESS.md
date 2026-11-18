@@ -3,13 +3,15 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-10 built and reviewed. Next: the PR into `main`.
+- Steps 1-10 built and reviewed; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened. Next: the user merges it.
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Open the PR into `main` (`Closes #2`); the user merges it. After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+- The user merges [PR #4](https://github.com/giulianonetto/research-workflow/pull/4). After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+### 12:22: PR #4 opened
+- Pushed the branch; issue #2 checklist: steps 2-10 ticked; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened with `Closes #2` (user: "yes, push, tick the boxes, open the PR").
 ### 12:15: review of the whole branch before the PR
 - `/code-review` (medium) on `main..HEAD`: 10 findings. Fixed 8: big-step branches did not map to a task folder; big-step and parallel commits had no logging rule; `/finalize-plan` made branches before its commit, and was unclear when the user declines the GitHub structure; `Closes #<N>` was no longer stated anywhere; a big step's PR reached the folder log; `/new-plan` named the issue after a plan not yet written; check 4 skipped `CLAUDE.md` (both checks now share one file list).
 - Not changed: the refresher cannot see the issue checklist (no `gh`, by the 11:26 DECISION: Next holds the pick); this repo's "Tasks in this repo" list (step 10 says to keep it as plain lines).
