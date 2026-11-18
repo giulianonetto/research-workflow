@@ -2,14 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- In progress: steps 1-2 of 6 done (rules file; `/finalize-plan` proposes the stops).
+- In progress: steps 1-3 of 6 done (rules file; `/finalize-plan` stops; `/implement-next` runs).
 - Run of steps 2-5 under way; it stops before step 6.
-- Next: step 3, `/implement-next` builds a run.
+- Next: step 4, `/progress` follows the new log rules.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Step 3: rewrite `skills/implement-next/SKILL.md` for runs (PLAN.md step 3), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+- Step 4: `skills/progress/SKILL.md` (PLAN.md step 4: step entries at most 2 bullets; one folder-log entry per task PR, at the merge), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+### 14:14: step 3, `/implement-next` builds a run
+- Added beyond the plan text: an early stop leaves the open step uncommitted; for a big step, Next is written by its last sub-step commit and the task branch is pulled after the merge.
 ### 14:14: step 2, `/finalize-plan` proposes the stops
 - Run of steps 2-5 started: the user re-ran `/implement-next` after the Next note named the run, so no separate question was asked.
 ### 14:09: step 1, rules file
