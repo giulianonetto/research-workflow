@@ -1,0 +1,130 @@
+# Progress: Simplify the workflow and right-size the build (#2)
+**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
+
+## Current state (updated 2026-11-18)
+- Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
+- Steps 1-10 built and reviewed; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened. Next: the user merges it.
+- Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
+
+## 2026-11-18: workflow review; plan rewritten
+Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
+### Next
+- The user merges [PR #4](https://github.com/giulianonetto/research-workflow/pull/4). After the merge: `/progress` (merged, done), plan link in #2 to `main`, tag `v0.2.0`.
+### 12:22: PR #4 opened
+- Pushed the branch; issue #2 checklist: steps 2-10 ticked; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened with `Closes #2` (user: "yes, push, tick the boxes, open the PR").
+### 12:15: review of the whole branch before the PR
+- `/code-review` (medium) on `main..HEAD`: 10 findings. Fixed 8: big-step branches did not map to a task folder; big-step and parallel commits had no logging rule; `/finalize-plan` made branches before its commit, and was unclear when the user declines the GitHub structure; `Closes #<N>` was no longer stated anywhere; a big step's PR reached the folder log; `/new-plan` named the issue after a plan not yet written; check 4 skipped `CLAUDE.md` (both checks now share one file list).
+- Not changed: the refresher cannot see the issue checklist (no `gh`, by the 11:26 DECISION: Next holds the pick); this repo's "Tasks in this repo" list (step 10 says to keep it as plain lines).
+- Files: `PLANS-README.md` and this repo's `plans/README.md` (Build, Logs, Status), `/finalize-plan`, `/grill-plan`, `/progress`, `/implement-next`, `/new-plan`, `tests/check_skills.py`. Both checks pass.
+- **DECISION 2026-11-18 12:15:** a big step's branch is `<task branch>-step-<n>` (e.g. `issue-12-foo-step-3`), made from the task branch after the `plan: finalized` commit, replaces 2026-11-18 12:02, because with `issue-<M>-<slug>` the skills that find the task from the branch name found no folder (Claude, from the review)
+### 12:12: step 10: docs, checks, version 0.2.0
+- `README.md` (commands table, what it writes), `docs/examples.html` (all five workflows and the short version), this repo's `CLAUDE.md`: the new flow and commands. Skill names written `/name` everywhere (`progress` and `sandbox` were bare in 6 skill files and the page).
+- This repo's `plans/README.md` is the new template plus a "Tasks in this repo" list (no status table); `plans/EXPERIMENTS.md` matches its template.
+- `tests/check_skills.py`: `STALE` gains `/update-plan`, `/to-tickets`, `/implement` (not `-next`), `/grilling`, `/grill-with-docs`, `/domain-modeling`, `paused`, `## Changes`, `docs/adr` (allowed in `setup-workflow/SKILL.md`); new check 5 flags a skill name without the slash (in backticks, `<code>` or a chip).
+- `/setup-workflow`: an "Upgrading from 0.1.x" list (status table, `paused` tasks, `## Changes`, `docs/agents/domain.md` and the `## Agent skills` block, open tasks without an issue), each changed only if the user agrees.
+- Version 0.2.0: `plugin.json`, both `Workflow version:` lines, CHANGELOG section (mentions #3).
+- "Done when" met: both checks pass, `check_scripts.sh` covers `/project-refresher tasks`, and `STALE` finds no removed command or status in any skill or template.
+### 12:08: step 9: short project sections
+- `CLAUDE-SECTION.md`: 5 bullets: read `plans/README.md`; start from the Current state; log every decision (same commit); status only by the user; one line for the project's language and tools (the facts `/setup-workflow` asks for need a place).
+- `README-SECTION.md`: one line, the flow diagram, the link to `plans/README.md`, and one line on experiments.
+- Both checks pass.
+### 12:08: step 8: removals
+- Deleted `skills/update-plan/` (out of `plugin.json`) and `skills/setup-workflow/DOMAIN.md`. `/finalize-plan`, `/new-plan`, `/sandbox`, `/write-results` and `EXPERIMENTS.md` (the "normal task" line and rule 1, nothing else) point to the plan-change rules in `plans/README.md`.
+- `/setup-workflow`: a GitHub remote is required (stops without one, offers `gh repo create`); no issue-tracker question, no `docs/agents/` or `docs/adr/`, no `docs/` un-ignore step, no mattpocock config, no `git init` branch; "with an empty task table" gone.
+- `CLAUDE-SECTION.md`: `## Agent skills` block, `/to-tickets`, `/grilling` and `/update-plan` gone. `README-SECTION.md`: flow without mattpocock commands, `/update-plan` or `paused` (both sections get shortened in step 9). `README.md`: "Dependencies" section and the `/update-plan` row gone.
+- Left for step 10: `docs/examples.html` still names them.
+- Both checks pass.
+### 12:06: step 7: `/new-plan` drafts in a file
+- `skills/new-plan/SKILL.md`: every task has an issue (body = the problem, 2-3 lines) and the folder and branch are always `issue-<N>-<slug>`; offers to continue an unapproved `tmp/new-plan/<task>/PLAN.md`; step 3 drafts in that file and iterates there; step 4 (after approval) moves it to `plans/<task>/` and deletes the tmp copy; step 5 puts the plan link in the issue body; the skeleton shows a big step with sub-steps (`2a`, `2b`).
+- Both checks pass.
+### 12:05: step 6: `/progress` follows the new rules
+- `skills/progress/SKILL.md`: "Which log" (task work → task log only; the folder log only for status changes, PRs, releases and work outside a task; no section per session), a "Same commit" section, step status ticked in the issue checklist, the `(plan change)` tag instead of the "plan change" section, five statuses in the header only (no table row for a new task), the plan link switched to `main` after the merge, no "set `in-progress`?" question.
+- Description: callers are now `/new-plan`, `/finalize-plan`, `/grill-plan` and `/implement-next` (`/update-plan` gone).
+- Both checks pass.
+### 12:05: step 5: `/project-refresher`
+- `skills/project-refresher/SKILL.md`: new `tasks` mode (one line per task: status · folder · title, from the task headers, open tasks first); rules say no `gh` calls or network, and asking "what is next?" never starts work; the `plans/README.md` table is no longer read.
+- `tests/check_scripts.sh`: covers `tasks` mode (a done task listed last), and the fake project no longer writes a status table. Both were planned for step 10; done here so the new code has its test in the same commit.
+- Both checks pass.
+### 12:04: step 4: new skill `/implement-next`
+- `skills/implement-next/SKILL.md`: read first (named task, or the active one), pick (unfinished work, then the next unchecked step; sets `in-progress` on the first step), still-needed check, parallel big steps (2-3 worktrees, agents don't log), simple and big step builds, review per `plans/README.md`, Next written in the same commit. Asks before pushing. Listed in `plugin.json`.
+- Both checks pass.
+- **DECISION 2026-11-18 12:04:** `/implement-next` has `disable-model-invocation: true`, so only the user starts a build, because it changes code and the status, like `/new-plan` and `/finalize-plan`, and asking "what is next?" must never start work; the plan named no flag for it (Claude, within "go on" from the user)
+### 12:03: step 3: new skill `/grill-plan`
+- `skills/grill-plan/SKILL.md`: reads the plan, task log, glossary and code first; asks in rounds over a design tree (numbered questions, each with a recommended answer); looks up facts itself; records answers under the plan-change rules; glossary terms only through the three tests. No `disable-model-invocation` flag.
+- Attribution: a line in the skill, a Credits section in `README.md`, and `NOTICE` with Matt Pocock's MIT notice (covers the review's Spec part too). `plugin.json` lists the skill now, because `check_skills.py` fails otherwise.
+- Both checks pass.
+### 12:02: step 2: `/finalize-plan` prepares the build
+- `skills/finalize-plan/SKILL.md`: new step 1 offers `/grill-plan` when weak spots remain; readiness check gains **Issue** and **Build shape**; after `planned`, step 5 shows and (on a yes) creates the issue checklist and a sub-issue and branch per big step; step 6 logs and commits once. The `/to-tickets` suggestion is gone; no separate skill.
+- Issue #2 (by hand, on the user's yes, 11:58): its body got the step checklist, step 1 ticked.
+- **DECISION 2026-11-18 12:02:** a big step's branch is `issue-<M>-<slug>`, with `<M>` the sub-issue number, made from the task branch, because it matches the `issue-<N>-<slug>` task branches and the plan named no pattern (Claude, within "go on" from the user)
+### 11:56: step 1: `plans/README.md` is the only rules file
+- `skills/setup-workflow/PLANS-README.md` rewritten: new sections Build, The task issue, Review (with the merge rule), Plan changes (the `(plan change)` tag replaces `## Changes`), Logs (folder-log and same-commit rules), five statuses kept only in the header (no table), Glossary (the three tests copied from `DOMAIN.md`), skill names always `/name`. `Workflow version:` line unchanged (bumped in step 10).
+- Also, following the 11:26 and 11:46 DECISION lines: the command list drops `/update-plan` and names `/grill-plan`, `/implement-next`, `/project-refresher` and `/sandbox`; ADR mentions gone; header line `**Issue:** <link>` (no "or none"); a task on hold stays `in-progress`; a plan change also updates the issue checklist or title.
+- Not yet in step with it (later steps): `/progress`, `/setup-workflow` ("empty task table"), `/update-plan`, `CLAUDE-SECTION.md`, `README-SECTION.md`, this repo's `plans/README.md`.
+- Both checks pass.
+- Status `planned` → `in-progress` (user: "yes", when asked whether starting step 1 sets it, as the new rules say).
+### 11:46: plan change: the issue says why, the plan says how
+- Issue #2 still described `/prep-implementation` (dropped this morning) in its title and body, with the plan link in a separate comment. Fixed by hand: new title, body = problem + plan link, comment deleted.
+- `PLAN.md` steps 1, 2, 6 and 7: the rule below.
+- **DECISION 2026-11-18 11:46 (plan change):** the task issue's body holds only the problem (2-3 lines), the plan link (in the body, switched to `main` after the merge) and the step checklist, and its title follows the plan's title, because issue #2's body and title went stale when the plan changed while the link hid in a comment; the plan missed: the issue is a second copy of the plan (user, this session)
+### 11:40: plan finalized (status `planned`)
+- Readiness check: Goal, Open questions, Ground, Decisions ok. Six small Step gaps fixed: the step 5 cross-reference; copy the glossary tests before `DOMAIN.md` is deleted; `EXPERIMENTS.md` mentions of `/update-plan` (step 8); this repo's own `plans/README.md` (step 10); `/progress` stops asking about `in-progress` and the refresher test fixture loses its status table; a "Done when" section.
+- Build shape, checked by hand (the current skill has no such check): every step is well under about 400 changed lines, so no big steps and no sub-issues.
+- Status `drafting` → `planned` (user: "i trust you", after the report).
+### 11:26: plan rewritten after the workflow review
+- Review file `tmp/review-2026-11-18.md` (not in git): the real project used planning, the task log, DECISION lines, Next and `sandbox`; its folder log is as long as all task logs (593 lines); 57 of 343 commits only log; `paused`, experiments and ADRs were never used; `## Changes` was used twice, both copies of DECISION lines; #15's 5 steps became 10 sub-issues (A-J).
+- Read Matt Pocock's `/grilling` and `/code-review` (mattpocock-skills 1.3.1, MIT) to decide what to keep.
+- `PLAN.md`: new title and Goal; steps now: rules file, `/finalize-plan`, `/grill-plan`, `/implement-next`, `/project-refresher`, `/progress`, `/new-plan`, removals, short project sections, docs and checks. Open questions: none.
+- Opened [#3](https://github.com/giulianonetto/research-workflow/issues/3) for clearing done tasks and old log entries at a release (out of scope here).
+- **DECISION 2026-11-18 11:26:** `plans/README.md` is the only rules file; the `CLAUDE.md` section shrinks to about 4 lines and the `README.md` section to the flow and a link, because the rules were written three times and one change touched about 20 places (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** the folder log keeps only its Current state and what no task log has (status changes, PRs and releases, work outside any task), with no section per session, replacing 2026-10-29 22:36 in part, because in the real project it grew as long as all the task logs together (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** a log update goes into the same commit as the work it describes, and when the user asks Claude to commit work (also by hand) Claude updates the logs in that commit, because 57 of 343 real commits only logged (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** the next pick lives in the task's Next, written by `/implement-next`, so `/project-refresher` needs no `gh` calls or network (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** no `/prep-implementation` skill: preparing the build is the last part of `/finalize-plan`, replacing 2026-11-17 14:15 (one skill `/prep-implementation`; `/finalize-plan` calls it) and making 2026-11-18 10:05 (its flag) moot, because one skill fewer and re-splitting can be asked for under the rules file (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** GitHub is assumed: every task has an issue, `/setup-workflow` requires a GitHub remote, and the `## Agent skills` block goes from `CLAUDE.md`, because the block only served `/to-tickets` and a task with a big step needs an issue anyway (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** build structure: one branch per task, one commit per `PLAN.md` step, and a big step (about 400 changed lines of code, or unrelated parts of the code) lists sub-steps and gets a sub-issue, a branch, one commit per sub-step and a PR into the task branch, replacing 2026-11-17 14:15 (Claude recommends the fewest sub-issues; review size drives the split), because the GitHub structure can then be read from the plan, and #15 would have had 2 sub-issues instead of 10 (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** the task issue holds a checklist of the `PLAN.md` steps and is the one place step status is kept, with user-run checks as checkboxes there, replacing 2026-11-17 14:15 (the parent issue table), because with sub-issues only for big steps a table of sub-issues would miss most steps (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** user gates are not part of the build structure, which is about organizing commits and PRs; user-run checks stay a separate rule (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** keep the `planned` status, ruling out dropping it, and `/implement-next` sets `in-progress` on the first step, because a finalized plan must show as ready but not started a month later (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** remove the `paused` status, because it was never used ("#26 on hold" stayed `in-progress` with the reason in Current state) (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** drop `## Changes` in `PLAN.md`: a decision that changes an agreed plan is tagged `- **DECISION <date> <time> (plan change):** ...; the plan missed: <x>`, which the DECISION grep still finds, because `## Changes` lines were copies of DECISION lines (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** status lives only in the task header; the `plans/README.md` table goes and `/project-refresher tasks` lists all tasks with their status, because two copies drift and the overview is still one command away (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** remove ADRs and `docs/agents/`, keeping a small `GLOSSARY.md` whose rules are one bullet in `plans/README.md`, because ADRs are a software-engineering tool, none was written, and DECISION lines did the job (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** drop mattpocock-skills as a dependency and adapt what is useful into this plugin, with attribution and his MIT notice in a `NOTICE` file, so the workflow has no outside commands to learn (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** new `/grill-plan`, adapted from Matt Pocock's `/grilling` (rounds over a design tree, numbered questions with recommended answers, Claude finds facts, the user decides) plus reading the plan, log, glossary and code and recording answers under the plan-change rules; usable while drafting and offered by `/finalize-plan`, with no `disable-model-invocation` flag (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** review before each step commit and each PR: Claude Code's built-in `/code-review` for bugs, plus our own Spec (against the `PLAN.md` step, adapted from Matt Pocock's Spec axis), Research (lost rows, missing values, coordinates and units, seeds, numbers that look wrong) and Style (project style plus three smells) under separate headings, because most of Matt Pocock's Fowler smells are software-engineering detail and neither version checks research pitfalls (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** merge rule: Claude merges a PR into the task branch when it is low risk and tests pass and asks when it is hard to undo or costly; the user merges the PR into `main`; a project's `CLAUDE.md` can override it (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** experiments stay as they are, frozen until the first real one, with no special case in the build rules, because they were never used (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** version 0.2.0 (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+- **DECISION 2026-11-18 11:26:** clearing done tasks and old log entries at a release is out of scope, tracked in #3 (user; workflow review `tmp/review-2026-11-18.md`, not in git)
+### 10:14: plan update: always /skill names
+- `PLAN.md` step 9: skill names are always written `/name`; `check_skills.py` flags a skill name in backticks without the slash. Came up because the docs mix `progress` and `/sandbox` with no written rule (`skills/setup-workflow/README-SECTION.md:10-11`).
+- **DECISION 2026-11-18 10:14:** skill names are always written `/name`, everywhere, because the user can type any skill, and two styles with an unwritten rule confused even the person who wrote them (user, this session)
+### 10:05: plan update
+- `PLAN.md`: Goal adds "fewer commands"; new bullet in "Where things are now" on `/update-plan`; step 2 says `prep-implementation` has no `disable-model-invocation` flag; new step 8 (remove `/update-plan`, contract in `plans/README.md`); docs, checks, version became step 9; open question 1 removed, the rest renumbered 1-7.
+- Evidence: `finalize-plan`, `new-plan` and `update-plan` have the flag and already run `progress`, which has none (`skills/*/SKILL.md` frontmatter); `progress` already has a "plan update" kind (`skills/progress/SKILL.md:11`); `CLAUDE-SECTION.md:6` already has a plan-changes line.
+- **DECISION 2026-11-18 10:05:** `prep-implementation` has no `disable-model-invocation` flag, so `/finalize-plan` can call it, because the flagged planning skills already call `progress` this way, and it creates nothing before the user confirms (user, this session)
+- **DECISION 2026-11-18 10:05:** remove `/update-plan`; a plan change follows a contract in `plans/README.md`, pointed to from the always-loaded `CLAUDE-SECTION.md`, that keeps its guards (only what the user decided; show before writing), partly replacing 2026-10-29 22:17, because the command was mostly a rule, it made a discussion feel like it needed a command, and nobody types it in a build session (user, this session)
+
+## 2026-11-17: plan started
+Started from the workflow review of a real project (2026-11-16/17), where a medium task was split into 10 sub-issues. The decisions made in that review are logged below.
+### Next
+- See 2026-11-18.
+### 14:53: plan update: new-plan drafts in a file
+- New step 7 in `PLAN.md` (docs, checks, version became step 8). Came up while running `/new-plan` for this task: the 90-line draft was shown in the chat.
+- **DECISION 2026-11-17 14:53:** `/new-plan` writes the draft to `tmp/new-plan/<task>/PLAN.md` and iterates on that file, keeping the approve-then-write order, because a long plan is hard to review in the chat, and `tmp/` is gitignored, survives sessions and does not depend on the branch; ruled out the session scratchpad (can be cleared on reboot) and writing into `plans/` on the branch before approval (user)
+### 14:15: plan started
+- Issue [#2](https://github.com/giulianonetto/research-workflow/issues/2), branch `issue-2-right-size-build`, `PLAN.md` drafted from `real-project/tmp/skill-building/workflow-review-2026-11-16.md`.
+- **DECISION 2026-11-17 14:15:** by default a task is built on one branch with one PR, and each extra sub-issue needs a reason (parallel work, a separate review unit, or a user gate), because 10 sub-issues for a medium task were hard to follow (from draft, 2026-11-16; review note)
+- **DECISION 2026-11-17 14:15:** Claude recommends the fewest sub-issues and the user decides from that recommendation, instead of fixed small/medium/large task sizes, because task size is a judgment, not a class (from draft, 2026-11-16; review note, second round)
+- **DECISION 2026-11-17 14:15:** sub-issue text is 3 lines (what, done when, what to review) plus a link to the `PLAN.md` step, because copying the plan into issues made them long and repeated, and an unneeded sub-issue was noticed only at the end (from draft, 2026-11-16; review note)
+- **DECISION 2026-11-17 14:15:** user gates are checkboxes in the parent issue, not sub-issues (from draft, 2026-11-16; review note)
+- **DECISION 2026-11-17 14:15:** the parent issue table is the one place sub-issue status is kept, and the task log keeps events, decisions and evidence with a link to it, because two copies drift (from draft, 2026-11-16; review note, third round)
+- **DECISION 2026-11-17 14:15:** one skill `/prep-implementation` prepares the build and splitting is one possible outcome of it, ruling out a separate `/split-plan`, because preparing the build also settles branches, user-run checks and the review plan (from draft, 2026-11-16; review note, third round)
+- **DECISION 2026-11-17 14:15:** `/finalize-plan` calls `/prep-implementation` as its last step, and `/prep-implementation` can also run alone, because preparing the build is part of finalizing (from draft, 2026-11-16; review note, fourth round)
+- **DECISION 2026-11-17 14:15:** "what is next?" goes into `project-refresher` (read-only), not a new skill, and "implement next" is a separate build skill, because asking must not start work (from draft, 2026-11-16; review note, third round)
+- **DECISION 2026-11-17 14:15:** the build skill picks the next unblocked sub-issue, checks it is still needed against later findings and DECISION lines, builds independent ones in parallel (at most 2-3 worktrees, agents don't touch the logs) and shared-file ones in order (user wait first, then unblocks most, then smallest), because the next step was chosen differently in every prompt (from draft, 2026-11-16; review note)
+- **DECISION 2026-11-17 14:15:** the skills name no cluster: "user-run checks" are checks Claude cannot run, kept only if the answer could change a decision and bundled once per milestone, and how to run them lives in the project's own docs, because some checks on known-good code made Claude stop and wait for nothing (from draft, 2026-11-16; review note, fourth round)
+- **DECISION 2026-11-17 14:15:** review size drives the split, with about 400 changed lines of code per PR as a guide (tests and logs not counted; more is fine for mechanical changes the PR body names) and Claude's judgment deciding, because reviewers find fewer defects past about 200-400 lines (SmartBear/Cisco studies) (from draft, 2026-11-17; review note, fifth round)
+- **DECISION 2026-11-17 14:15:** the build skill is named `implement-next`, to pair with "what is next?" in `project-refresher` (from draft, 2026-11-17; review note, fifth round)
+- **DECISION 2026-11-17 14:15:** keep the test discipline in the build, because tests are cheap once written and caught real bugs in the review project (from draft, 2026-11-16; review note)

@@ -1,6 +1,6 @@
 ---
 name: "project-refresher"
-description: "Give a short 'where was I?' brief for a project folder after days or weeks away. Reads the folder's PROGRESS.md, plans/ and recent DECISION lines first; falls back to git state, recent files and R/shell history only when there is no log."
+description: "Give a short 'where was I?' brief for a project folder after days or weeks away, answer 'what is next?' from the task's Next, or list every task with its status (tasks). Reads the folder's PROGRESS.md, plans/ and recent DECISION lines first; falls back to git state, recent files and R/shell history only when there is no log. Never starts work."
 ---
 
 # Project refresher
@@ -9,20 +9,21 @@ Tell the user what they were doing in this folder, what is unfinished, and the n
 
 ## Arguments
 Words after the command, any order, all optional:
-- no mode word → **short mode (default)**; `detailed` → detailed mode.
+- no mode word → **short mode (default)**; `detailed` → detailed mode; `tasks` → tasks mode (one line per task with its status).
 - a number (e.g. `14`) → `DAYS=14` (fallback scan only).
 - a path → `cd` there first.
 - other words → a topic to focus on.
 
 ## Rules
-- **Read-only.** Never commit, stash, checkout, delete or edit anything.
-- **Exactly ONE tool call** (the script below) in short mode, then write the brief. Detailed mode: the same script with `MODE=detailed`, plus at most 1 extra call if it changes the brief (e.g. `git diff --stat`).
+- **Read-only.** Never commit, stash, checkout, delete or edit anything. Asking "what is next?" never starts work: answer, then stop.
+- **Local only.** No `gh` calls and no network: the task's **Next** already holds the next pick (written by `/implement-next`).
+- **Exactly ONE tool call** (the script below) in short and tasks mode, then write the brief. Detailed mode: the same script with `MODE=detailed`, plus at most 1 extra call if it changes the brief (e.g. `git diff --stat`).
 - **The logs are the source of truth.** If the folder has a `PROGRESS.md`, the script reads it and its active task folders and skips the scan. The task's **Next** was written for exactly this moment: use it as the next step, don't re-derive it.
 - Never walk the whole folder (`find .`, `du`, `ls -R`): data folders can be huge. Never `cat`/Read history, logs or `.jsonl` files yourself.
 
 ## Collect
 ```bash
-MODE=short; DAYS=30   # set MODE=detailed / DAYS=<n> from the arguments
+MODE=short; DAYS=30   # set MODE=detailed / MODE=tasks / DAYS=<n> from the arguments
 W=160; [ "$MODE" = detailed ] && W=200
 cap(){ cut -c1-$W | head -n "$1"; }
 sec(){ printf '\n== %s ==\n' "$1"; }
@@ -30,6 +31,16 @@ n(){ [ "$MODE" = detailed ] && echo "$2" || echo "$1"; }   # n <short> <detailed
 block(){ awk -v h="$2" 'index($0,h)==1{on=1; print; next} on && /^## /{exit} on' "$1"; }  # one "## ..." section
 R=$(git rev-parse --show-toplevel 2>/dev/null)   # works in subfolders and worktrees
 [ -f PROGRESS.md ] || { [ -n "$R" ] && [ -f "$R/PROGRESS.md" ] && cd "$R"; }
+if [ "$MODE" = tasks ]; then   # one line per task, from the task headers; open tasks first
+  sec TASKS
+  for f in plans/*/PROGRESS.md; do
+    [ -f "$f" ] || continue
+    s=$(grep -m1 -oE '^\*\*Status:\*\* [a-z-]+' "$f" | sed 's/.* //')
+    case "$s" in done|dropped) o=1 ;; *) o=0 ;; esac
+    printf '%s\t%s · %s · %s\n' "$o" "${s:-?}" "$(basename "$(dirname "$f")")" "$(head -n 1 "$f" | sed 's/^# Progress: //')"
+  done | sort -s -t "$(printf '\t')" -k1,1 | cut -f2- | cut -c1-$W
+  exit 0
+fi
 if [ -n "$R" ]; then
   sec GIT
   git log -1 --format='last commit: %cr (%ci)' 2>/dev/null
@@ -58,7 +69,6 @@ if [ -f PROGRESS.md ]; then
       [ -f "$t/RESULTS.md" ] && echo "-- RESULTS.md: $(grep -c '<!-- unreviewed -->' "$t/RESULTS.md") unreviewed sections, $(grep -cE '<[a-z][^>]*>' "$t/RESULTS.md") placeholder lines"
     fi
   done
-  [ -f plans/README.md ] && { sec "plans table"; grep -E '^\| \[' plans/README.md | cap 10; }
 else
   sec RECENT_FILES
   if [ -n "$R" ]; then   # git knows what changed: no folder walk
@@ -112,6 +122,9 @@ Simple words (the user is not a native English speaker). Mark guesses with "prob
 _Run `/project-refresher detailed` for more._
 ```
 No explanations of how you know, no counts or IDs unless they are the main point, no extra sections. If there is no PROGRESS.md, add one last line: _No PROGRESS.md here: this brief is a guess from git and history._
+
+### Tasks mode
+One line per task, as the script prints it (status · folder · title), open tasks first, under a `# Tasks` heading. No other sections.
 
 ### Detailed mode
 ```

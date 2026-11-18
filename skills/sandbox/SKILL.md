@@ -5,7 +5,7 @@ description: Hand the user a ready-to-run sandbox to inspect something by hand (
 
 In an experiment task, a question about the experiment's own results usually belongs in its `analysis.qmd`; use a sandbox entry for side questions.
 
-A sandbox entry is for the **user's** inspection: they run it, look, and judge. Write it so it is easy to step through and change, not to deliver a verdict. Checks you can judge yourself from printed output are normal work: run them and log the evidence with `progress`.
+A sandbox entry is for the **user's** inspection: they run it, look, and judge. Write it so it is easy to step through and change, not to deliver a verdict. Checks you can judge yourself from printed output are normal work: run them and log the evidence with `/progress`.
 
 Code lives in `plans/<task>/sandbox/` (committed). Everything it writes goes to `tmp/sandbox/<task>/NN-<slug>/`, never to the project's real output folders. An entry belongs to a task; if no task is active, ask which one. Before the first entry in a folder, check that `tmp/` is ignored (`git check-ignore -q tmp/sandbox`); if not, add `tmp/` to `.gitignore` and say so.
 
@@ -31,4 +31,4 @@ Code lives in `plans/<task>/sandbox/` (committed). Everything it writes goes to 
 
 5. **Hand it over.** Give the user the file to open or the command to run, and what to look at first.
 
-When the user reports what they saw: fill in **Findings**, then run `progress` (with a DECISION line if the findings settled something). If they change what the plan should say, suggest `/update-plan`.
+When the user reports what they saw: fill in **Findings**, then run `/progress` (with a DECISION line if the findings settled something). If they change what the plan should say, offer to change it under the plan-change rules in `plans/README.md`.

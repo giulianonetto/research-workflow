@@ -1,11 +1,25 @@
 # Progress log
 
-## Current state (updated 2026-11-04)
-- **Now:** no active task. Version 0.1.1 released (PR #1 merged, `f889652`; tag `v0.1.1`).
-- Last task: [initial-design](plans/initial-design/PROGRESS.md) (done).
-- Next: try it on a real project; rough edges become issues.
+## Current state (updated 2026-11-18)
+- **Now:** [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md) (in-progress): simplify the workflow and right-size the build ([#2](https://github.com/giulianonetto/research-workflow/issues/2)); all 10 steps built, [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` open (version 0.2.0).
+- Last release: 0.1.1 (tag `v0.1.1`).
 
 Times are local.
+
+## 2026-11-18: workflow review
+### 12:22: #2 PR opened
+- [#2](plans/issue-2-right-size-build/PROGRESS.md): [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened (0.2.0).
+### 11:56: #2 in-progress
+- [#2](plans/issue-2-right-size-build/PROGRESS.md): step 1 built; status `planned` → `in-progress`.
+### 11:40: #2 planned
+- [#2](plans/issue-2-right-size-build/PROGRESS.md) finalized: status `planned`, six small plan gaps fixed.
+### 11:26: #2 plan rewritten; #3 opened
+- Reviewed the whole workflow against the real project; [#2's plan](plans/issue-2-right-size-build/PROGRESS.md) rewritten (new title, 21 DECISION lines there).
+- Opened [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release.
+
+## 2026-11-17: right-size the build
+### 14:15: task started
+- Real-project review turned into issue [#2](https://github.com/giulianonetto/research-workflow/issues/2) and task [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md), status `drafting`; the review's decisions are logged there.
 
 ## 2026-11-04: version 0.1.1 (no Next on done tasks)
 ### 16:24: 0.1.1 merged and tagged

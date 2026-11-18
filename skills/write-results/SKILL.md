@@ -4,7 +4,7 @@ description: Write or revise an experiment's RESULTS.md and analysis.qmd - a fir
 disable-model-invocation: true
 ---
 
-For experiment tasks (`**Kind:** experiment`). Writing up is iterative: draft, review, interpret, review again, in any order. This one command covers every round, the way `/update-plan` covers every change to a plan. Closing is not here: when every section is reviewed, the close check in `progress` ("mark done") finishes the experiment.
+For experiment tasks (`**Kind:** experiment`). Writing up is iterative: draft, review, interpret, review again, in any order. This one command covers every round. Closing is not here: when every section is reviewed, the close check in `/progress` ("mark done") finishes the experiment.
 
 If the folder has no `plans/EXPERIMENTS.md`, tell the user to run `/setup-workflow` first and stop. Find the task from the branch name or the folder's Current state; if that is not clear, ask. If it is not an experiment, say so and stop.
 
@@ -38,6 +38,6 @@ From the words after the command, or what the user says:
 
 3. **Show the round.** List the sections changed, the sections still `unreviewed`, and the open items (numbers without a source, objectives without an answer). Apply the user's comments in the same session, as many rounds as they like.
 
-4. **Log it.** Run the `progress` skill: a short task-log note (`results: drafted Methods, Results 1; reviewed Answers`), and a DECISION line when the write-up settled something (for example, the answer to the overall objective). Commit: `results: <short summary>`.
+4. **Log it.** Run the `/progress` skill: a short task-log note (`results: drafted Methods, Results 1; reviewed Answers`), and a DECISION line when the write-up settled something (for example, the answer to the overall objective). Commit: `results: <short summary>`.
 
-5. **Next.** If sections are still unreviewed, name them. When none are left, tell the user: "Ready to close: tell `progress` to mark it done."
+5. **Next.** If sections are still unreviewed, name them. When none are left, tell the user: "Ready to close: tell `/progress` to mark it done."
