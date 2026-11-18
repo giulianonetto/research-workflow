@@ -1,10 +1,15 @@
 # Progress log
 
-## Current state (updated 2026-11-17)
-- **Now:** [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md) (drafting): `/prep-implementation`, `implement-next`, "what is next?" in the refresher ([#2](https://github.com/giulianonetto/research-workflow/issues/2)).
+## Current state (updated 2026-11-18)
+- **Now:** [issue-2-right-size-build](plans/issue-2-right-size-build/PROGRESS.md) (drafting): simplify the workflow and right-size the build ([#2](https://github.com/giulianonetto/research-workflow/issues/2)); plan rewritten 2026-11-18, ready for `/finalize-plan`.
 - Last release: 0.1.1 (tag `v0.1.1`).
 
 Times are local.
+
+## 2026-11-18: workflow review
+### 11:26: #2 plan rewritten; #3 opened
+- Reviewed the whole workflow against the real project; [#2's plan](plans/issue-2-right-size-build/PROGRESS.md) rewritten (new title, 21 DECISION lines there).
+- Opened [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release.
 
 ## 2026-11-17: right-size the build
 ### 14:15: task started
