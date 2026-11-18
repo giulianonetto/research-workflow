@@ -2,14 +2,17 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- In progress: steps 1-4 of 6 done (rules file; `/finalize-plan` stops; `/implement-next` runs; `/progress` log rules).
-- Run of steps 2-5 under way; it stops before step 6.
-- Next: step 5, `/new-plan` skeleton shows a stop.
+- In progress: steps 1-5 of 6 done (rules file and the four skills); the skills now follow the 0.3.0 rules, the docs and version do not yet.
+- Run of steps 2-5 ended as agreed; by the new rules it could have gone on through step 6 (its Stop is after it).
+- Next: step 6, docs, checks, version 0.3.0; then review the branch and open the PR into `main`.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Step 5: `skills/new-plan/SKILL.md` (PLAN.md step 5: a Stop line in the skeleton; no question before the first push), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+- Step 6 with `/implement-next` (PLAN.md step 6): `README.md` (command table, push permission line), `docs/examples.html` (workflows 2 and 3, short version), `docs/workflow.html` (Build card), `/setup-workflow` upgrade note, `STALE` in `tests/check_skills.py`, version 0.3.0 in `.claude-plugin/plugin.json` and both `Workflow version:` lines, CHANGELOG. Then the full review of the branch and the PR into `main`.
+### 14:15: step 5, `/new-plan` skeleton shows a stop
+- The skeleton shows two Stop lines: one with a `<why>` on step 1 and the fixed one on the last step.
+- The run was named "steps 2-5, stop before step 6" (in the step 1 Next and at the start of this run); by the new rules it runs up to and including the step with the Stop, so steps 2-6. It stopped after step 5 as agreed with the user.
 ### 14:15: step 4, `/progress` follows the new log rules
 - The 2-bullet limit is for step entries only; other work (plan changes, sessions by hand) still logs what changed and its evidence.
 ### 14:14: step 3, `/implement-next` builds a run
