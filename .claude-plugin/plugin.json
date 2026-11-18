@@ -11,6 +11,7 @@
     "./skills/grill-plan",
     "./skills/update-plan",
     "./skills/finalize-plan",
+    "./skills/implement-next",
     "./skills/progress",
     "./skills/write-results",
     "./skills/sandbox",

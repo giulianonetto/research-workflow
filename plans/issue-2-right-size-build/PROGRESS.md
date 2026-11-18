@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-3 built. Next: step 4 (`/implement-next`).
+- Steps 1-4 built. Next: step 5 (`/project-refresher`).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 4 of `PLAN.md`: new skill `/implement-next`. One commit, with the log update in it.
+- Build step 5 of `PLAN.md`: `/project-refresher` (Next holds the pick; new `tasks` mode; no plans table). One commit, with the log update in it.
+### 12:04: step 4: new skill `/implement-next`
+- `skills/implement-next/SKILL.md`: read first (named task, or the active one), pick (unfinished work, then the next unchecked step; sets `in-progress` on the first step), still-needed check, parallel big steps (2-3 worktrees, agents don't log), simple and big step builds, review per `plans/README.md`, Next written in the same commit. Asks before pushing. Listed in `plugin.json`.
+- Both checks pass.
+- **DECISION 2026-11-18 12:04:** `/implement-next` has `disable-model-invocation: true`, so only the user starts a build, because it changes code and the status, like `/new-plan` and `/finalize-plan`, and asking "what is next?" must never start work; the plan named no flag for it (Claude, within "go on" from the user)
 ### 12:03: step 3: new skill `/grill-plan`
 - `skills/grill-plan/SKILL.md`: reads the plan, task log, glossary and code first; asks in rounds over a design tree (numbered questions, each with a recommended answer); looks up facts itself; records answers under the plan-change rules; glossary terms only through the three tests. No `disable-model-invocation` flag.
 - Attribution: a line in the skill, a Credits section in `README.md`, and `NOTICE` with Matt Pocock's MIT notice (covers the review's Spec part too). `plugin.json` lists the skill now, because `check_skills.py` fails otherwise.
