@@ -2,15 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- All 6 steps done; version 0.3.0. Full review of the whole branch done before the step 6 commit: 9 of 10 findings fixed.
-- README rewritten after step 6, at the user's request: shorter, with two figures.
-- Stopped at step 6's Stop: the PR into `main` is next, after the user's yes.
-- Next: open the PR into `main` (`Closes #5`); the user merges it, then tag `v0.3.0`.
+- All 6 steps done; version 0.3.0. [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) into `main` is open (`Closes #5`); the user merges it.
+- README rewritten after step 6 at the user's request: shorter, three figures, experiments left out.
+- Next: after the merge, `/progress` "merged, mark done", then tag `v0.3.0`.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Open the PR from `issue-5-build-runs` into `main` (`gh pr create`, `Closes #5`), after the user says yes. After the user merges it: `/progress` "merged, mark done" (one folder-log entry, plan link to `main`), then tag `v0.3.0`.
+- Wait for the user to merge [PR #6](https://github.com/giulianonetto/research-workflow/pull/6). Then `/progress` "merged, mark done" (one folder-log entry, plan link in #5 to `main`), and tag `v0.3.0` (`git tag v0.3.0 && git push origin v0.3.0`).
+### 15:02: PR into main opened
+- [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) opened from `issue-5-build-runs` into `main`, `Closes #5`.
 ### 14:59: step 6, README round 3
 - At the user's request: a Get started figure (install → `/setup-workflow` → `/new-plan`, `docs/img/start-*.svg`) with 3 short steps; install cut to Claude Desktop, with Claude Code in a toggle; Command first in the table; the file list as a tree; Credits say the project is heavily inspired by mattpocock-skills; Development folded in a toggle under its heading.
 - Dropped from the README: install in chat and Cowork, and the claude.ai route; the push-permission line moved under "How a build runs". Then 24px of space added under each figure (`PAD` in `docs/figures.py`): on GitHub the text sat right against them.
