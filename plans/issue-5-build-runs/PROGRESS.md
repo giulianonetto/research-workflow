@@ -1,14 +1,19 @@
 # Progress: Build in runs that stop where the plan says, with lighter build rules (#5)
-**Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
+**Status:** planned · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- Drafting: 6 small steps (rules file, `/finalize-plan`, `/implement-next`, `/progress`, `/new-plan` skeleton, docs and version 0.3.0). Grilled once (5 answers); no open questions.
-- Next: `/finalize-plan` (it should also propose the stops for this plan's own steps, once step 1 is agreed).
+- Planned: 6 one-commit steps (rules file, `/finalize-plan`, `/implement-next`, `/progress`, `/new-plan` skeleton, docs and version 0.3.0); no big steps.
+- Stops: after step 1 (read the rules) and after step 6 (review, PR into `main`).
+- Next: step 1 with `/implement-next`, in a fresh session.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- `/finalize-plan`, in a fresh session.
+- `/implement-next` in a fresh session: step 1, the rules in `skills/setup-workflow/PLANS-README.md` and `plans/README.md`. Stop after it, so the user can read the rules.
+### 14:04: plan finalized
+- `/finalize-plan`: two gaps fixed with the user's yes (stops added; step 6 now names `docs/workflow.html`, the push lines in `docs/examples.html` workflows 2 and 3, and the `README.md` command table). No gaps accepted. Status `drafting` → `planned`.
+- Issue [#5](https://github.com/giulianonetto/research-workflow/issues/5): 6-box step checklist added to the body; no sub-issues (no big steps).
+- **DECISION 2026-11-18 14:04:** this plan's stops are after step 1 (read the new rules before steps 2-5 copy them) and after step 6 (review the branch, PR into `main`), ruling out a stop on the last step only, because the rules text is the core of the task and is worth reading before it spreads to four skills (user chose the recommended option)
 ### 13:54: grill round 1
 - `/grill-plan` found 5 weak spots; the user accepted all 5 recommended answers ("yes to all"). `PLAN.md` steps 1, 2, 3 and 5 updated.
 - **DECISION 2026-11-18 13:54:** a `**Stop:**` line always means stop after its step (build, commit, push, report); a step that must not start without the user puts its Stop on the step before, because the plan's stop reasons pointed both ways and its example said "stop before step 6" (user: "yes to all")

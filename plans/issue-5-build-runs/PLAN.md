@@ -27,6 +27,7 @@ Source: building #2 (2026-11-18) and the talk after it, in this session and in a
 - **Push:** after each step commit, push the task branch and tick the step's box, so GitHub is at most one step behind and a ticked box is always on GitHub. Pushing the task branch needs no question; pushing or merging into `main` does. A project's `CLAUDE.md` can override this.
 - **No parallel builds** unless the user asks.
 - **Logs:** a step's entry is the commit plus only what the diff can't show (deviations from the plan, what was left for later), at most 2 bullets, plus DECISION lines. The folder log gets one entry per task PR, written when it is merged; while it is open, only the Current state names it.
+- **Stop:** read the new rules in `plans/README.md` before steps 2-5 copy them into the skills.
 
 ### 2. `/finalize-plan` proposes the stops
 - Readiness check gains **Stops:** Claude proposes a `**Stop:**` line for each step that meets the rule in step 1, always a Stop on the last step (the PR into `main`); the user confirms or changes them, and they are written into `PLAN.md`.
@@ -47,10 +48,11 @@ Source: building #2 (2026-11-18) and the talk after it, in this session and in a
 - Step 5 drops "(ask before pushing)": the first push of the task branch needs no question either. `/setup-workflow`'s "Don't push" stays (that commit is on `main`).
 
 ### 6. Docs, checks, version
-- `README.md`, `docs/examples.html` (workflow 3: a run with a stop; the short version), this repo's `CLAUDE.md` if needed. `README.md` gets one line on allowing `git push` in Claude Code's own settings, so pushes to the task branch don't stop at a prompt; `/setup-workflow` does not change those settings.
+- `README.md` (its command-table line too), `docs/examples.html` (workflow 3: a run with a stop; workflows 2 and 3: no question before the first push; the short version), `docs/workflow.html` (the Build card), this repo's `CLAUDE.md` if needed. `README.md` gets one line on allowing `git push` in Claude Code's own settings, so pushes to the task branch don't stop at a prompt; `/setup-workflow` does not change those settings.
 - `/setup-workflow`: upgrading from 0.2.x says that existing plans have no stops, so `/implement-next` asks before each step until `/finalize-plan` or the user adds them.
 - `check_skills.py`: nothing new expected; add to `STALE` any phrase that step 3 removes, if one fits.
 - Version 0.3.0: bump `plugin.json` and both `Workflow version:` lines; add a CHANGELOG section.
+- **Stop:** review the branch and open the PR into main.
 
 ## Done when
 Both checks pass, `PLANS-README.md` has the stop, run, review, push and log rules, and no skill or template still allows parallel builds without the user asking or asks before pushing the task branch.
