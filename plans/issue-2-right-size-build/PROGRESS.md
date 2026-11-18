@@ -1,14 +1,21 @@
 # Progress: Simplify the workflow and right-size the build (#2)
-**Status:** planned · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
+**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Nothing built yet. Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
+- Step 1 built: `skills/setup-workflow/PLANS-README.md` is the only rules file. Next: step 2 (`/finalize-plan`).
+- Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- In a fresh session, build step 1 of `PLAN.md`: rewrite `skills/setup-workflow/PLANS-README.md` as the only rules file (copy the glossary tests from `DOMAIN.md` first). One commit, with the log update in it.
+- In a fresh session, build step 2 of `PLAN.md`: `/finalize-plan` prepares the build (`skills/finalize-plan/SKILL.md`; the rules it points to are now in `skills/setup-workflow/PLANS-README.md`). One commit, with the log update in it.
+### 11:56: step 1: `plans/README.md` is the only rules file
+- `skills/setup-workflow/PLANS-README.md` rewritten: new sections Build, The task issue, Review (with the merge rule), Plan changes (the `(plan change)` tag replaces `## Changes`), Logs (folder-log and same-commit rules), five statuses kept only in the header (no table), Glossary (the three tests copied from `DOMAIN.md`), skill names always `/name`. `Workflow version:` line unchanged (bumped in step 10).
+- Also, following the 11:26 and 11:46 DECISION lines: the command list drops `/update-plan` and names `/grill-plan`, `/implement-next`, `/project-refresher` and `/sandbox`; ADR mentions gone; header line `**Issue:** <link>` (no "or none"); a task on hold stays `in-progress`; a plan change also updates the issue checklist or title.
+- Not yet in step with it (later steps): `/progress`, `/setup-workflow` ("empty task table"), `/update-plan`, `CLAUDE-SECTION.md`, `README-SECTION.md`, this repo's `plans/README.md`.
+- Both checks pass.
+- Status `planned` → `in-progress` (user: "yes", when asked whether starting step 1 sets it, as the new rules say).
 ### 11:46: plan change: the issue says why, the plan says how
 - Issue #2 still described `/prep-implementation` (dropped this morning) in its title and body, with the plan link in a separate comment. Fixed by hand: new title, body = problem + plan link, comment deleted.
 - `PLAN.md` steps 1, 2, 6 and 7: the rule below.
