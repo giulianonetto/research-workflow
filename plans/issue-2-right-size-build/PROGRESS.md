@@ -1,14 +1,18 @@
 # Progress: Simplify the workflow and right-size the build (#2)
-**Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
+**Status:** planned · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-18)
-- Drafting. `PLAN.md` rewritten after a review of the whole workflow: one rules file, smaller logs, step = commit (sub-issue only for a big step), `/grill-plan` and `/implement-next` new, `/update-plan` and the mattpocock-skills dependency gone. No open questions.
+- Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
 - Nothing built yet. Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Run `/finalize-plan` (no open questions left; it will check the Build shape of this plan's own steps).
+- In a fresh session, build step 1 of `PLAN.md`: rewrite `skills/setup-workflow/PLANS-README.md` as the only rules file (copy the glossary tests from `DOMAIN.md` first). One commit, with the log update in it.
+### 11:40: plan finalized (status `planned`)
+- Readiness check: Goal, Open questions, Ground, Decisions ok. Six small Step gaps fixed: the step 5 cross-reference; copy the glossary tests before `DOMAIN.md` is deleted; `EXPERIMENTS.md` mentions of `/update-plan` (step 8); this repo's own `plans/README.md` (step 10); `/progress` stops asking about `in-progress` and the refresher test fixture loses its status table; a "Done when" section.
+- Build shape, checked by hand (the current skill has no such check): every step is well under about 400 changed lines, so no big steps and no sub-issues.
+- Status `drafting` → `planned` (user: "i trust you", after the report).
 ### 11:26: plan rewritten after the workflow review
 - Review file `tmp/review-2026-11-18.md` (not in git): the real project used planning, the task log, DECISION lines, Next and `sandbox`; its folder log is as long as all task logs (593 lines); 57 of 343 commits only log; `paused`, experiments and ADRs were never used; `## Changes` was used twice, both copies of DECISION lines; #15's 5 steps became 10 sub-issues (A-J).
 - Read Matt Pocock's `/grilling` and `/code-review` (mattpocock-skills 1.3.1, MIT) to decide what to keep.

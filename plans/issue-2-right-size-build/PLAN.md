@@ -39,7 +39,7 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
   - The folder log keeps only its Current state (active tasks, with links) and what no task log has: status changes, PRs and releases, work outside any task. No section per session.
   - A log update goes into the same commit as the work it describes. A commit for the log alone only when nothing else changed. When the user asks Claude to commit work (also work done by hand), Claude updates the logs in that commit.
 - **Status:** five: `drafting`, `planned`, `in-progress`, `done`, `dropped`. Kept only in the task header line; no table in `plans/README.md`.
-- **Glossary:** one bullet: `GLOSSARY.md` at the root, key terms only, added with the user's agreement (the three tests from `DOMAIN.md`).
+- **Glossary:** one bullet: `GLOSSARY.md` at the root, key terms only, added with the user's agreement. Copy the three tests from `setup-workflow/DOMAIN.md` here before step 8 deletes it.
 - **Skill names:** always written `/name`.
 
 ### 2. `/finalize-plan` prepares the build
@@ -65,13 +65,14 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
 - **After building:** write the next pick into the task's **Next**. Add a user-run check only if its answer could change a decision. Keep test discipline: tests are cheap once written and caught real bugs.
 
 ### 5. `/project-refresher`
-- "What is next?": the task's **Next** already holds the pick (step 3), so no `gh` calls and no network. Asking never starts work.
+- "What is next?": the task's **Next** already holds the pick (step 4), so no `gh` calls and no network. Asking never starts work.
 - New `/project-refresher tasks`: one line per task with its status, from the task headers; open tasks first.
 - Drop reading the `plans/README.md` table.
 
 ### 6. `/progress` follows the new rules
 - The folder-log rule, the same-commit rule, status in the header only, five statuses, the `(plan change)` tag instead of the "plan change" section and `## Changes`.
 - Step status lives in the task issue checklist; the logs keep events, decisions and links.
+- Drop the "set `in-progress`?" question after a build session: `/implement-next` sets it.
 
 ### 7. `/new-plan` drafts in a file, not in the chat
 - Step 3: write the draft to `tmp/new-plan/<task>/PLAN.md`, give the user the path, and iterate on the file (the user can edit it too). Nothing goes into `plans/` or git before the user approves.
@@ -81,7 +82,7 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
 - The `PLAN.md` skeleton shows a big step with sub-steps.
 
 ### 8. Remove what the reviews found unneeded
-- Delete `skills/update-plan/` (its rules are in step 1). `/finalize-plan`, `/new-plan`, `/sandbox` and `/write-results` point to the plan-change rules instead.
+- Delete `skills/update-plan/` (its rules are in step 1). `/finalize-plan`, `/new-plan`, `/sandbox`, `/write-results` and `setup-workflow/EXPERIMENTS.md` (rule 1 and the "normal task" line) point to the plan-change rules instead. Experiments change only here.
 - Remove ADRs and `docs/agents/`: delete `setup-workflow/DOMAIN.md`, the `docs/` un-ignore step and every ADR mention.
 - Remove the `## Agent skills` block from `CLAUDE-SECTION.md` (Issue tracker and Domain docs).
 - Remove every mattpocock-skills command (`/to-tickets`, `/implement`, `/grilling`, `/grill-with-docs`, `/domain-modeling`, its `/code-review`) and the README "Dependencies" section.
@@ -94,10 +95,14 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
 
 ### 10. Docs, checks, version
 - `README.md`, `docs/examples.html`, this repo's `CLAUDE.md`: the new flow and commands.
+- This repo's own `plans/README.md` moves to the new template (no status table; keep this repo's task list as plain lines), as `/setup-workflow` would upgrade a project.
 - `check_skills.py`: add to `STALE`: `/update-plan`, `/to-tickets`, `/implement` not followed by `-`, `/grilling`, `/grill-with-docs`, `/domain-modeling`, `paused`, `## Changes`, `docs/adr` (allowed in `setup-workflow/SKILL.md`, which names them to replace old sections). Flag a skill name in backticks without the slash.
-- `check_scripts.sh`: covers `/project-refresher tasks`.
+- `check_scripts.sh`: covers `/project-refresher tasks`; its fake project no longer writes a status table (line 55).
 - `/setup-workflow`: upgrading an older project shows what changes (the status table, `paused` tasks, old `## Changes` sections, `docs/agents/domain.md`) and changes it only if the user agrees.
 - `plugin.json` skills list (`/grill-plan` and `/implement-next` new, `/update-plan` gone). New version 0.2.0: bump `plugin.json` and both `Workflow version:` lines; add a CHANGELOG section that mentions [#3](https://github.com/giulianonetto/research-workflow/issues/3).
+
+## Done when
+Both checks pass, `check_scripts.sh` covers `/project-refresher tasks`, and no skill or template names a removed command or status.
 
 ## Open questions
 None.
