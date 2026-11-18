@@ -1,15 +1,17 @@
 # Progress: Build in runs that stop where the plan says, with lighter build rules (#5)
-**Status:** planned · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
+**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- Planned: 6 one-commit steps (rules file, `/finalize-plan`, `/implement-next`, `/progress`, `/new-plan` skeleton, docs and version 0.3.0); no big steps.
-- Stops: after step 1 (read the rules) and after step 6 (review, PR into `main`).
-- Next: step 1 with `/implement-next`, in a fresh session.
+- In progress: step 1 of 6 done (the stop, run, review, push and log rules in `plans/README.md` and its template).
+- Stopped after step 1 so the user can read the new rules before steps 2-5 copy them into the skills.
+- Next: steps 2-5 with `/implement-next` (no Stop until step 6).
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- `/implement-next` in a fresh session: step 1, the rules in `skills/setup-workflow/PLANS-README.md` and `plans/README.md`. Stop after it, so the user can read the rules.
+- Read the new rules in `plans/README.md` (Build, Review, Logs). If they are right, run `/implement-next`: steps 2-5 (`skills/finalize-plan/SKILL.md`, `skills/implement-next/SKILL.md`, `skills/progress/SKILL.md`, `skills/new-plan/SKILL.md`), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+### 14:09: step 1, rules file
+- Status `planned` → `in-progress`. Also changed the `/implement-next` line in Commands ("builds the next steps, up to the next stop"); the "Same commit" example (a PR built in another worktree) stays, since parallel builds are still allowed when the user asks.
 ### 14:04: plan finalized
 - `/finalize-plan`: two gaps fixed with the user's yes (stops added; step 6 now names `docs/workflow.html`, the push lines in `docs/examples.html` workflows 2 and 3, and the `README.md` command table). No gaps accepted. Status `drafting` → `planned`.
 - Issue [#5](https://github.com/giulianonetto/research-workflow/issues/5): 6-box step checklist added to the body; no sub-issues (no big steps).
