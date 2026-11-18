@@ -69,6 +69,7 @@ Source: review of a real project, 2026-11-16/17 (`real-project/tmp/skill-buildin
 
 ### 9. Docs, checks, version
 - `README-SECTION.md` flow and steps 4-5, `CLAUDE-SECTION.md`, `README.md`, `docs/examples.html`: new flow; drop `/to-tickets`, `/implement` and `/update-plan` from the flow.
+- Skill names: always `/name`, in skills, templates, docs and this repo's `CLAUDE.md` (e.g. "run `/progress`", not "the `progress` skill"). A check in `check_skills.py` flags a skill name in backticks without the slash.
 - `plugin.json` skills list (two new, one removed); `check_scripts.sh` covers the refresher's new part.
 - New version (template change): bump `plugin.json` and both `Workflow version:` lines; add a CHANGELOG section.
 

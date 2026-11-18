@@ -2,13 +2,16 @@
 **Status:** drafting · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-18)
-- Drafting. The shape is agreed; open question 1 (old numbering) is settled, and a new step 8 removes `/update-plan` (plan changes follow a contract rule). 7 open questions left in [PLAN.md](PLAN.md).
+- Drafting. The shape is agreed; open question 1 (old numbering) is settled, a new step 8 removes `/update-plan` (plan changes follow a contract rule), and skill names are always `/name`. 7 open questions left in [PLAN.md](PLAN.md).
 - Nothing built yet.
 
 ## 2026-11-18: plan update: prep-implementation callable, /update-plan removed
 Settled the old open question 1 and decided to remove `/update-plan`, which came up because running it with nothing to write felt unnecessary.
 ### Next
 - Settle the open questions in `PLAN.md` (start with 1: where the parent table lives without an issue tracker), then run `/finalize-plan`.
+### 10:14: plan update: always /skill names
+- `PLAN.md` step 9: skill names are always written `/name`; `check_skills.py` flags a skill name in backticks without the slash. Came up because the docs mix `progress` and `/sandbox` with no written rule (`skills/setup-workflow/README-SECTION.md:10-11`).
+- **DECISION 2026-11-18 10:14:** skill names are always written `/name`, everywhere, because the user can type any skill, and two styles with an unwritten rule confused even the person who wrote them (user, this session)
 ### 10:05: plan update
 - `PLAN.md`: Goal adds "fewer commands"; new bullet in "Where things are now" on `/update-plan`; step 2 says `prep-implementation` has no `disable-model-invocation` flag; new step 8 (remove `/update-plan`, contract in `plans/README.md`); docs, checks, version became step 9; open question 1 removed, the rest renumbered 1-7.
 - Evidence: `finalize-plan`, `new-plan` and `update-plan` have the flag and already run `progress`, which has none (`skills/*/SKILL.md` frontmatter); `progress` already has a "plan update" kind (`skills/progress/SKILL.md:11`); `CLAUDE-SECTION.md:6` already has a plan-changes line.
