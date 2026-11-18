@@ -9,11 +9,10 @@
 
 ## Why use it
 
-- **Come back after weeks and know where you were.** Every task keeps a short log with a **Next**. `/project-refresher` reads it to you.
-- **Never lose a decision.** Each one is a dated DECISION line with its reason, one `grep` away.
-- **Stay in charge.** A plan changes status only after your yes. You agree in advance where the build stops: results to judge, checks to run, anything hard to undo.
-- **Let Claude do the steady part.** Between stops, Claude builds alone: one reviewed commit per step, pushed, with the log in the same commit.
-- **Experiments end in an answer.** One `run.sh`, a written `RESULTS.md`, and a short notebook you can continue by hand.
+- **Pick up where you left off**, even after weeks.
+- **Keep every decision**, with its reason, one `grep` away.
+- **Decide where Claude stops.** Between stops, it builds alone.
+- **End experiments with a written answer.**
 
 ## How a build runs
 
