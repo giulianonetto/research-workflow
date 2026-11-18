@@ -2,14 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#5](https://github.com/giulianonetto/research-workflow/issues/5)
 
 ## Current state (updated 2026-11-18)
-- In progress: steps 1-3 of 6 done (rules file; `/finalize-plan` stops; `/implement-next` runs).
+- In progress: steps 1-4 of 6 done (rules file; `/finalize-plan` stops; `/implement-next` runs; `/progress` log rules).
 - Run of steps 2-5 under way; it stops before step 6.
-- Next: step 4, `/progress` follows the new log rules.
+- Next: step 5, `/new-plan` skeleton shows a stop.
 
 ## 2026-11-18: plan started
 Started from building #2 and the talk after it, in this session and in a second chat on stops (its proposal was pasted into this session).
 ### Next
-- Step 4: `skills/progress/SKILL.md` (PLAN.md step 4: step entries at most 2 bullets; one folder-log entry per task PR, at the merge), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+- Step 5: `skills/new-plan/SKILL.md` (PLAN.md step 5: a Stop line in the skeleton; no question before the first push), then `python3 tests/check_skills.py` and `bash tests/check_scripts.sh`.
+### 14:15: step 4, `/progress` follows the new log rules
+- The 2-bullet limit is for step entries only; other work (plan changes, sessions by hand) still logs what changed and its evidence.
 ### 14:14: step 3, `/implement-next` builds a run
 - Added beyond the plan text: an early stop leaves the open step uncommitted; for a big step, Next is written by its last sub-step commit and the task branch is pulled after the merge.
 ### 14:14: step 2, `/finalize-plan` proposes the stops
