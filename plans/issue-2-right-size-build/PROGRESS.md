@@ -9,6 +9,10 @@
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
 - In a fresh session, build step 1 of `PLAN.md`: rewrite `skills/setup-workflow/PLANS-README.md` as the only rules file (copy the glossary tests from `DOMAIN.md` first). One commit, with the log update in it.
+### 11:46: plan change: the issue says why, the plan says how
+- Issue #2 still described `/prep-implementation` (dropped this morning) in its title and body, with the plan link in a separate comment. Fixed by hand: new title, body = problem + plan link, comment deleted.
+- `PLAN.md` steps 1, 2, 6 and 7: the rule below.
+- **DECISION 2026-11-18 11:46 (plan change):** the task issue's body holds only the problem (2-3 lines), the plan link (in the body, switched to `main` after the merge) and the step checklist, and its title follows the plan's title, because issue #2's body and title went stale when the plan changed while the link hid in a comment; the plan missed: the issue is a second copy of the plan (user, this session)
 ### 11:40: plan finalized (status `planned`)
 - Readiness check: Goal, Open questions, Ground, Decisions ok. Six small Step gaps fixed: the step 5 cross-reference; copy the glossary tests before `DOMAIN.md` is deleted; `EXPERIMENTS.md` mentions of `/update-plan` (step 8); this repo's own `plans/README.md` (step 10); `/progress` stops asking about `in-progress` and the refresher test fixture loses its status table; a "Done when" section.
 - Build shape, checked by hand (the current skill has no such check): every step is well under about 400 changed lines, so no big steps and no sub-issues.

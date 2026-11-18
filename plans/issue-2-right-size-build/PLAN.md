@@ -30,7 +30,8 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
   - A big step lists clear sub-steps in `PLAN.md`. It gets a sub-issue and its own branch, one commit per sub-step, and a PR into the task branch.
   - At the end, one PR from the task branch into `main`.
 - **When a step needs sub-steps:** when it would pass about 400 changed lines of code (tests and logs not counted), or would touch unrelated parts of the code. More is fine for mechanical changes (renames, generated fixtures, moved code) if the commit or PR says so. A guide from code-review studies (SmartBear/Cisco: about 200-400 lines per review); Claude uses judgment.
-- **Task issue:** a checklist of the `PLAN.md` steps, the one place step status is kept; a big step links its sub-issue. A sub-issue's text is 3 lines (what, done when, what to review) plus a link to its `PLAN.md` step; never copy the plan into issues. User-run checks are checkboxes in the task issue.
+- **The issue says why, the plan says how.** The task issue's body is the problem in 2-3 lines and the link to `PLAN.md`; it never lists the solution, so it cannot go stale. The link is in the body, not in a comment; after the merge it points to `main` (the branch link breaks when the branch is deleted). The issue title follows the plan's title.
+- **Task issue:** below the link, a checklist of the `PLAN.md` steps, the one place step status is kept; a big step links its sub-issue. A sub-issue's text is 3 lines (what, done when, what to review) plus a link to its `PLAN.md` step; never copy the plan into issues. User-run checks are checkboxes in the task issue.
 - **User-run checks:** checks that need something Claude cannot run (a cluster, real data, a GPU, credentials). Kept only if the answer could change a decision; bundled so one run covers as many as possible.
 - **Review:** before each commit of a step, and before each PR: Claude Code's built-in `/code-review` for bugs, plus our own check, reported under separate headings: **Spec** (against the `PLAN.md` step: missing, not asked for, looks wrong; adapted from Matt Pocock's Spec axis); **Research** (rows silently lost in joins or filters, missing values, coordinate or unit mix-ups, unseeded randomness, numbers that look wrong); **Style** (the project's documented style only, plus three smells: unclear names, duplicated code, options nobody asked for).
 - **Merge rule:** a PR into the task branch: low risk and tests pass → Claude merges; hard to undo or costly → Claude asks. The PR into `main`: the user merges. A project's `CLAUDE.md` can override this rule.
@@ -44,6 +45,7 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
 
 ### 2. `/finalize-plan` prepares the build
 - Starts by offering `/grill-plan` when open questions or weak spots remain.
+- Readiness check gains **Issue:** the title matches the plan's title (update it if not), and the body holds no solution text.
 - Readiness check gains **Build shape:** each step is one commit, or a big step with sub-steps (the size guide in step 1).
 - After the user confirms `planned`: show the GitHub structure the plan implies (the task issue checklist, a sub-issue and a branch per big step), and create it only after the user confirms.
 - Replaces step 4 (the `/to-tickets` suggestion). No separate `/prep-implementation` skill. To re-split later, the user asks; the rules are in `plans/README.md`.
@@ -72,12 +74,14 @@ Sources: the review of a real project, 2026-11-16/17 (`real-project/tmp/skill-bu
 ### 6. `/progress` follows the new rules
 - The folder-log rule, the same-commit rule, status in the header only, five statuses, the `(plan change)` tag instead of the "plan change" section and `## Changes`.
 - Step status lives in the task issue checklist; the logs keep events, decisions and links.
+- When the task's PR is merged, change the plan link in the issue body to `main`.
 - Drop the "set `in-progress`?" question after a build session: `/implement-next` sets it.
 
 ### 7. `/new-plan` drafts in a file, not in the chat
 - Step 3: write the draft to `tmp/new-plan/<task>/PLAN.md`, give the user the path, and iterate on the file (the user can edit it too). Nothing goes into `plans/` or git before the user approves.
 - Step 4 (after approval): create the branch, move the file to `plans/<task>/PLAN.md`, delete the tmp copy, then log and commit as now.
-- Step 1: every task has an issue: use the one the user names, or create one. The folder and branch are always `issue-<N>-<slug>`.
+- Step 1: every task has an issue: use the one the user names, or create one. The folder and branch are always `issue-<N>-<slug>`. A new issue's body is the problem only (2-3 lines).
+- Step 5: put the plan link in the issue body (`gh issue edit`), not in a comment.
 - Step 1: if `tmp/new-plan/<task>/PLAN.md` exists (a session ended before approval), offer to continue from it.
 - The `PLAN.md` skeleton shows a big step with sub-steps.
 
