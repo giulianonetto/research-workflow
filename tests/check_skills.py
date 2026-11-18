@@ -21,6 +21,8 @@ STALE = [  # (pattern, files allowed to contain it, why it is stale)
     (r"\bpaused\b", {"skills/setup-workflow/SKILL.md"}, "the paused status was removed: a task on hold stays in-progress"),
     (r"## Changes", {"skills/setup-workflow/SKILL.md"}, "## Changes in PLAN.md was replaced by the (plan change) DECISION tag"),
     (r"docs/adr", {"skills/setup-workflow/SKILL.md"}, "ADRs were removed: DECISION lines do the job"),
+    (r"(?i)ask(s)? before pushing", set(), "the task branch is pushed after each step without a question (0.3.0)"),
+    (r"agent per worktree", set(), "parallel builds were removed: only when the user asks (0.3.0)"),
 ]
 errors = []
 
@@ -86,7 +88,7 @@ for f in SKILLS.glob("*/SKILL.md"):
             err(f"{f.relative_to(ROOT)}: link to missing file {target}")
 
 # 4. stale names (the same files as check 5)
-DOCS = list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md", ROOT / "CLAUDE.md"]
+DOCS = list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "docs/workflow.html", ROOT / "README.md", ROOT / "CLAUDE.md"]
 for f in DOCS:
     rel = str(f.relative_to(ROOT))
     text = f.read_text()

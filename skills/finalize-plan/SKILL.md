@@ -20,6 +20,7 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
    - **Decisions:** every decision the build depends on is in `PLAN.md`, not only in DECISION lines or the chat; no plan text contradicts a later DECISION line.
    - **Issue:** the task has a GitHub issue; its title matches the plan's title (offer to update it if not); its body holds the problem and the plan link, and no solution text (rules in `plans/README.md`).
    - **Build shape:** each step is one commit, or a big step that lists its sub-steps (the size rule in `plans/README.md`: about 400 changed lines of code, or unrelated parts of the code). Recommend the fewest big steps.
+   - **Stops:** propose a `- **Stop:** <why>` line for each step that meets the stop rule in `plans/README.md` (Build), and always one on the last step: `- **Stop:** review the branch and open the PR into main`. **Gap** until the user confirms or changes them and they are in `PLAN.md`.
 
 3. **Show the report.** For gaps, offer to fix them now (under the plan-change rules in `plans/README.md`) or to stop and keep drafting. Done when every item is **ok**, or the user explicitly says to go ahead with the gaps listed.
 

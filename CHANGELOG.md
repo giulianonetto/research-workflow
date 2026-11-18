@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 (2026-11-18)
+
+Build in runs that stop where the plan says, with lighter build rules ([#5](https://github.com/giulianonetto/research-workflow/issues/5)).
+
+- **Stops:** a step that needs you ends with a `- **Stop:** <why>` line in `PLAN.md` (you must judge the result, a user-run check, hard to undo, or a design choice left open). A Stop means after its step. The last step always stops for the review and the PR into `main`. `/finalize-plan` proposes the stops and you confirm them; the `/new-plan` skeleton shows the last one.
+- **Runs:** `/implement-next` asks once, then builds the steps up to the next stop, at most 5 per run (a number in `plans/README.md`). It stops early when a test fails and the fix is not clear, the review has a question, or a decision comes up that the plan does not cover. It ends with one summary, including every decision it made alone. A plan with no Stop lines (made before 0.3.0): it asks before each step.
+- **Push:** after each step commit, Claude pushes the task branch and ticks the step's box, with no question; pushing or merging into `main` still needs you. `/new-plan` pushes the new branch too. A project's `CLAUDE.md` can override this. `README.md` says how to allow `git push` in Claude Code's settings.
+- **Review:** the full review (`/code-review`, Spec, Research, Style) for a step that changes a file that runs or sets the results (code, tests, configs, notebooks), and on the whole branch before every PR; the Spec check only for a step that changes only text.
+- **Logs:** a step's entry is the commit plus only what the diff can't show: at most 2 bullets, plus DECISION lines. The task's PR into `main` gets one folder-log entry, at the merge.
+- **Removed:** parallel builds of big steps (only when you ask).
+- `/setup-workflow` says that plans from 0.2.x have no Stop lines yet.
+- **README:** shorter, with two figures (the life of a task, a build in runs) in light and dark versions, drawn by `docs/figures.py`; the details are folded away.
+
 ## 0.2.0 (2026-11-18)
 
 Simpler workflow, and the build follows the plan's shape ([#2](https://github.com/giulianonetto/research-workflow/issues/2)).

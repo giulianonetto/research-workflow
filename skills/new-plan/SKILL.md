@@ -34,6 +34,7 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
    ### 2. <big step: about 400+ changed lines of code, or unrelated parts of the code>
    - **2a.** <sub-step: one commit>
    - **2b.** <sub-step: one commit>
+   - **Stop:** review the branch and open the PR into main
 
    ## Open questions
    1. <point left unsettled>. Plan assumes <current assumption, or "nothing yet">.
@@ -41,7 +42,7 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
 
    For an experiment, replace `## Goal` with `## Overall objective` (one line) and `## Specific objectives` (numbered; each says how it will be answered: which output, which `run.sh` stage, or "to decide").
 
-   Thin is fine: a one-line Goal and a list of open questions is a valid start. From a user's draft, keep all its content and map it into these sections; ask before dropping anything. No status in `PLAN.md` (it lives in `PROGRESS.md`). Iterate on the file until the user approves it.
+   Thin is fine: a one-line Goal and a list of open questions is a valid start. From a user's draft, keep all its content and map it into these sections; ask before dropping anything. No status in `PLAN.md` (it lives in `PROGRESS.md`). Stop lines are optional while drafting: `/finalize-plan` proposes a `- **Stop:** <why>` line for each step the user must look at, and always the one on the last step (the stop rule is in `plans/README.md`, Build). Iterate on the file until the user approves it.
 
 4. **Write it** (after approval). Create the branch if it doesn't exist, from the up-to-date default branch unless the user says otherwise (`git switch <main> && git pull`, then `git switch -c <branch>`; if there are uncommitted changes, ask first). Move the draft to `plans/<task>/PLAN.md` and delete the `tmp/new-plan/<task>/` copy. For an experiment, also scaffold, filling the title, issue and task name:
    - `experiment/run.sh` from [experiment-template/run.sh](experiment-template/run.sh), executable;
@@ -51,6 +52,6 @@ If the folder has no `plans/README.md`, tell the user to run `/setup-workflow` f
 
    Then run `/progress` for a **new task** with status `drafting` (and `**Kind:** experiment` for an experiment). Decisions already made in this conversation or in the user's draft go in as DECISION lines (for decisions from an earlier draft, use that draft's date if known and say "from draft").
 
-5. **Commit and link.** One commit, `plan: start <task>`. Once the branch is on GitHub (ask before pushing), set the issue title to the plan's title if it differs, and put the plan link in the issue body, below the problem text, not in a comment: `gh issue edit <N> --body-file ...` with `Plan: <blob URL of PLAN.md on the branch>`. If not pushed yet, say the link is pending.
+5. **Commit and link.** One commit, `plan: start <task>`. Push the branch (no question needed: it is the task branch, unless the project's `CLAUDE.md` says otherwise). Then set the issue title to the plan's title if it differs, and put the plan link in the issue body, below the problem text, not in a comment: `gh issue edit <N> --body-file ...` with `Plan: <blob URL of PLAN.md on the branch>`. If the push failed, say the link is pending.
 
 6. **Next.** Tell the user: the plan can change at any time (just say what to change; `/grill-plan` asks the hard questions); run `/finalize-plan` when they think it is ready to build.

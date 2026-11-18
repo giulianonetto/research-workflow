@@ -1,6 +1,6 @@
 {
   "name": "research-workflow",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Plans, progress logs, DECISION lines and experiments for research repos: draft plans over many days, status changes only by your choice, and experiments that close with RESULTS.md and a short analysis.qmd.",
   "author": { "name": "giulianonetto" },
   "repository": "https://github.com/giulianonetto/research-workflow",
