@@ -1,26 +1,14 @@
 ## Development workflow
 
-Each task is a GitHub issue, a branch and a folder `plans/<task>/` with `PLAN.md` (the spec) and `PROGRESS.md` (the log of work and decisions); the root `PROGRESS.md` says what is active. Rules: [`plans/README.md`](plans/README.md).
+Each task is a GitHub issue, a branch and a folder `plans/<task>/` with `PLAN.md` (the plan) and `PROGRESS.md` (the log of work and decisions). All rules: [`plans/README.md`](plans/README.md).
 
 ```text
 issue ─▶ /new-plan ─▶ brainstorm sessions ─▶ /finalize-plan ─▶ /implement-next per step
            drafting    (/grill-plan)              planned          in-progress
       ─▶ PR into main (you merge) ─▶ /progress (merged / done)
 
-every session:  /project-refresher at the start ─▶ work ─▶ progress at the end
+every session:  /project-refresher at the start ─▶ work (logged in the same commit)
 at any point:   change the plan (any reason) · /sandbox (you run it and look) · /grill-plan on a hard point
 ```
 
-1. **Issue:** every task starts from one.
-2. **`/new-plan`:** as soon as the idea is worth tracking. Creates `plans/<task>/` with a draft `PLAN.md` (from the conversation or a draft you have) and `PROGRESS.md`. Status `drafting`.
-3. **Brainstorm, over as many sessions and days as needed:** talk it through, use `/grill-plan` on hard points, `/sandbox` to check things by hand. Change the plan whenever it should change (rules in `plans/README.md`). Every major decision, including options ruled out, is a DECISION line in the task's `PROGRESS.md`.
-4. **`/finalize-plan`:** when you think it is ready. It shows the gaps; the status becomes `planned` only when you confirm. It then prepares the build on GitHub (the issue checklist, a sub-issue for each big step).
-5. **Build, always in a fresh session:** `/clear`, then run `/implement-next`; it starts from the task's `PROGRESS.md`. End each session with the `progress` skill; the next session resumes from its **Next**.
-6. **`/code-review`** against `main`, then open the PR (`gh pr create`, or ask Claude); its description says `Closes #<n>`.
-7. **Close out:** progress logged as merged / done.
-
-**Experiments** (try something out, end in an answer) are tasks too: `/new-plan exp`. They keep their code in `plans/<task>/experiment/` (entry point `run.sh`), are written up with `/write-results` (as often as needed, until you have reviewed every section), and close with `RESULTS.md` and a short `analysis.qmd` to continue by hand. Rules: [`plans/EXPERIMENTS.md`](plans/EXPERIMENTS.md).
-
-Status changes only when you choose: `/new-plan`, `/finalize-plan`, `/implement-next`, or telling `/progress` (done, dropped…).
-
-All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
+Experiments (try something out, end in an answer) are tasks too: `/new-plan exp`; rules in [`plans/EXPERIMENTS.md`](plans/EXPERIMENTS.md).

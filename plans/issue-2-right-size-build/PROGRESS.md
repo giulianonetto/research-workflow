@@ -3,13 +3,17 @@
 
 ## Current state (updated 2026-11-18)
 - Planned: 10 steps, all small, so no sub-issues: one commit per step on `issue-2-right-size-build`, then one PR into `main`.
-- Steps 1-8 built. Next: step 9 (short project sections).
+- Steps 1-9 built. Next: step 10 (docs, checks, version).
 - Clearing logs at a release is [#3](https://github.com/giulianonetto/research-workflow/issues/3), out of scope.
 
 ## 2026-11-18: workflow review; plan rewritten
 Removing `/update-plan` led to a review of the whole workflow against the real project (`real-project`): what went wrong in real use without each part? `PLAN.md` was rewritten from it (new title), and all open questions were settled.
 ### Next
-- Build step 9 of `PLAN.md`: short project sections (`CLAUDE-SECTION.md` about 4 lines; `README-SECTION.md` the flow and a link). One commit, with the log update in it.
+- Build step 10 of `PLAN.md`: docs, checks, version 0.2.0. One commit, with the log update in it; then the PR into `main`.
+### 12:08: step 9: short project sections
+- `CLAUDE-SECTION.md`: 5 bullets: read `plans/README.md`; start from the Current state; log every decision (same commit); status only by the user; one line for the project's language and tools (the facts `/setup-workflow` asks for need a place).
+- `README-SECTION.md`: one line, the flow diagram, the link to `plans/README.md`, and one line on experiments.
+- Both checks pass.
 ### 12:08: step 8: removals
 - Deleted `skills/update-plan/` (out of `plugin.json`) and `skills/setup-workflow/DOMAIN.md`. `/finalize-plan`, `/new-plan`, `/sandbox`, `/write-results` and `EXPERIMENTS.md` (the "normal task" line and rule 1, nothing else) point to the plan-change rules in `plans/README.md`.
 - `/setup-workflow`: a GitHub remote is required (stops without one, offers `gh repo create`); no issue-tracker question, no `docs/agents/` or `docs/adr/`, no `docs/` un-ignore step, no mattpocock config, no `git init` branch; "with an empty task table" gone.
