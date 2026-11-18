@@ -1,7 +1,7 @@
 # Progress log
 
 ## Current state (updated 2026-11-18)
-- **Now:** [issue-5-build-runs](plans/issue-5-build-runs/PROGRESS.md) (in-progress, step 1 of 6 done): build in runs that stop where the plan says, with lighter build rules ([#5](https://github.com/giulianonetto/research-workflow/issues/5)).
+- **Now:** [issue-5-build-runs](plans/issue-5-build-runs/PROGRESS.md) (in-progress): build in runs that stop where the plan says, with lighter build rules ([#5](https://github.com/giulianonetto/research-workflow/issues/5)).
 - Last release: 0.2.0 (tag `v0.2.0`): one rules file, the build follows the plan's shape ([#2](plans/issue-2-right-size-build/PROGRESS.md)).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 

@@ -125,15 +125,15 @@ code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px
     <span class="num">4</span>
     <h2>Build</h2>
     <div class="cmds"><span class="chip">/implement-next</span></div>
-    <p>One step, one reviewed commit, with the log in it. Claude ticks the box in the issue.</p>
-    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>until every box is ticked</span>
+    <p>Claude builds the steps up to the next stop in the plan: one reviewed commit per step, with the log in it. It pushes and ticks the box in the issue after each step.</p>
+    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>one run per stop, until every box is ticked</span>
   </article>
 
   <article class="stage done">
     <span class="num">5</span>
     <h2>Close</h2>
     <div class="cmds"><span class="chip you">PR &amp; merge</span><span class="chip">/progress</span></div>
-    <p>Open the PR and merge it. Then say “merged, mark done”. The issue closes.</p>
+    <p>Claude reviews the whole branch and offers the PR. You merge it, then say “merged, mark done”. The issue closes.</p>
     <span class="st m-st">done</span>
   </article>
 </section>

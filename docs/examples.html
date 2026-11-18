@@ -204,7 +204,7 @@ cd sim-bench</pre>
           <li>writes the draft to <code>tmp/new-plan/issue-41-hurdle-model/PLAN.md</code> and gives you the path: a short Goal, maybe a few steps, and everything unsettled under <b>Open questions</b>;</li>
           <li>changes the file until you approve; you can edit it too. Nothing goes into git before your yes.</li>
         </ul>
-        <p>Then Claude creates the branch from an up-to-date <code>main</code>, moves the draft into the task folder, logs any decisions you already made as DECISION lines, and commits <code>plan: start issue-41-hurdle-model</code>. It asks before pushing; once pushed, it puts the plan link in the issue body.</p>
+        <p>Then Claude creates the branch from an up-to-date <code>main</code>, moves the draft into the task folder, logs any decisions you already made as DECISION lines, and commits <code>plan: start issue-41-hurdle-model</code>. It pushes the branch (no question: it is the task branch) and puts the plan link in the issue body.</p>
         <span class="transition">status <span class="st drafting">drafting</span></span>
       </div>
     </li>
@@ -238,7 +238,7 @@ cd sim-bench</pre>
       <div class="who"><span class="chip cmd">/new-plan</span></div>
       <div class="what">
         <div class="say"><b>You:</b> "/new-plan for issue #27"</div>
-        <p>Claude reads the issue, its body and comments (<code>gh issue view 27 --comments</code>), and the code it names. Then it drafts <code>PLAN.md</code> in <code>tmp/new-plan/</code>: the Goal comes from the issue, and points left open in the comments become Open questions. After your yes, it creates <code>issue-27-low-coverage</code> from <code>main</code> and commits. After you push, the plan link goes into the issue body.</p>
+        <p>Claude reads the issue, its body and comments (<code>gh issue view 27 --comments</code>), and the code it names. Then it drafts <code>PLAN.md</code> in <code>tmp/new-plan/</code>: the Goal comes from the issue, and points left open in the comments become Open questions. After your yes, it creates <code>issue-27-low-coverage</code> from <code>main</code>, commits and pushes; the plan link goes into the issue body.</p>
         <span class="transition">status <span class="st drafting">drafting</span></span>
       </div>
     </li>
@@ -261,7 +261,7 @@ cd sim-bench</pre>
     <li class="step">
       <div class="who"><span class="chip cmd">/finalize-plan</span></div>
       <div class="what">
-        <p>Claude checks each item and shows <b>ok</b> or <b>gap</b>: Goal, Open questions, files that really exist, steps concrete enough, decisions written in the plan, the issue (title matches the plan, no solution text), and the build shape (each step one commit, or a big step with sub-steps). You fix the gaps (or accept them), then:</p>
+        <p>Claude checks each item and shows <b>ok</b> or <b>gap</b>: Goal, Open questions, files that really exist, steps concrete enough, decisions written in the plan, the issue (title matches the plan, no solution text), the build shape (each step one commit, or a big step with sub-steps), and the <b>Stops</b>: Claude proposes a <code>Stop:</code> line for each step you must look at (here step 2, which changes the numbers), and always one on the last step (review the branch, PR into <code>main</code>). You fix the gaps (or accept them), then:</p>
         <div class="say"><b>"Set the status to planned?"</b> You: "yes"</div>
         <span class="transition">status <span class="st drafting">drafting</span> → <span class="st planned">planned</span></span>
         <p>Then Claude shows the GitHub structure the plan implies, and creates it after your yes: a checklist of the plan's steps in the issue body, and a sub-issue with its own branch for each big step (none here: three small steps).</p>
@@ -278,9 +278,12 @@ cd sim-bench</pre>
     <li class="step">
       <div class="who"><span class="chip cmd">/implement-next</span></div>
       <div class="what">
-        <p>Claude builds the next unchecked step. Before the commit it reviews the change: <code>/code-review</code> for bugs, then <b>Spec</b> (against the plan step), <b>Research</b> (lost rows, missing values, units, seeds, numbers that look wrong) and <b>Style</b>. Then one commit for the step, with the log update in it (what was done, DECISION lines, a new <b>Next</b>), and it ticks the box in the issue. Running it on the first step is your choice to start:</p>
+        <p>Claude names the run and asks once:</p>
+        <div class="say"><b>"I will build steps 1 and 2, then stop after step 2 (Stop: check the simulated coverage). OK, or one step at a time?"</b> You: "OK"</div>
+        <p>Running it on the first step is your choice to start:</p>
         <span class="transition">status <span class="st planned">planned</span> → <span class="st inprog">in-progress</span></span>
-        <p>If reality breaks the plan, say so. Claude shows the change to <code>PLAN.md</code>, and after your yes logs it as a DECISION line with the <code>(plan change)</code> tag and what the plan missed.</p>
+        <p>Then it builds the steps one after the other, without asking. Before each commit it reviews the change: for code, <code>/code-review</code> for bugs, then <b>Spec</b> (against the plan step), <b>Research</b> (lost rows, missing values, units, seeds, numbers that look wrong) and <b>Style</b>; for a step that changes only text, the Spec check. Then one commit for the step, with a short log update in it (what the diff can't show, DECISION lines, a new <b>Next</b>); it pushes the task branch and ticks the box in the issue. It stops early if a test fails and the fix is not clear, or a question comes up that the plan does not answer. At the end: one summary of each step, its review, and every decision it made alone.</p>
+        <p>You look at the coverage, then run <span class="chip cmd">/implement-next</span> again for step 3. If reality breaks the plan, say so. Claude shows the change to <code>PLAN.md</code>, and after your yes logs it as a DECISION line with the <code>(plan change)</code> tag and what the plan missed.</p>
       </div>
     </li>
   </ol>
@@ -289,7 +292,7 @@ cd sim-bench</pre>
   <ol class="steps">
     <li class="step">
       <div class="who"><span class="chip cmd">/code-review</span><span class="chip you">You</span></div>
-      <div class="what"><p>When every box is ticked: the same review on the whole branch, then the PR into <code>main</code> (<code>gh pr create</code>, or ask Claude to). Check that the PR description says <code>Closes #27</code>, so merging closes the issue. You merge it.</p></div>
+      <div class="what"><p>The last step's stop: when every box is ticked, Claude runs the full review on the whole branch and offers to open the PR into <code>main</code>. Check that the PR description says <code>Closes #27</code>, so merging closes the issue. You merge it.</p></div>
     </li>
     <li class="step">
       <div class="who"><span class="chip cmd">/progress</span></div>
@@ -536,7 +539,7 @@ $OUT  = tmp/experiments/&lt;task&gt;/     not in git     everything else: simula
     <dt>New task</dt><dd><code>/new-plan</code>; every task has a GitHub issue</dd>
     <dt>Plan should change</dt><dd>Say what to change, any time, any reason; <code>/grill-plan</code> for the hard questions</dd>
     <dt>Ready to build</dt><dd><code>/finalize-plan</code>, which changes the status only after your yes, then puts the step checklist in the issue</dd>
-    <dt>Build</dt><dd><code>/implement-next</code>: one reviewed commit per step, with the log in it</dd>
+    <dt>Build</dt><dd><code>/implement-next</code>: the steps up to the next stop in the plan, one reviewed and pushed commit per step, with the log in it</dd>
     <dt>Log work</dt><dd><code>/progress</code> (or "log progress"), in the same commit as the work</dd>
     <dt>Check something by hand</dt><dd>Ask for a sandbox</dd>
     <dt>Try something out</dt><dd><code>/new-plan exp</code>; results come from <code>experiment/run.sh</code>; write up with <code>/write-results</code> (as many rounds as you like); close with "mark done"</dd>

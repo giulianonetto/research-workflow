@@ -15,7 +15,7 @@ Claude skills for research repos: plans that start as drafts and grow over many 
 | New task / experiment (drafts the plan in `tmp/` first) | `/new-plan` / `/new-plan exp` |
 | Hard questions about a draft plan, in rounds | `/grill-plan` |
 | Plan ready to build (status changes only after your yes; then the issue checklist and sub-issues) | `/finalize-plan` |
-| Build the next step (one commit, reviewed, log in the same commit) | `/implement-next` |
+| Build the next steps, up to the next stop in the plan (one reviewed commit per step, log in it, pushed) | `/implement-next` |
 | Write up an experiment (as many rounds as you like) | `/write-results` |
 | Check something by hand | ask for a sandbox (`/sandbox`) |
 | Log work, change a status | `/progress` (or "log progress") |
@@ -65,6 +65,8 @@ Use only one of the two on the same machine; with both, every command appears tw
 ### In each project
 
 Open Claude in the project folder and run `/setup-workflow` (in Claude Code, plugin commands carry the plugin's name: `/research-workflow:setup-workflow`). In a project set up with an older version, run it again: it shows what changed and updates only with your agreement.
+
+Claude pushes the task branch after each step. To skip the permission prompt each time, allow `git push` in Claude Code's own settings (`/permissions`); the workflow does not change them.
 
 ## Credits
 

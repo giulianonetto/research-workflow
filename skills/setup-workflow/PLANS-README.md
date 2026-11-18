@@ -1,6 +1,6 @@
 # Plans
 
-Workflow version: 0.2.0 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
+Workflow version: 0.3.0 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
 
 This file holds all the rules of the workflow. One folder per task: `plans/<task>/PLAN.md` (what and how) and `plans/<task>/PROGRESS.md` (what was done and decided). Optional `plans/<task>/sandbox/`: code for manual inspection, indexed in its `README.md`; its outputs go to `tmp/sandbox/<task>/` (not in git). The flow is in the [README](../README.md#development-workflow).
 
@@ -43,12 +43,11 @@ Every task has a GitHub issue.
 
 Before each step commit and before each PR. Report each part under its own heading, and skip a heading that does not apply.
 
-- **A step that changes a file that runs** (code, scripts, pipelines, tests): the full review, all four parts below.
+- **A step that changes a file that runs or sets the results** (code, scripts, pipelines, tests, config and params files, notebooks): the full review, all four parts below.
 - **A step that changes only text** (docs, plans, comments): the Spec part only.
 - **Before every PR:** always the full review, on everything the PR brings in.
 
 The four parts:
-
 
 - **Bugs:** Claude Code's built-in `/code-review`.
 - **Spec:** against the `PLAN.md` step: what is missing, what was not asked for, what looks wrong. Adapted from Matt Pocock's Spec axis.

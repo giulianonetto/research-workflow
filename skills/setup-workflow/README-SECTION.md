@@ -3,7 +3,7 @@
 Each task is a GitHub issue, a branch and a folder `plans/<task>/` with `PLAN.md` (the plan) and `PROGRESS.md` (the log of work and decisions). All rules: [`plans/README.md`](plans/README.md).
 
 ```text
-issue ─▶ /new-plan ─▶ brainstorm sessions ─▶ /finalize-plan ─▶ /implement-next per step
+issue ─▶ /new-plan ─▶ brainstorm sessions ─▶ /finalize-plan ─▶ /implement-next in runs
            drafting    (/grill-plan)              planned          in-progress
       ─▶ PR into main (you merge) ─▶ /progress (merged / done)
 

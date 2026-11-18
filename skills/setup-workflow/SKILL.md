@@ -23,6 +23,7 @@ Scaffold the files the workflow's skills rely on. Explore, show the drafts, conf
      - `## Changes` sections in `PLAN.md` files: keep them as history, or turn each line into a DECISION line with the `(plan change)` tag in the task log;
      - `docs/agents/domain.md`, `docs/adr/` and the CLAUDE.md `## Agent skills` block: the glossary rules are now in `plans/README.md`; offer to delete `docs/agents/domain.md` and the block, keep `GLOSSARY.md`, and leave existing ADRs alone (link them from DECISION lines if the user wants);
      - an open task with no GitHub issue: offer to create one.
+   - **Upgrading from 0.2.x or older:** say that existing plans have no Stop lines, so `/implement-next` asks before each step until they get them: from `/finalize-plan` for a plan still `drafting`, or from the user, who can ask to add them at any time (the stop rule is in `plans/README.md`, Build).
    - `PROGRESS.md` (if missing): `# Progress log`, a `## Current state (updated <date>)` block with one bullet `- **Now:** no active task`, the times line from the template, and a first dated entry `## <date>: workflow set up`.
    - `CLAUDE.md`: the section in [CLAUDE-SECTION.md](CLAUDE-SECTION.md).
    - `README.md`: the section in [README-SECTION.md](README-SECTION.md), at the end.

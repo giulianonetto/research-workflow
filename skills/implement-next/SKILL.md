@@ -12,7 +12,7 @@ Builds the next steps of a task in one run, up to the next stop, then stops. Run
 
 2. **Pick the run.** Start with unfinished work (Next, uncommitted changes, an open big-step branch), otherwise the next unchecked step in the checklist. The run goes from there up to the first step with a `**Stop:**` line, that step included, and holds at most the number of steps in `plans/README.md` (Runs). A big step counts as one step. A plan with no Stop lines was made before 0.3.0: the run is one step. On the first step of a `planned` task, set the status to `in-progress` (logged with this step, as a status change).
 
-3. **Ask once.** Name the run in one line and ask, for example: "I will build steps 3, 4 and 5, then stop after step 5 (Stop: look at the plots). OK, or one step at a time?" For "one step at a time", the run is the first step only. Then build the whole run without asking again, unless an early stop comes up (step 7).
+3. **Ask once.** Name the run in one line and ask, for example: "I will build steps 3, 4 and 5, then stop after step 5 (Stop: look at the plots). OK, or one step at a time?" If "Still needed?" (step 4) fires for the first step, ask it in the same message. For "one step at a time", the run is the first step only. Then build the whole run without asking again, unless an early stop comes up (step 7).
 
 4. **Still needed?** Before each step, compare it with the findings and DECISION lines logged after it was written, also those from earlier in this run. If one may make the step obsolete or change it, stop and ask in one line; a change goes through the plan-change rules.
 
@@ -22,10 +22,10 @@ Builds the next steps of a task in one run, up to the next stop, then stops. Run
 
    The last commit of each step writes the next pick into the task's **Next** (the step, the file to open, the command to run).
 
-   Keep test discipline: write or update tests with the code, and run them before the commit. Tests are cheap once written and catch real bugs. Pushing the task branch needs no question; pushing or merging into `main` does.
+   Keep test discipline: write or update tests with the code, and run them before the commit. Tests are cheap once written and catch real bugs. Pushing the task branch needs no question (unless the project's `CLAUDE.md` says otherwise); pushing or merging into `main` does.
 
-6. **Review** before each commit of a step and before each PR, as `plans/README.md` says: the full review (`/code-review` for bugs, then **Spec**, **Research** and **Style** under their own headings) for a step that changes a file that runs, and before every PR; only the **Spec** check for a step that changes only text. Fix what is clear before the commit; anything to ask about is an early stop.
+6. **Review** before each commit of a step and before each PR, as `plans/README.md` says: the full review (`/code-review` for bugs, then **Spec**, **Research** and **Style** under their own headings) for a step that changes a file that runs or sets the results, and before every PR; only the **Spec** check for a step that changes only text. Fix what is clear before the commit; anything to ask about is an early stop.
 
-7. **Stop** after the step with the Stop line, at the run limit, or early: a test fails and the fix is not clear, the review finds something to ask about, "Still needed?" fires, the merge rule says to ask, or a decision comes up that the plan does not cover. On an early stop, leave the open step uncommitted and say what is open.
+7. **Stop** after the step with the Stop line, at the run limit, or early: a test fails and the fix is not clear, the review finds something to ask about, "Still needed?" fires, the merge rule says to ask, or a decision comes up that the plan does not cover. On an early stop, leave the open work uncommitted (a big step's sub-step commits stay), write the open question into the task's **Next**, and say what is open.
 
 8. **After the run.** Add a user-run check to the task issue only if its answer could change a decision. When every box is ticked, review the whole task branch the same way and offer to open the PR into `main` (`Closes #<N>` in its description); the user merges it. End with one summary: each step built and its review result, every decision Claude made alone (each is a DECISION line in the log), why the run stopped, and what is next.
