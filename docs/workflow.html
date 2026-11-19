@@ -3,7 +3,8 @@
 <title>The Workflow</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* one page, one flow: five stage cards in a row (stacked on phones), a status track above, a session band below */
+/* one page, one flow: five stage cards in a row (stacked on phones), a status track above, two lanes below them
+   (what you do, what you see on GitHub), then a session band */
 :root {
   --bg:#ffffff; --fg:#1b2420; --muted:#66716b; --line:#e4e8e5; --soft:#f6f8f7;
   --accent:#2f6b4f; --accent-soft:#e6f1ea;
@@ -39,11 +40,14 @@ h1 { font-size:2.1rem; font-weight:600; letter-spacing:-.015em }
 .flow { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); column-gap:28px; row-gap:14px }
 .track { grid-row:1; display:flex; flex-direction:column; align-items:center; gap:8px }
 .track::before { content:""; align-self:stretch; height:4px; border-radius:2px; background:var(--c) }
-.t-draft { grid-column:1 / 3 } .t-plan { grid-column:3 } .t-prog { grid-column:4 } .t-done { grid-column:5 }
+.t-draft { grid-column:1 / 4 } .t-prog { grid-column:4 } .t-done { grid-column:5 }
+/* planned is the gate after Finalize: a short bar over the gap between cards 3 and 4 */
+.t-plan { grid-column:3 / 5; justify-self:center; z-index:1 }
+.t-plan::before { align-self:center; width:28px }
 
 .stage { grid-row:2; position:relative; display:flex; flex-direction:column; gap:12px; padding:18px 16px 16px;
   border:1px solid var(--line); border-radius:12px; background:var(--bg) }
-.stage + .stage::before { /* arrow from the previous card */
+.stage ~ .stage::before { /* arrow from the previous card */
   content:""; position:absolute; left:-21px; top:38px; width:14px; height:14px;
   border-top:2px solid #b9c2bd; border-right:2px solid #b9c2bd; transform:rotate(45deg) }
 .num { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-weight:600; font-size:14px; color:var(--c); background:var(--cb) }
@@ -54,6 +58,18 @@ h1 { font-size:2.1rem; font-weight:600; letter-spacing:-.015em }
   border-top:1px dashed var(--line); padding-top:10px }
 .loop svg { flex:none }
 .m-st { display:none; align-self:flex-start }
+
+/* lanes: one row for you, one for GitHub, a cell under each card */
+.lane-head { grid-column:1 / -1; display:flex; gap:10px; align-items:baseline; margin-top:8px; font-size:13px; color:var(--muted) }
+.lane-head b { font-size:12px; font-weight:600; letter-spacing:.09em; text-transform:uppercase }
+.lane-head.you b { color:var(--you) }
+.h-you { grid-row:3 } .h-gh { grid-row:5 }
+.lane { border-radius:10px; padding:12px 14px; font-size:14px }
+.lane.you { grid-row:4; background:var(--you-soft); color:var(--you); font-weight:500 }
+.lane.gh { grid-row:6; background:var(--soft); color:var(--fg) }
+.lane-k { display:none; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--muted) }
+.lane.you .lane-k { color:var(--you) }
+.lane.gh.wide { grid-column:span 2 } /* stages 1 and 2: the same on GitHub */
 
 /* every session */
 .session { display:flex; flex-direction:column; gap:16px; align-items:center }
@@ -75,8 +91,13 @@ code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px
   body { padding-top:40px }
   .flow { grid-template-columns:minmax(0,1fr); row-gap:30px; max-width:440px; margin:0 auto; width:100% }
   .track { display:none }
-  .stage { grid-row:auto; flex-direction:column }
-  .stage + .stage::before { left:50%; top:-24px; margin-left:-7px; transform:rotate(135deg) }
+  .flow { row-gap:8px }
+  .stage, .lane.you, .lane.gh { grid-row:auto }
+  .lane.gh.wide { grid-column:auto }
+  .stage ~ .stage { margin-top:30px }
+  .stage ~ .stage::before { left:50%; top:-26px; margin-left:-7px; transform:rotate(135deg) }
+  .lane-head { display:none }
+  .lane-k { display:block; margin-bottom:4px }
   .m-st { display:inline-block }
   .band { grid-template-columns:minmax(0,1fr); justify-items:center; gap:10px }
   .dash { width:2px; height:20px; background:repeating-linear-gradient(180deg, #c7cec9 0 5px, transparent 5px 9px) }
@@ -88,7 +109,7 @@ code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px
 
 <header>
   <h1>The workflow</h1>
-  <p class="lede">One task, from idea to merged. Each step is one command. Nothing changes status without your yes.</p>
+  <p class="lede">One task, from idea to merged. Each step is one command. Nothing changes status without your yes, and you review the work in small pieces on GitHub.</p>
 </header>
 
 <section class="flow" aria-label="The five stages of a task">
@@ -97,45 +118,57 @@ code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px
   <div class="track t-prog inprog"><span class="st">in-progress</span></div>
   <div class="track t-done done"><span class="st">done</span></div>
 
+  <div class="lane-head you h-you"><b>You</b></div>
+  <div class="lane-head h-gh"><b>On GitHub</b></div>
+
   <article class="stage drafting">
     <span class="num">1</span>
     <h2>Start a plan</h2>
     <div class="cmds"><span class="chip">/new-plan</span></div>
-    <p>Say the idea in plain words. Claude opens a GitHub issue and writes a draft plan. Nothing goes into git before your yes.</p>
+    <p>Brainstorm and draft. The draft lives in <code>tmp/</code> (not in git). On your yes, it moves to <code>plans/&lt;task&gt;/</code> (in git) on a new branch, with a <code>PROGRESS.md</code> log.</p>
     <span class="st m-st">drafting</span>
   </article>
+  <div class="lane you"><span class="lane-k">You</span>Approve the draft.</div>
 
   <article class="stage drafting">
     <span class="num">2</span>
     <h2>Shape it</h2>
-    <div class="cmds"><span class="chip you">Talk</span><span class="chip">/grill-plan</span><span class="chip">/sandbox</span></div>
-    <p>Think it through, answer the hard questions, check data by hand. Each decision becomes a DECISION line.</p>
-    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>as many days as you need</span>
+    <div class="cmds"><span class="chip">/grill-plan</span></div>
+    <p>Refine the plan with feedback. Each choice becomes a DECISION line.</p>
+    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>over many sessions</span>
   </article>
+  <div class="lane you"><span class="lane-k">You</span>Answer questions.</div>
+  <div class="lane gh wide"><span class="lane-k">On GitHub, stages 1 and 2</span>Task issue opened, then the task branch and the plan link in the issue. Each plan update is committed to the task branch.</div>
 
-  <article class="stage planned">
+  <article class="stage drafting">
     <span class="num">3</span>
     <h2>Finalize</h2>
     <div class="cmds"><span class="chip">/finalize-plan</span></div>
-    <p>Claude marks each part <b>ok</b> or <b>gap</b>. You fix the gaps or accept them. Then the steps go into the issue as a checklist.</p>
-    <span class="st m-st">planned</span>
+    <p>Claude checks that every step is ready to build: one commit, or a big step with sub-steps. It marks gaps and proposes the stops.</p>
+    <span class="st m-st planned">then planned</span>
   </article>
+  <div class="lane you"><span class="lane-k">You</span>Approve the plan and its stopping points.</div>
+  <div class="lane gh"><span class="lane-k">On GitHub</span>Checklist in the issue, one box per step.</div>
 
   <article class="stage inprog">
     <span class="num">4</span>
     <h2>Build</h2>
     <div class="cmds"><span class="chip">/implement-next</span></div>
-    <p>Claude builds the steps up to the next stop in the plan: one reviewed commit per step, with the log in it. It pushes and ticks the box in the issue after each step.</p>
-    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>one run per stop, until every box is ticked</span>
+    <p>Claude builds and reviews each step, up to the next stop: one reviewed commit per step.</p>
+    <span class="loop"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>one run per stop</span>
   </article>
+  <div class="lane you"><span class="lane-k">You</span>Look at each stop. Check by hand with <code>/sandbox</code>.</div>
+  <div class="lane gh"><span class="lane-k">On GitHub</span>A reviewed commit and a ticked box per step.</div>
 
   <article class="stage done">
     <span class="num">5</span>
     <h2>Close</h2>
-    <div class="cmds"><span class="chip you">PR &amp; merge</span><span class="chip">/progress</span></div>
-    <p>Claude reviews the whole branch and offers the PR. You merge it, then say “merged, mark done”. The issue closes.</p>
+    <div class="cmds"><span class="chip">/progress</span></div>
+    <p>Claude reviews the whole branch and opens the PR into main. After your merge, it marks the task done.</p>
     <span class="st m-st">done</span>
   </article>
+  <div class="lane you"><span class="lane-k">You</span>Review and merge the PR.</div>
+  <div class="lane gh"><span class="lane-k">On GitHub</span>The PR into main closes the issue.</div>
 </section>
 
 <section class="session" aria-label="Every session">
@@ -151,8 +184,9 @@ code { font-family:var(--mono); font-size:.88em; background:#edf1ee; padding:1px
 
 <section class="notes">
   <div class="note"><b>The plan can change</b><span>Say what to change, at any time. Claude shows the edit and logs it as a DECISION line.</span></div>
+  <div class="note"><b>Two logs</b><span><code>PROGRESS.md</code> at the root, the folder log (one per project): active tasks, status changes, PRs, releases. <code>plans/&lt;task&gt;/PROGRESS.md</code>, the task log (one per task): the work of each step, its DECISION lines and what is next. All decisions: <code>grep -rn DECISION PROGRESS.md plans/</code></span></div>
+  <div class="note"><b>Check something by hand</b><span>At any stage, <code>/sandbox</code> gives you code to run and look at yourself.</span></div>
   <div class="note"><b>An experiment?</b><span>Start with <code>/new-plan exp</code>. Before you close, write it up with <code>/write-results</code>.</span></div>
-  <div class="note"><b>All past decisions</b><span>One grep away: <code>grep -rn DECISION PROGRESS.md plans/</code></span></div>
 </section>
 
 <p class="foot">Step-by-step examples for five common situations: <a href="examples.html">examples.html</a></p>

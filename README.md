@@ -4,7 +4,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/flow-dark.svg">
-  <img src="docs/img/flow-light.svg" alt="The life of a task: start a plan, shape it, finalize it, build it in runs, close it. Every session starts with /project-refresher and ends with /progress.">
+  <img src="docs/img/flow-light.svg" alt="The life of a task: start a plan, shape it, finalize it, build it in runs, close it. The draft lives in tmp/ until you approve it, then moves to plans/ on a task branch, linked from the issue. Finalize checks that every step is ready to build (one commit, or sub-steps) and becomes planned only after you approve the plan and its stops. Claude reviews each step before its commit and the whole branch before the PR; you review and merge the PR. Under each stage: what you do and what you see on GitHub. Every session starts with /project-refresher and ends with /progress. Record keeping: PROGRESS.md at the root, the folder log (one per project), logs active tasks, status changes, PRs and releases; plans/<task>/PROGRESS.md, the task log (one per task), logs the work of each step, its DECISION lines and what is next. Any time: /sandbox to check by hand, or change the plan.">
 </picture>
 
 ## Why use it
@@ -12,6 +12,7 @@
 - **Pick up where you left off**, even after weeks.
 - **Keep every decision**, with its reason, one `grep` away.
 - **Decide where Claude stops.** Between stops, it builds alone.
+- **Review in small pieces.** One commit per step, one box per step in the GitHub issue, one PR per big step.
 
 ## How a build runs
 
@@ -61,6 +62,8 @@ Commands then carry the plugin's name: `/research-workflow:setup-workflow`. Inst
 | `/implement-next` | Build up to the next stop |
 | `/sandbox` | Check something by hand |
 | `/progress` | Log work, change a status (or say "log progress") |
+
+An **experiment** (try something out, end in an answer) is a task too: start it with `/new-plan exp`, and write it up with `/write-results` before you close it.
 
 The plan can change at any time: just say what to change. All rules live in one file in your project, `plans/README.md`. All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 

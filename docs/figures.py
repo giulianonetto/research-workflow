@@ -3,7 +3,7 @@
 
 Writes docs/img/flow-{light,dark}.svg (the life of a task), docs/img/runs-{light,dark}.svg
 (a build in runs, with its stops) and docs/img/start-{light,dark}.svg (get started). Colors follow docs/workflow.html. Text does not wrap in SVG,
-so every line is written by hand: keep card lines under about 22 characters.
+so every line is written by hand: keep card and lane lines under about 20 characters.
 """
 from pathlib import Path
 
@@ -59,46 +59,76 @@ LOOP = ('<path d="M{x1} {y1} a5 5 0 1 1 -1.5 -3.6" fill="none" stroke="{{{c}}}" 
 
 
 def flow():
-    W, CW, GAP, TOP, CH = 1000, 180, 25, 44, 210
+    W, CW, TOP, CH = 1000, 172, 44, 190
+    # the gap after Finalize is wider: it is the gate where the task becomes `planned`
+    gaps = [20, 20, 80, 20]
+    xs = [0]
+    for g in gaps:
+        xs.append(xs[-1] + CW + g)
     cards = [
-        ("drafting", "Start a plan", [("/new-plan", "cmd")], ["Say the idea.", "Claude drafts a plan", "and opens an issue."], None),
-        ("drafting", "Shape it", [("/grill-plan", "cmd"), ("/sandbox", "cmd")], ["Think it through.", "Each choice becomes", "a DECISION line."], "over many days"),
-        ("planned", "Finalize", [("/finalize-plan", "cmd")], ["Claude checks the plan.", "You agree where", "the build stops."], None),
-        ("inprog", "Build", [("/implement-next", "cmd")], ["Claude builds up to", "the next stop: one", "commit per step."], "one run per stop"),
-        ("done", "Close", [("you merge", "you"), ("/progress", "cmd")], ["You merge the PR", "and say “mark done”.", "The issue closes."], None),
+        ("drafting", "Start a plan", "/new-plan", ["Brainstorm and draft.", ("tmp/ → plans/<task>/", "mono"), "+ a PROGRESS.md log"], None),
+        ("drafting", "Shape it", "/grill-plan", ["Refine the plan", "with feedback."], "over many sessions"),
+        ("drafting", "Finalize", "/finalize-plan", ["Checks plan is ready", "to build: one commit", "per step/sub-step."], None),
+        ("inprog", "Build", "/implement-next", ["Claude builds and", "reviews each step,", "up to the next stop."], "one run per stop"),
+        ("done", "Close", "/progress", ["Claude reviews the", "branch, opens the PR,", "then marks it done."], None),
     ]
-    xs = [i * (CW + GAP) for i in range(5)]
+    you = [["Approve the draft."], ["Answer questions."], ["Approve the plan", "and stopping points."],
+           ["Look at each stop,", "check with /sandbox."], ["Review + merge PR."]]
+    # a cell is its lines, or (number of columns, lines) when it spans several stages
+    github = [(2, ["Issue opened → task branch pushed → plan link.", "Plan updates committed to the task branch."]),
+              ["Checklist: one box", "per step."], ["Reviewed commit +", "box ticked per step."], ["PR into main", "closes the issue."]]
     out = []
-    # status track: one bar per status, over its cards, with its label
-    for status, label, a, b in [("drafting", "drafting", 0, 1), ("planned", "planned", 2, 2), ("inprog", "in-progress", 3, 3), ("done", "done", 4, 4)]:
-        x1, x2 = xs[a], xs[b] + CW
+    # status track: drafting over cards 1-3, `planned` is the gate after Finalize
+    for status, label, x1, x2 in [("drafting", "drafting", xs[0], xs[2] + CW), ("planned", "planned", xs[2] + CW, xs[3]),
+                                  ("inprog", "in-progress", xs[3], xs[3] + CW), ("done", "done", xs[4], xs[4] + CW)]:
         out.append(f'<rect x="{x1}" y="14" width="{x2 - x1}" height="4" rx="2" fill="{{{status}}}"/>')
+    for status, label, x1, x2 in [("drafting", "drafting", xs[0], xs[2] + CW), ("planned", "planned", xs[2] + CW, xs[3]),
+                                  ("inprog", "in-progress", xs[3], xs[3] + CW), ("done", "done", xs[4], xs[4] + CW)]:
         out.append(pill((x1 + x2) / 2, 16, label, status))
-    for i, (status, title, chips, lines, loop) in enumerate(cards):
+    for i, (status, title, cmd, lines, loop) in enumerate(cards):
         x = xs[i]
         out.append(f'<rect x="{x + .5}" y="{TOP + .5}" width="{CW - 1}" height="{CH}" rx="12" fill="{{card}}" stroke="{{line}}"/>')
         out.append(f'<circle cx="{x + 30}" cy="{TOP + 32}" r="14" fill="{{{status}_bg}}"/>')
         out.append(text(x + 30, TOP + 37, str(i + 1), 14, status, 600, SANS, "middle"))
         out.append(text(x + 52, TOP + 37.5, title, 16, "fg", 600))
-        cx, cy = x + 16, TOP + 58
-        for label, kind in chips:
-            if cx + chip_width(label, kind) > x + CW - 14:
-                cx, cy = x + 16, cy + 30
-            svg, w = chip(cx, cy, label, kind)
-            out.append(svg)
-            cx += w + 6
+        svg, _ = chip(x + 16, TOP + 58, cmd)
+        out.append(svg)
         for j, line in enumerate(lines):
-            out.append(text(x + 16, TOP + 132 + j * 19, line, 13, "muted"))
+            if isinstance(line, tuple):  # a path: mono, a bit smaller
+                out.append(text(x + 16, TOP + 108 + j * 19, line[0], 11.5, "muted", 500, MONO))
+            else:
+                out.append(text(x + 16, TOP + 108 + j * 19, line, 13, "muted"))
         if loop:
             out.append(f'<line x1="{x + 16}" y1="{TOP + CH - 30}" x2="{x + CW - 16}" y2="{TOP + CH - 30}" stroke="{{line}}" stroke-dasharray="3 3"/>')
             lx, ly = x + 22, TOP + CH - 12
             out.append(LOOP.format(x1=lx + 5, y1=ly - 4, x2=lx + 5.5, y2=ly - 11, c=status))
             out.append(text(x + 34, TOP + CH - 10, loop, 12.5, status, 500))
         if i:
-            ax, ay = x - GAP / 2 - 3, TOP + 32
+            ax, ay = x - gaps[i - 1] / 2 + 3.5, TOP + 32
             out.append(f'<path d="M{ax - 4} {ay - 7} l7 7 l-7 7" fill="none" stroke="{{arrow}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+    # two lanes under the cards: what you do, and what you can follow on GitHub
+    y = TOP + CH + 32
+    for key, rows, fill, ink, weight in [("YOU", you, "you_bg", "you", 500), ("ON GITHUB", github, "soft", "fg", 400)]:
+        color = "you" if key == "YOU" else "muted"
+        out.append(text(0, y, key, 11.5, color, 600, SANS, "start", ".09em"))
+        top = y + 10
+        cells, col = [], 0
+        for cell in rows:
+            span, lines = cell if isinstance(cell, tuple) else (1, cell)
+            cells.append((xs[col], xs[col + span - 1] + CW - xs[col], lines))
+            col += span
+        h = 25 + (max(len(lines) for _, _, lines in cells) - 1) * 19 + 15
+        for x, w, lines in cells:
+            out.append(f'<rect x="{x}" y="{top}" width="{w}" height="{h}" rx="10" fill="{{{fill}}}"/>')
+            for j, line in enumerate(lines):
+                out.append(text(x + 14, top + 25 + j * 19, line, 13, ink, weight))
+        y = top + h + 30
+    # the gate: a faint line down the gap after Finalize, broken at the arrow
+    gx = xs[2] + CW + gaps[2] / 2
+    for y1, y2 in [(30, TOP + 18), (TOP + 48, y - 34)]:
+        out.append(f'<line x1="{gx}" y1="{y1}" x2="{gx}" y2="{y2}" stroke="{{planned}}" stroke-width="1.5" stroke-dasharray="3 5" opacity=".55"/>')
     # every session
-    by = TOP + CH + 40
+    by = y + 14
     out.append(text(W / 2, by, "EVERY SESSION", 11.5, "muted", 600, SANS, "middle", ".09em"))
     ry = by + 18
     left, wl = chip(0, ry, "/project-refresher")
@@ -118,7 +148,37 @@ def flow():
     rx = mx + mid_w + 60
     out.append(f'<g transform="translate({rx} 0)">{right}</g>')
     out.append(text(rx + wr / 2, ry + 44, "log it, same commit", 12.5, "muted", 400, SANS, "middle"))
-    return W, ry + 52, "The life of a task: start a plan, shape it, finalize it, build it in runs, close it.", out
+    # record keeping: the two logs
+    ky = ry + 92
+    out.append(text(W / 2, ky, "RECORD KEEPING", 11.5, "muted", 600, SANS, "middle", ".09em"))
+    logs = [("PROGRESS.md", "folder log (one per project): active tasks, status changes, PRs, releases"),
+            ("plans/<task>/PROGRESS.md", "task log (one per task): work per step, DECISION lines, Next")]
+    fw = max(len(f) for f, _ in logs) * 7.2 + 18
+    total = fw + 12 + max(len(d) for _, d in logs) * 6.6
+    x0 = (W - total) / 2
+    for j, (f, d) in enumerate(logs):
+        fy = ky + 18 + j * 34
+        out.append(f'<rect x="{x0 + fw - (len(f) * 7.2 + 18)}" y="{fy}" width="{len(f) * 7.2 + 18}" height="24" rx="6" fill="{{soft}}"/>')
+        out.append(text(x0 + fw - 9, fy + 16.5, f, 12, "fg", 500, MONO, "end"))  # names right-aligned to the descriptions
+        out.append(text(x0 + fw + 12, fy + 16.5, d, 12.5, "muted"))
+    # any time: check by hand, or change the plan
+    ay = ky + 18 + 2 * 34 + 40
+    out.append(text(W / 2, ay, "ANY TIME", 11.5, "muted", 600, SANS, "middle", ".09em"))
+    sy = ay + 18
+    sb, ws = chip(0, sy, "/sandbox")
+    note1 = "check by hand"
+    tag = "change the plan"
+    wt = len(tag) * 7.4 + 28
+    total = ws + 10 + len(note1) * 6.6 + 48 + wt
+    x0 = (W - total) / 2
+    out.append(f'<g transform="translate({x0} 0)">{sb}</g>')
+    x1 = x0 + ws + 10
+    out.append(text(x1, sy + 16.5, note1, 12.5, "muted"))
+    x2 = x1 + len(note1) * 6.6 + 48
+    out.append(f'<rect x="{x2}" y="{sy - 2}" width="{wt}" height="28" rx="14" fill="{{soft}}"/>')
+    out.append(text(x2 + wt / 2, sy + 16.5, tag, 13, "fg", 400, SANS, "middle"))
+    return W, sy + 26, ("The life of a task: start a plan, shape it, finalize it, build it in runs, close it; "
+                        "what you do and what you follow on GitHub at each stage."), out
 
 
 def runs():
