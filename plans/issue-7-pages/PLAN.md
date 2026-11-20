@@ -28,6 +28,7 @@ Out of scope: a Markdown copy of the page; a custom domain; a Pages workflow in 
 - The examples folded in as a section: the five-day story, How the work lands on GitHub, the four cases. The `#commands` link points to the page's own Commands section.
 - A short nav at the top that jumps to the sections. The look, palette and dark mode of `examples.html`; no JavaScript.
 - Delete `docs/examples.html` (never public, so no link to keep).
+- Done when every README section and every examples section is on the page, the nav links work, and it reads well in light and dark mode and at phone width.
 - **Stop:** the user opens the page locally and judges it, before step 3 links to it.
 
 ### 3. README, notes, checks
@@ -39,7 +40,8 @@ Out of scope: a Markdown copy of the page; a custom domain; a Pages workflow in 
 ### 4. Turn on Pages
 - `gh api -X POST repos/giulianonetto/research-workflow/pages -f 'source[branch]=main' -f 'source[path]=/docs'` (outward-facing: Claude asks first; or the user does it in Settings → Pages).
 - The site is built from `main`, so the page goes live when the branch is merged.
-- **Stop:** review the branch and open the PR into main; after the merge, open the site in light and dark mode, on a phone width too, and check the README links.
+- After the merge: open the site in light and dark mode and at phone width, and check the README links.
+- **Stop:** review the branch and open the PR into main
 
 ## Open questions
 1. If something must go from old commits: rewrite history (`git filter-repo`, then force-push `main` and the tags; the `v0.2.0`/`v0.3.0` tags and old PR links change), or start the public repo from a fresh history. Plan assumes nothing yet: decided after the step 1 report, and it may add a step.
