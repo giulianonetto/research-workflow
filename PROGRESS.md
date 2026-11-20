@@ -8,6 +8,13 @@
 
 Times are local.
 
+## 2026-11-20: figure and README touch-ups
+### Next
+- [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 08:41: figure colors, README edits
+- `docs/figures.py`: no beige: command chips in dark mode are slate (were cream), the light GitHub lane and file chips are cool grey; the "every session" middle box says "plan or build" (was "work on the plan"), because a session can also build steps; the "you" box under Shape it says "Answer questions, improve the plan." because the user also edits the plan, not only answers; command chips and log file names use the code font a bit bigger and less bold (13 px, weight 500; was 12 px bold), because the small bold letters were hard on the eyes (user picked it from four versions).
+- README (by hand): `gh auth` line for a private repo removed from the Claude Code install; the Development summary is bold.
+
 ## 2026-11-19: README figure shows you and GitHub
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).

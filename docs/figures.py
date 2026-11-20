@@ -16,12 +16,12 @@ PAD = 24  # empty space under each figure: GitHub puts no margin under an image
 
 # <status> is the solid color, <status>_ink the text on it
 THEMES = {
-    "light": dict(fg="#1c2233", muted="#596173", line="#d3d8e0", card="#ffffff", soft="#f3f1ea", arrow="#1c2233",
+    "light": dict(fg="#1c2233", muted="#596173", line="#d3d8e0", card="#ffffff", soft="#f0f2f5", arrow="#1c2233",
                   cmd_bg="#1c2233", cmd_fg="#ffffff", you="#cf4527", you_ink="#ffffff", you_bg="#fdece7",
                   drafting="#e3a400", drafting_ink="#1c2233", planned="#2b59c3", planned_ink="#ffffff",
                   inprog="#0d8a69", inprog_ink="#ffffff", done="#596173", done_ink="#ffffff"),
     "dark": dict(fg="#eceff4", muted="#a2a9b7", line="#363c48", card="#151a21", soft="#1c2129", arrow="#eceff4",
-                 cmd_bg="#f1ecdf", cmd_fg="#151a21", you="#ff7d5e", you_ink="#0d1117", you_bg="#36201b",
+                 cmd_bg="#2c3547", cmd_fg="#f2f4f8", you="#ff7d5e", you_ink="#0d1117", you_bg="#36201b",
                  drafting="#f2b632", drafting_ink="#0d1117", planned="#7aa2ff", planned_ink="#0d1117",
                  inprog="#36c79b", inprog_ink="#0d1117", done="#a2a9b7", done_ink="#0d1117"),
 }
@@ -57,7 +57,7 @@ def icon(name, x, y, color, size=24):
 
 
 def chip_width(label, kind):
-    return len(label) * 7.2 + 18 if kind == "cmd" else len(label) * 7.4 + 18
+    return len(label) * 7.8 + 20 if kind == "cmd" else len(label) * 7.4 + 18
 
 
 def chip(x, y, label, kind="cmd"):
@@ -65,7 +65,7 @@ def chip(x, y, label, kind="cmd"):
     w = chip_width(label, kind)
     if kind == "cmd":
         return (f'<rect x="{x}" y="{y}" width="{w}" height="24" rx="4" fill="{{cmd_bg}}"/>'
-                + text(x + w / 2, y + 16.5, label, 12, "cmd_fg", 600, MONO, "middle")), w
+                + text(x + w / 2, y + 16.5, label, 13, "cmd_fg", 500, MONO, "middle")), w
     return (f'<rect x="{x}" y="{y}" width="{w}" height="24" rx="4" fill="{{you}}"/>'
             + text(x + w / 2, y + 16.5, label, 12.5, "you_ink", 700, SANS, "middle")), w
 
@@ -109,7 +109,7 @@ def flow():
         ("inprog", "Build", "/implement-next", "code", ["Claude builds and", "reviews each step,", "up to the next stop."], "one run per stop"),
         ("done", "Close", "/progress", "merge", ["Claude reviews the", "branch, opens the PR,", "then marks it done."], None),
     ]
-    you = [["Approve the draft."], ["Answer questions."], ["Approve the plan", "and stopping points."],
+    you = [["Approve the draft."], ["Answer questions,", "improve the plan."], ["Approve the plan", "and stopping points."],
            ["Look at each stop,", "check with /sandbox."], ["Review + merge PR."]]
     # a cell is its lines, or (number of columns, lines) when it spans several stages
     github = [(2, ["Issue opened → task branch pushed → plan link.", "Plan updates committed to the task branch."]),
@@ -185,7 +185,7 @@ def flow():
     for d in (x0 + wl + 10, mx + mid_w + 10):
         out.append(f'<line x1="{d}" y1="{ry + 12}" x2="{d + 40}" y2="{ry + 12}" stroke="{{muted}}" stroke-width="2" stroke-dasharray="4 5"/>')
     out.append(box(mx, ry - 2, mid_w, 28))
-    out.append(text(mx + mid_w / 2, ry + 16.5, "work on the plan", 13, "fg", 500, SANS, "middle"))
+    out.append(text(mx + mid_w / 2, ry + 16.5, "plan or build", 13, "fg", 500, SANS, "middle"))
     rx = mx + mid_w + 60
     out.append(f'<g transform="translate({rx} 0)">{right}</g>')
     out.append(text(rx + wr / 2, ry + 44, "log it, same commit", 12.5, "muted", 400, SANS, "middle"))
@@ -194,14 +194,14 @@ def flow():
     out.append(heading(W / 2, ky, "Record keeping"))
     logs = [("PROGRESS.md", "folder log (one per project): active tasks, status changes, PRs, releases"),
             ("plans/<task>/PROGRESS.md", "task log (one per task): work per step, DECISION lines, Next")]
-    fw = max(len(f) for f, _ in logs) * 7.2 + 18
+    fw = max(len(f) for f, _ in logs) * 7.8 + 20
     total = fw + 12 + max(len(d) for _, d in logs) * 6.6
     x0 = (W - total) / 2
     for j, (f, d) in enumerate(logs):
         fy = ky + 16 + j * 34
-        w = len(f) * 7.2 + 18
+        w = len(f) * 7.8 + 20
         out.append(f'<rect x="{x0 + fw - w}" y="{fy}" width="{w}" height="24" rx="4" fill="{{soft}}"/>')
-        out.append(text(x0 + fw - 9, fy + 16.5, f, 12, "fg", 600, MONO, "end"))  # names right-aligned to the descriptions
+        out.append(text(x0 + fw - 10, fy + 16.5, f, 13, "fg", 500, MONO, "end"))  # names right-aligned to the descriptions
         out.append(text(x0 + fw + 12, fy + 16.5, d, 12.5, "muted"))
     # any time: check by hand, or change the plan
     ay = ky + 16 + 2 * 34 + 38

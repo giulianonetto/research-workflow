@@ -12,7 +12,7 @@
 <text x="15" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#e3a400" text-anchor="start">1</text>
 <text x="38" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Start a plan</text>
 <g transform="translate(134 71) scale(1.000)" fill="none" stroke="#e3a400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1v.1h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3z"/></g>
-<rect x="16" y="112" width="82.8" height="24" rx="4" fill="#1c2233"/><text x="57.4" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/new-plan</text>
+<rect x="16" y="112" width="90.2" height="24" rx="4" fill="#1c2233"/><text x="61.1" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/new-plan</text>
 <text x="16" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Brainstorm and draft.</text>
 <text x="16" y="181" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11.5" font-weight="500" fill="#596173" text-anchor="start">tmp/ → plans/&lt;task&gt;/</text>
 <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">+ a PROGRESS.md log</text>
@@ -20,7 +20,7 @@
 <text x="207" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#e3a400" text-anchor="start">2</text>
 <text x="230" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Shape it</text>
 <g transform="translate(326 71) scale(1.000)" fill="none" stroke="#e3a400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/><path d="M10 9.2a2 2 0 1 1 2.9 1.8c-.6.3-.9.8-.9 1.4"/><circle cx="12" cy="14.3" r=".4"/></g>
-<rect x="208" y="112" width="97.2" height="24" rx="4" fill="#1c2233"/><text x="256.6" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/grill-plan</text>
+<rect x="208" y="112" width="105.8" height="24" rx="4" fill="#1c2233"/><text x="260.9" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/grill-plan</text>
 <text x="208" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Refine the plan</text>
 <text x="208" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">with feedback.</text>
 <line x1="208" y1="218" x2="348" y2="218" stroke="#d3d8e0" stroke-dasharray="3 3"/>
@@ -31,7 +31,7 @@
 <text x="399" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#e3a400" text-anchor="start">3</text>
 <text x="422" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Finalize</text>
 <g transform="translate(518 71) scale(1.000)" fill="none" stroke="#e3a400" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 9.5l1.5 1.5 2.5-2.5M14.5 10h2M8 15.5l1.5 1.5 2.5-2.5M14.5 16h2"/></g>
-<rect x="400" y="112" width="118.8" height="24" rx="4" fill="#1c2233"/><text x="459.4" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/finalize-plan</text>
+<rect x="400" y="112" width="129.2" height="24" rx="4" fill="#1c2233"/><text x="464.6" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/finalize-plan</text>
 <text x="400" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Checks plan is ready</text>
 <text x="400" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">to build: one commit</text>
 <text x="400" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">per step/sub-step.</text>
@@ -40,7 +40,7 @@
 <text x="651" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#0d8a69" text-anchor="start">4</text>
 <text x="674" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Build</text>
 <g transform="translate(770 71) scale(1.000)" fill="none" stroke="#0d8a69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15"/></g>
-<rect x="652" y="112" width="126.0" height="24" rx="4" fill="#1c2233"/><text x="715.0" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/implement-next</text>
+<rect x="652" y="112" width="137.0" height="24" rx="4" fill="#1c2233"/><text x="720.5" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/implement-next</text>
 <text x="652" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Claude builds and</text>
 <text x="652" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">reviews each step,</text>
 <text x="652" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">up to the next stop.</text>
@@ -52,7 +52,7 @@
 <text x="843" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#596173" text-anchor="start">5</text>
 <text x="866" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Close</text>
 <g transform="translate(962 71) scale(1.000)" fill="none" stroke="#596173" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="13" r="2"/><path d="M6 7v10M6 7c0 4.5 5 6 10 6"/></g>
-<rect x="844" y="112" width="82.8" height="24" rx="4" fill="#1c2233"/><text x="885.4" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/progress</text>
+<rect x="844" y="112" width="90.2" height="24" rx="4" fill="#1c2233"/><text x="889.1" y="128.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/progress</text>
 <text x="844" y="162" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Claude reviews the</text>
 <text x="844" y="181" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">branch, opens the PR,</text>
 <text x="844" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">then marks it done.</text>
@@ -64,7 +64,8 @@
 <text x="16" y="319" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">Approve the draft.</text>
 <rect x="192" y="294" width="172" height="59" rx="4" fill="#fdece7"/>
 <rect x="192" y="294" width="4" height="59" fill="#cf4527"/>
-<text x="208" y="319" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">Answer questions.</text>
+<text x="208" y="319" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">Answer questions,</text>
+<text x="208" y="338" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">improve the plan.</text>
 <rect x="384" y="294" width="172" height="59" rx="4" fill="#fdece7"/>
 <rect x="384" y="294" width="4" height="59" fill="#cf4527"/>
 <text x="400" y="319" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">Approve the plan</text>
@@ -78,39 +79,39 @@
 <text x="844" y="319" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="start">Review + merge PR.</text>
 <g transform="translate(0 372) scale(0.750)" fill="none" stroke="#596173" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="6" r="2"/><path d="M6 7v10M18 8c0 5-12 3-12 9"/></g>
 <text x="24" y="387" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#596173" text-anchor="start">On GitHub</text>
-<rect x="0" y="397" width="364" height="59" rx="4" fill="#f3f1ea"/>
+<rect x="0" y="397" width="364" height="59" rx="4" fill="#f0f2f5"/>
 <text x="16" y="422" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">Issue opened → task branch pushed → plan link.</text>
 <text x="16" y="441" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">Plan updates committed to the task branch.</text>
-<rect x="384" y="397" width="172" height="59" rx="4" fill="#f3f1ea"/>
+<rect x="384" y="397" width="172" height="59" rx="4" fill="#f0f2f5"/>
 <text x="400" y="422" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">Checklist: one box</text>
 <text x="400" y="441" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">per step.</text>
-<rect x="636" y="397" width="172" height="59" rx="4" fill="#f3f1ea"/>
+<rect x="636" y="397" width="172" height="59" rx="4" fill="#f0f2f5"/>
 <text x="652" y="422" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">Reviewed commit +</text>
 <text x="652" y="441" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">box ticked per step.</text>
-<rect x="828" y="397" width="172" height="59" rx="4" fill="#f3f1ea"/>
+<rect x="828" y="397" width="172" height="59" rx="4" fill="#f0f2f5"/>
 <text x="844" y="422" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">PR into main</text>
 <text x="844" y="441" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#1c2233" text-anchor="start">closes the issue.</text>
 <line x1="596.0" y1="34" x2="596.0" y2="78" stroke="#2b59c3" stroke-width="2" stroke-dasharray="4 5"/>
 <line x1="596.0" y1="102" x2="596.0" y2="452" stroke="#2b59c3" stroke-width="2" stroke-dasharray="4 5"/>
 <text x="500.0" y="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1c2233" text-anchor="middle">Every session</text>
-<g transform="translate(249.79999999999998 0)"><rect x="0" y="516" width="147.6" height="24" rx="4" fill="#1c2233"/><text x="73.8" y="532.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/project-refresher</text></g>
-<text x="323.59999999999997" y="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="middle">where was I?</text>
-<line x1="407.4" y1="528" x2="447.4" y2="528" stroke="#596173" stroke-width="2" stroke-dasharray="4 5"/>
-<line x1="617.4" y1="528" x2="657.4" y2="528" stroke="#596173" stroke-width="2" stroke-dasharray="4 5"/>
-<rect x="458.15" y="514.75" width="148.5" height="26.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/>
-<text x="532.4" y="532.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="middle">work on the plan</text>
-<g transform="translate(667.4 0)"><rect x="0" y="516" width="82.8" height="24" rx="4" fill="#1c2233"/><text x="41.4" y="532.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/progress</text></g>
-<text x="708.8" y="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="middle">log it, same commit</text>
+<g transform="translate(239.7 0)"><rect x="0" y="516" width="160.4" height="24" rx="4" fill="#1c2233"/><text x="80.2" y="532.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/project-refresher</text></g>
+<text x="319.9" y="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="middle">where was I?</text>
+<line x1="410.1" y1="528" x2="450.1" y2="528" stroke="#596173" stroke-width="2" stroke-dasharray="4 5"/>
+<line x1="620.1" y1="528" x2="660.1" y2="528" stroke="#596173" stroke-width="2" stroke-dasharray="4 5"/>
+<rect x="460.85" y="514.75" width="148.5" height="26.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/>
+<text x="535.1" y="532.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="middle">plan or build</text>
+<g transform="translate(670.1 0)"><rect x="0" y="516" width="90.2" height="24" rx="4" fill="#1c2233"/><text x="45.1" y="532.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/progress</text></g>
+<text x="715.2" y="560" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="middle">log it, same commit</text>
 <text x="500.0" y="606" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1c2233" text-anchor="middle">Record keeping</text>
-<rect x="251.30000000000007" y="622" width="97.2" height="24" rx="4" fill="#f3f1ea"/>
-<text x="339.50000000000006" y="638.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#1c2233" text-anchor="end">PROGRESS.md</text>
-<text x="360.50000000000006" y="638.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">folder log (one per project): active tasks, status changes, PRs, releases</text>
-<rect x="157.70000000000005" y="656" width="190.8" height="24" rx="4" fill="#f3f1ea"/>
-<text x="339.50000000000006" y="672.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#1c2233" text-anchor="end">plans/&lt;task&gt;/PROGRESS.md</text>
-<text x="360.50000000000006" y="672.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">task log (one per task): work per step, DECISION lines, Next</text>
+<rect x="250.89999999999998" y="622" width="105.8" height="24" rx="4" fill="#f0f2f5"/>
+<text x="346.7" y="638.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#1c2233" text-anchor="end">PROGRESS.md</text>
+<text x="368.7" y="638.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">folder log (one per project): active tasks, status changes, PRs, releases</text>
+<rect x="149.5" y="656" width="207.2" height="24" rx="4" fill="#f0f2f5"/>
+<text x="346.7" y="672.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#1c2233" text-anchor="end">plans/&lt;task&gt;/PROGRESS.md</text>
+<text x="368.7" y="672.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">task log (one per task): work per step, DECISION lines, Next</text>
 <text x="500.0" y="728" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1c2233" text-anchor="middle">Any time</text>
-<g transform="translate(320.8 0)"><rect x="0" y="744" width="75.6" height="24" rx="4" fill="#1c2233"/><text x="37.8" y="760.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/sandbox</text></g>
-<text x="406.4" y="760.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">check by hand</text>
-<rect x="540.95" y="742.75" width="137.5" height="26.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/>
-<text x="609.7" y="760.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="middle">change the plan</text>
+<g transform="translate(317.4 0)"><rect x="0" y="744" width="82.4" height="24" rx="4" fill="#1c2233"/><text x="41.2" y="760.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="500" fill="#ffffff" text-anchor="middle">/sandbox</text></g>
+<text x="409.79999999999995" y="760.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="400" fill="#596173" text-anchor="start">check by hand</text>
+<rect x="544.3499999999999" y="742.75" width="137.5" height="26.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/>
+<text x="613.0999999999999" y="760.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="500" fill="#1c2233" text-anchor="middle">change the plan</text>
 </svg>

@@ -42,7 +42,6 @@ Each `/implement-next` asks once, then builds up to the next **Stop** in the pla
 <summary>Claude Code without Claude Desktop</summary>
 
 ```bash
-gh auth login && gh auth setup-git     # the repo is private
 claude plugin install research-workflow --marketplace giulianonetto/research-workflow
 ```
 
@@ -94,7 +93,7 @@ This project is heavily inspired by Matt Pocock's [mattpocock-skills](https://gi
 ## Development
 
 <details>
-<summary>For work on this repo</summary>
+<summary><b>Working on this repo</b></summary>
 
 This repo uses its own workflow: see [PROGRESS.md](PROGRESS.md) and [plans/](plans/). Every design decision is a DECISION line.
 
