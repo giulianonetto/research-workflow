@@ -88,7 +88,7 @@ for f in SKILLS.glob("*/SKILL.md"):
             err(f"{f.relative_to(ROOT)}: link to missing file {target}")
 
 # 4. stale names (the same files as check 5)
-DOCS = list(SKILLS.rglob("*.md")) + [ROOT / "docs/examples.html", ROOT / "README.md", ROOT / "CLAUDE.md"]
+DOCS = list(SKILLS.rglob("*.md")) + [ROOT / "docs/index.html", ROOT / "README.md", ROOT / "CLAUDE.md"]
 for f in DOCS:
     rel = str(f.relative_to(ROOT))
     text = f.read_text()
