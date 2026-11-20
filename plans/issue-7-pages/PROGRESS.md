@@ -2,14 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
 
 ## Current state (updated 2026-11-20)
-- `in-progress`: steps 1-4 done. The new repo is public; the old one is `research-workflow-old` (private, archived).
-- `docs/index.html` is the one page; the README links to the site; `docs/.nojekyll` added.
-- Next: step 5, turn on Pages, then review the branch and open the PR into main.
+- `in-progress`: all 5 steps done. The new repo is public; the old one is `research-workflow-old` (private, archived).
+- Pages is on (`main`, `/docs`); the site goes live when the PR into main is merged.
+- Waiting on the user: review and merge the PR into main.
 
 ## 2026-11-20: plan started
 Started from the user's question on how to show `docs/examples.html` on GitHub.
 ### Next
-- `PLAN.md` step 5: turn on Pages (`gh api -X POST repos/giulianonetto/research-workflow/pages`), review the branch, open the PR into main.
+- The user reviews and merges the PR into main. After the merge: open https://giulianonetto.github.io/research-workflow/ in light and dark mode and at phone width, check the README links, then `/progress` "merged, mark done".
+### 16:02: step 5: Pages on
+- Pages turned on with `gh api` (source `main`, `/docs`, HTTPS enforced). Until the merge, `main` has no `docs/index.html`, so the site root gives 404.
 ### 16:01: step 4: README, notes, checks
 - README: a site link under the intro; the "More" line links to the site's example instead of the download note. `docs/.nojekyll`; `CLAUDE.md` names `docs/index.html`. The `check_skills.py` bullet was done in step 3.
 ### 15:33: step 3: one page with everything
