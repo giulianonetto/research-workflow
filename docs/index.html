@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Workflow Examples</title>
+<title>research-workflow</title>
+<meta name="description" content="Claude skills for research repos: plan with Claude over days, build step by step, stop where you want to look.">
 <style>
-/* in the look of the README figures (docs/figures.py): one story from idea to merged PR, then four short cases.
-   Details sit in <details class="more">, closed by default. */
+/* The project site (GitHub Pages serves docs/ from main). In the look of the README figures (docs/figures.py).
+   Keep it in step with the skills and README.md. Details sit in <details class="more">, closed by default. No JavaScript. */
 :root {
   --bg:#ffffff; --fg:#1c2233; --muted:#596173; --line:#d3d8e0; --card:#ffffff; --soft:#f0f2f5; --code:#e9ecf1;
   --cmd-bg:#1c2233; --cmd-fg:#ffffff; --link:#0a7558;
@@ -24,18 +25,54 @@
   }
 }
 * { box-sizing:border-box }
+html { scroll-behavior:smooth }
 body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans); font-size:15px; line-height:1.55; padding:56px 16px 72px }
 main { max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:56px }
+section { scroll-margin-top:24px; display:flex; flex-direction:column; gap:14px }
+main > *, section > * { min-width:0 } /* wide figures scroll in their box, not the page */
 h1, h2, h3, p { margin:0 }
 a { color:var(--link) }
-code { font-family:var(--mono); font-size:.88em; background:var(--code); padding:1px 5px; border-radius:4px }
+code { font-family:var(--mono); font-size:.88em; background:var(--code); padding:1px 5px; border-radius:4px; overflow-wrap:break-word }
 pre { font-family:var(--mono); font-size:13px; line-height:1.55; background:var(--soft); border-radius:4px; padding:10px 14px; margin:0; overflow-x:auto; white-space:pre }
 
-header { display:flex; flex-direction:column; gap:12px }
-h1 { font-size:2.1rem; font-weight:700; letter-spacing:-.015em }
-.lede { color:var(--muted); font-size:1.05rem }
-.key { display:flex; flex-wrap:wrap; gap:8px 22px; font-size:13.5px; color:var(--muted); align-items:center }
-.key > span { display:inline-flex; gap:6px; align-items:center }
+/* top: name, one line, install box, nav */
+header { display:flex; flex-direction:column; gap:18px }
+.title { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap }
+h1 { font-size:2.1rem; font-weight:700; letter-spacing:-.015em; font-family:var(--mono) }
+.gh { font-size:14px; font-weight:600 }
+.lede { font-size:1.1rem }
+.lede b { font-weight:700 }
+.install { border:1.5px solid var(--line); border-left:6px solid var(--inprog); border-radius:4px; background:var(--card); padding:14px 18px; display:flex; flex-direction:column; gap:8px; font-size:14.5px }
+.install-h { font-weight:700; font-size:13px; letter-spacing:.02em; color:var(--inprog) }
+.install pre { font-size:14px; font-weight:600; background:var(--code) }
+nav { display:flex; flex-wrap:wrap; gap:8px; font-size:13.5px }
+nav a { text-decoration:none; color:var(--fg); background:var(--soft); border:1px solid var(--line); border-radius:4px; padding:3px 10px; white-space:nowrap }
+nav a:hover { border-color:var(--fg) }
+
+h2 { font-size:1.45rem; font-weight:700 }
+.scenario { color:var(--muted); margin-top:-6px }
+
+/* why use it: four cards */
+.why { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px }
+.why > div { border:1.5px solid var(--line); border-top:5px solid var(--c); border-radius:4px; background:var(--card); padding:14px 16px; display:flex; gap:12px; align-items:flex-start }
+.why svg { flex:none; width:26px; height:26px; stroke:var(--c); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; margin-top:2px }
+.why b { display:block; font-size:15.5px }
+.why span { color:var(--muted); font-size:14px }
+
+/* the README figures: light and dark SVGs; scroll sideways on a phone instead of shrinking the text */
+.fig { overflow-x:auto }
+.fig img { display:block; width:100%; min-width:680px; height:auto }
+
+/* get started */
+ol.start { margin:0; padding-left:22px; display:flex; flex-direction:column; gap:10px }
+ol.start li::marker { font-weight:700 }
+
+/* commands table */
+table { border-collapse:collapse; width:100%; font-size:14.5px }
+td { padding:7px 10px; border-top:1px solid var(--line); vertical-align:top }
+tr:first-child td { border-top:0 }
+td:first-child { width:1%; white-space:nowrap }
+.note { font-size:14.5px }
 
 .chip { font-family:var(--mono); font-size:13px; font-weight:500; padding:2px 9px; border-radius:4px; white-space:nowrap; display:inline-block; background:var(--cmd-bg); color:var(--cmd-fg) }
 .you-tag { font-size:13px; font-weight:700; padding:2px 9px; border-radius:4px; white-space:nowrap; display:inline-block; background:var(--you); color:var(--you-ink) }
@@ -46,12 +83,11 @@ h1 { font-size:2.1rem; font-weight:700; letter-spacing:-.015em }
 .st.inprog { background:var(--inprog); color:var(--inprog-ink) }
 .st.done { background:var(--done); color:var(--done-ink) }
 .status { font-size:13.5px; color:var(--muted); display:flex; gap:6px; align-items:center; flex-wrap:wrap }
-
-h2 { font-size:1.45rem; font-weight:700 }
-.scenario { color:var(--muted); margin-top:6px }
+.key { display:flex; flex-wrap:wrap; gap:8px 22px; font-size:13.5px; color:var(--muted); align-items:center }
+.key > span { display:inline-flex; gap:6px; align-items:center; flex-wrap:wrap }
 
 /* the story: a line down the left, a marker for each day, a row for each step */
-.story { list-style:none; margin:24px 0 0; padding:0 0 0 22px; border-left:2px solid var(--line); display:flex; flex-direction:column; gap:14px }
+.story { list-style:none; margin:10px 0 0; padding:0 0 0 22px; border-left:2px solid var(--line); display:flex; flex-direction:column; gap:14px }
 .day { position:relative; margin:18px 0 2px; font-weight:700; font-size:15px }
 .day:first-child { margin-top:0 }
 .day::before { content:""; position:absolute; left:-30px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--bg); border:3px solid var(--fg) }
@@ -65,7 +101,7 @@ h2 { font-size:1.45rem; font-weight:700 }
 .say.u b { color:var(--you) }
 .say.c { background:var(--soft) }
 
-details.more summary { cursor:pointer; color:var(--link); font-size:13.5px; font-weight:600; width:max-content }
+details.more summary { cursor:pointer; color:var(--link); font-size:13.5px; font-weight:600; width:max-content; max-width:100% }
 details.more[open] summary { margin-bottom:8px }
 details.more > div { display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted) }
 details.more ul { margin:0; padding-left:20px }
@@ -81,7 +117,7 @@ ul.list { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:
 .ann { font-size:12.5px; color:var(--muted) }
 
 /* how the work lands on GitHub */
-.graph { margin-top:18px; overflow-x:auto }
+.graph { overflow-x:auto }
 .graph svg { display:block; width:100%; min-width:640px; height:auto }
 .graph .t { fill:var(--fg); font:13px var(--sans) }
 .graph .b { font-weight:700 }
@@ -92,49 +128,149 @@ ul.list { margin:0; padding-left:20px; display:flex; flex-direction:column; gap:
 .n-task { fill:var(--inprog) } .n-sub { fill:var(--planned) }
 .n-merge { fill:var(--bg); stroke:var(--fg); stroke-width:3 }
 .stop { fill:var(--you) } .stop-t { fill:var(--you-ink); font:700 12px var(--sans) }
-.rules { list-style:none; margin:18px 0 0; padding:0; display:grid; grid-template-columns:max-content minmax(0,1fr); gap:8px 16px; font-size:14.5px }
+.rules { list-style:none; margin:4px 0 0; padding:0; display:grid; grid-template-columns:max-content minmax(0,1fr); gap:8px 16px; font-size:14.5px }
 .rules li { display:contents }
 .rules b { font-weight:700 }
 .rules span { color:var(--muted) }
 
 /* other ways in */
-.cases { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:20px; align-items:start }
+.cases { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:6px; align-items:start }
 .case { border:1.5px solid var(--line); border-top:5px solid var(--fg); border-radius:4px; background:var(--card); padding:16px 18px; display:flex; flex-direction:column; gap:10px }
-.case.wide { grid-column:1 / -1 }
 .case h3 { font-size:1.08rem; font-weight:700 }
 .case > p { color:var(--muted); font-size:14px; margin-top:-6px }
 .case ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px }
 .case li { font-size:14px }
 .case li > span:first-child { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:5px }
 .case li pre { margin-top:6px }
-.case h4 { margin:6px 0 0; font-size:14px; color:var(--fg) }
 
-.foot { text-align:center; font-size:14px; color:var(--muted) }
+footer { border-top:1.5px solid var(--line); padding-top:20px; display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--muted) }
+footer .links { display:flex; flex-wrap:wrap; gap:6px 18px; font-weight:600 }
 
 @media (max-width:700px) {
   body { padding-top:40px }
-  h1 { font-size:1.75rem }
+  h1 { font-size:1.6rem }
+  .why, .cases { grid-template-columns:minmax(0,1fr) }
   .step { grid-template-columns:minmax(0,1fr) }
   .who { flex-direction:row; flex-wrap:wrap; align-items:center }
-  .cases { grid-template-columns:minmax(0,1fr) }
+  .rules { grid-template-columns:minmax(0,1fr); gap:2px }
+  .rules span { margin-bottom:8px }
 }
 </style>
 </head><body>
 <main>
 
 <header>
-  <h1>Workflow examples</h1>
-  <p class="lede">One task, from idea to merged PR. Then four other ways to start.</p>
+  <div class="title">
+    <h1>research-workflow</h1>
+    <a class="gh" href="https://github.com/giulianonetto/research-workflow">GitHub repo →</a>
+  </div>
+  <p class="lede"><b>Claude skills for research repos.</b> You plan with Claude over days, and every session picks up where the last one stopped. Claude builds the plan step by step and stops where you said you want to look.</p>
+  <div class="install">
+    <div class="install-h">INSTALL</div>
+    <p>In Claude Desktop, open <b>Customize → Plugins → Add marketplace</b> and enter:</p>
+    <pre>giulianonetto/research-workflow</pre>
+    <p>Then add the <b>research-workflow</b> plugin. <a href="#start">Claude Code, and the next steps</a></p>
+  </div>
+  <nav aria-label="Sections">
+    <a href="#why">Why</a>
+    <a href="#task">A task</a>
+    <a href="#runs">Build runs</a>
+    <a href="#start">Get started</a>
+    <a href="#commands">Commands</a>
+    <a href="#example">Example</a>
+    <a href="#github">On GitHub</a>
+    <a href="#cases">Other ways to start</a>
+    <a href="#files">What it writes</a>
+  </nav>
+</header>
+
+<section id="why" aria-label="Why use it">
+  <h2>Why use it</h2>
+  <div class="why">
+    <div style="--c:var(--planned)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+      <div><b>Pick up where you left off</b><span>even after weeks.</span></div>
+    </div>
+    <div style="--c:var(--drafting)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+      <div><b>Keep every decision</b><span>with its reason, one <code>grep</code> away.</span></div>
+    </div>
+    <div style="--c:var(--you)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M8 12h8"/></svg>
+      <div><b>Decide where Claude stops</b><span>Between stops, it builds alone.</span></div>
+    </div>
+    <div style="--c:var(--inprog)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l2 2 3-3M3 12l2 2 3-3M3 18l2 2 3-3"/><path d="M12 7h9M12 13h9M12 19h9"/></svg>
+      <div><b>Review in small pieces</b><span>One commit per step, one box per step in the GitHub issue, one PR per big step.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="task" aria-label="The life of a task">
+  <h2>The life of a task</h2>
+  <div class="fig">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="img/flow-dark.svg">
+      <img src="img/flow-light.svg" width="1004" height="798" alt="The life of a task: start a plan, shape it, finalize it, build it in runs, close it. The draft lives in tmp/ until you approve it, then moves to plans/ on a task branch, linked from the issue. Finalize checks that every step is ready to build (one commit, or sub-steps) and becomes planned only after you approve the plan and its stops. Claude reviews each step before its commit and the whole branch before the PR; you review and merge the PR. Under each stage: what you do and what you see on GitHub. Every session starts with /project-refresher and ends with /progress. Record keeping: PROGRESS.md at the root, the folder log (one per project), logs active tasks, status changes, PRs and releases; plans/&lt;task&gt;/PROGRESS.md, the task log (one per task), logs the work of each step, its DECISION lines and what is next. Any time: /sandbox to check by hand, or change the plan.">
+    </picture>
+  </div>
+</section>
+
+<section id="runs" aria-label="How a build runs">
+  <h2>How a build runs</h2>
+  <div class="fig">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="img/runs-dark.svg">
+      <img src="img/runs-light.svg" width="1004" height="246" alt="A build in runs: /implement-next builds steps 1 and 2, then stops so you can look at the plots; run again, it builds steps 3 to 6 and stops for the review and the PR into main.">
+    </picture>
+  </div>
+  <p>Each <span class="chip">/implement-next</span> asks once, then builds up to the next <b>Stop</b> in the plan (at most 5 steps). It also stops early if a test fails or a question comes up that the plan does not answer. Claude pushes the task branch after each step: allow <code>git push</code> in Claude Code's <code>/permissions</code> to skip the prompt.</p>
+</section>
+
+<section id="start" aria-label="Get started">
+  <h2>Get started</h2>
+  <div class="fig">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="img/start-dark.svg">
+      <img src="img/start-light.svg" width="1004" height="184" alt="Get started: install the plugin, run /setup-workflow once per repo, then /new-plan for each task.">
+    </picture>
+  </div>
+  <ol class="start">
+    <li><b>Install.</b> In Claude Desktop, open <b>Customize → Plugins → Add marketplace</b> and enter <code>giulianonetto/research-workflow</code>. Then add the <b>research-workflow</b> plugin (connect GitHub if asked). Turn on <b>Sync automatically</b> to get updates.</li>
+    <li><b>Set up a repo</b> with <span class="chip">/setup-workflow</span>. After an update, run it again: it shows what changed.</li>
+    <li><b>Start a task:</b> say the idea, then <span class="chip">/new-plan</span>.</li>
+  </ol>
+  <details class="more"><summary>Claude Code without Claude Desktop</summary><div>
+<pre>claude plugin install research-workflow --marketplace giulianonetto/research-workflow</pre>
+    <p>Commands then carry the plugin's name: <code>/research-workflow:setup-workflow</code>. Install it one way only, or every command appears twice.</p>
+  </div></details>
+</section>
+
+<section id="commands" aria-label="Commands">
+  <h2>Commands</h2>
+  <table>
+    <tr><td><span class="chip">/project-refresher</span></td><td>Start of a session: "where was I? what is next?"</td></tr>
+    <tr><td><span class="chip">/project-refresher tasks</span></td><td>All tasks with their status</td></tr>
+    <tr><td><span class="chip">/new-plan</span></td><td>A new task</td></tr>
+    <tr><td><span class="chip">/grill-plan</span></td><td>Hard questions about a draft plan</td></tr>
+    <tr><td><span class="chip">/finalize-plan</span></td><td>The plan is ready to build</td></tr>
+    <tr><td><span class="chip">/implement-next</span></td><td>Build up to the next stop</td></tr>
+    <tr><td><span class="chip">/sandbox</span></td><td>Check something by hand</td></tr>
+    <tr><td><span class="chip">/progress</span></td><td>Log work, change a status (or say "log progress")</td></tr>
+  </table>
+  <p class="note">An <b>experiment</b> (try something out, end in an answer) is a task too: start it with <span class="chip">/new-plan exp</span>, and write it up with <span class="chip">/write-results</span> before you close it. <a href="#experiment">An example</a></p>
+  <p class="note">The plan can change at any time: just say what to change. All rules live in one file in your project, <code>plans/README.md</code>. All past decisions:</p>
+<pre>grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md</pre>
+</section>
+
+<section id="example" aria-label="One task, start to finish">
+  <h2>One task, start to finish</h2>
+  <p class="scenario">Your repo is set up. You have an idea: try a hurdle model for the zero-heavy taxa.</p>
   <div class="key">
     <span><span class="chip">/command</span> you type it</span>
     <span><span class="you-tag">You</span> you say or do it</span>
     <span><span class="st drafting">drafting</span><span class="st planned">planned</span><span class="st inprog">in progress</span><span class="st done">done</span> task status</span>
   </div>
-</header>
-
-<section aria-label="One task, start to finish">
-  <h2>One task, start to finish</h2>
-  <p class="scenario">Your repo is set up. You have an idea: try a hurdle model for the zero-heavy taxa.</p>
 
   <ol class="story">
     <li class="day">Day 1 <span>· start</span></li>
@@ -289,7 +425,7 @@ Next: decide how to model the zeros.</pre>
   </ul>
 </section>
 
-<section aria-label="Other ways to start">
+<section id="cases" aria-label="Other ways to start">
   <h2>Other ways to start</h2>
   <div class="cases">
 
@@ -333,7 +469,7 @@ Next: decide how to model the zeros.</pre>
       </div></details>
     </article>
 
-    <article class="case">
+    <article class="case" id="experiment">
       <h3>An experiment</h3>
       <p>Try something out, and end with an answer.</p>
       <ol>
@@ -369,7 +505,28 @@ $OUT = tmp/experiments/&lt;task&gt;/   not in git: everything else</pre>
   </div>
 </section>
 
-<p class="foot">All commands: <a href="https://github.com/giulianonetto/research-workflow#commands">the README</a>. All rules: <code>plans/README.md</code> in your project.</p>
+<section id="files" aria-label="What it writes in a project">
+  <h2>What it writes in a project</h2>
+<pre>your-project/
+├── CLAUDE.md              + a short workflow section
+├── README.md              + a short workflow section
+├── PROGRESS.md            the folder log: active tasks, status changes, PRs, releases
+└── plans/
+    ├── README.md          all the rules
+    └── &lt;task&gt;/
+        ├── PLAN.md        the plan: Goal, steps, stops
+        ├── PROGRESS.md    the task log: work, DECISION lines, Next
+        └── sandbox/       code for you to run and look at</pre>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="https://github.com/giulianonetto/research-workflow">GitHub repo</a>
+    <a href="https://github.com/giulianonetto/research-workflow/blob/main/CHANGELOG.md">Changelog</a>
+    <a href="https://github.com/giulianonetto/research-workflow#development">Working on this repo</a>
+  </div>
+  <p>Heavily inspired by Matt Pocock's <a href="https://github.com/mattpocock/skills">mattpocock-skills</a> (MIT License). <span class="chip">/grill-plan</span> and the Spec part of the review are adapted from it; see <a href="https://github.com/giulianonetto/research-workflow/blob/main/NOTICE">NOTICE</a>.</p>
+</footer>
 
 </main>
 </body></html>

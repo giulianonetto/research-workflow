@@ -2,14 +2,17 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
 
 ## Current state (updated 2026-11-20)
-- `in-progress`: steps 1-2 done. The history is rewritten and lives in a new private repo with the same name; the old one is `research-workflow-old` (private, archived).
-- Waiting on the user: check the new repo and make it public (step 2's Stop).
-- Then step 3: one page with everything (`docs/index.html`).
+- `in-progress`: steps 1-3 done. The new repo is public; the old one is `research-workflow-old` (private, archived).
+- `docs/index.html` is the one page (README content, figures, commands, the examples); `docs/examples.html` is deleted.
+- Waiting on the user: open the page locally and judge it (step 3's Stop). Then step 4: README links, `.nojekyll`, `CLAUDE.md`.
 
 ## 2026-11-20: plan started
 Started from the user's question on how to show `docs/examples.html` on GitHub.
 ### Next
-- The user checks https://github.com/giulianonetto/research-workflow and makes it public (Settings → General → Change visibility). Then `/implement-next` for `PLAN.md` step 3 (one page with everything, `docs/index.html`).
+- The user opens `docs/index.html` in a browser (light and dark mode, phone width) and judges it. Then `/implement-next` for `PLAN.md` step 4 (README, notes, checks).
+### 15:33: step 3: one page with everything
+- `docs/index.html`: the README's content, its three figures (light and dark), the commands, and the examples page folded in, with a section nav and the examples' look; footer with credits and links to the repo, changelog and Development. The wide figures scroll sideways in their box at phone width. `docs/examples.html` deleted.
+- Moved from step 4: `tests/check_skills.py` scans `docs/index.html`, because the check read the deleted page and would fail. The user made the new repo public before this step.
 ### 15:09: step 2: history cleaned, moved to a new repo
 - `git filter-repo` on all branches and tags (replace list outside the repo; one author, noreply email), pushed to a new private repo; issues #2, #3, #5, #7 moved with their numbers (placeholders #1, #4, #6); the release workflow made the three releases again; old repo renamed, archived; commit hashes in the logs updated.
 - Not in the plan: pushes went over SSH (the `gh` token has no `workflow` scope); the `v0.1.1` tag was pushed twice (the first push ran no workflow) and `v0.3.0` set back to Latest; the local branches already merged into `main` were deleted.
