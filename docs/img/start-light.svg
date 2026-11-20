@@ -1,26 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 1004 179" width="1004" height="179" role="img" aria-label="Get started: install the plugin, run /setup-workflow once per repo, then /new-plan for each task.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 1004 184" width="1004" height="184" role="img" aria-label="Get started: install the plugin, run /setup-workflow once per repo, then /new-plan for each task.">
 <title>Get started: install the plugin, run /setup-workflow once per repo, then /new-plan for each task.</title>
-<rect x="0.5" y=".5" width="289" height="150" rx="12" fill="#ffffff" stroke="#dfe4e1"/>
-<circle cx="30" cy="32" r="14" fill="#e6f1ea"/>
-<text x="30" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2f6b4f" text-anchor="middle">1</text>
-<text x="52" y="37.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1b2420" text-anchor="start">Install</text>
-<rect x="16" y="58" width="124.39999999999999" height="24" rx="6" fill="#eeeaf6"/><text x="78.19999999999999" y="74.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#5b4a8a" text-anchor="middle" letter-spacing=".05em">CLAUDE DESKTOP</text>
-<text x="16" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">Customize → Plugins:</text>
-<text x="16" y="131" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">add the plugin once.</text>
-<rect x="355.5" y=".5" width="289" height="150" rx="12" fill="#ffffff" stroke="#dfe4e1"/>
-<circle cx="385" cy="32" r="14" fill="#e6f1ea"/>
-<text x="385" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2f6b4f" text-anchor="middle">2</text>
-<text x="407" y="37.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1b2420" text-anchor="start">Set up a repo</text>
-<rect x="371" y="58" width="126.0" height="24" rx="6" fill="#e6f1ea"/><text x="434.0" y="74.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="500" fill="#2f6b4f" text-anchor="middle">/setup-workflow</text>
-<text x="371" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">Once per repo.</text>
-<text x="371" y="131" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">Needs a GitHub remote.</text>
-<path d="M321.5 67.0 l8 8 l-8 8" fill="none" stroke="#b9c2bd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="710.5" y=".5" width="289" height="150" rx="12" fill="#ffffff" stroke="#dfe4e1"/>
-<circle cx="740" cy="32" r="14" fill="#e6f1ea"/>
-<text x="740" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2f6b4f" text-anchor="middle">3</text>
-<text x="762" y="37.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1b2420" text-anchor="start">Start a task</text>
-<rect x="726" y="58" width="82.8" height="24" rx="6" fill="#e6f1ea"/><text x="767.4" y="74.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="500" fill="#2f6b4f" text-anchor="middle">/new-plan</text>
-<text x="726" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">Say the idea.</text>
-<text x="726" y="131" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#66716b" text-anchor="start">Claude drafts the plan.</text>
-<path d="M676.5 67.0 l8 8 l-8 8" fill="none" stroke="#b9c2bd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="0.75" y="0.75" width="288.5" height="154.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/><path d="M0 4 a4 4 0 0 1 4 -4 h282 a4 4 0 0 1 4 4 v2 h-290 z" fill="#0d8a69"/>
+<text x="16" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#0d8a69" text-anchor="start">1</text>
+<text x="40" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Install</text>
+<g transform="translate(250 19) scale(1.000)" fill="none" stroke="#0d8a69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></g>
+<rect x="16" y="62" width="121.60000000000001" height="24" rx="4" fill="#cf4527"/><text x="76.80000000000001" y="78.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#ffffff" text-anchor="middle">Claude Desktop</text>
+<text x="16" y="114" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Customize → Plugins:</text>
+<text x="16" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">add the plugin once.</text>
+<rect x="355.75" y="0.75" width="288.5" height="154.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/><path d="M355 4 a4 4 0 0 1 4 -4 h282 a4 4 0 0 1 4 4 v2 h-290 z" fill="#0d8a69"/>
+<text x="371" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#0d8a69" text-anchor="start">2</text>
+<text x="395" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Set up a repo</text>
+<g transform="translate(605 19) scale(1.000)" fill="none" stroke="#0d8a69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2.5h8.5A1.5 1.5 0 0 1 21 9v9.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/></g>
+<rect x="371" y="62" width="126.0" height="24" rx="4" fill="#1c2233"/><text x="434.0" y="78.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/setup-workflow</text>
+<text x="371" y="114" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Once per repo.</text>
+<text x="371" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Needs a GitHub remote.</text>
+<path d="M319.0 71.0 l7 7 l-7 7" fill="none" stroke="#1c2233" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="710.75" y="0.75" width="288.5" height="154.5" rx="4" fill="#ffffff" stroke="#d3d8e0" stroke-width="1.5"/><path d="M710 4 a4 4 0 0 1 4 -4 h282 a4 4 0 0 1 4 4 v2 h-290 z" fill="#0d8a69"/>
+<text x="726" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="30" font-weight="800" fill="#0d8a69" text-anchor="start">3</text>
+<text x="750" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1c2233" text-anchor="start">Start a task</text>
+<g transform="translate(960 19) scale(1.000)" fill="none" stroke="#0d8a69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1v.1h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3z"/></g>
+<rect x="726" y="62" width="82.8" height="24" rx="4" fill="#1c2233"/><text x="767.4" y="78.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">/new-plan</text>
+<text x="726" y="114" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Say the idea.</text>
+<text x="726" y="133" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#596173" text-anchor="start">Claude drafts the plan.</text>
+<path d="M674.0 71.0 l7 7 l-7 7" fill="none" stroke="#1c2233" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

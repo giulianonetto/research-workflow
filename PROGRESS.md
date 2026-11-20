@@ -3,7 +3,7 @@
 ## Current state (updated 2026-11-19)
 - **Now:** no active task.
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
-- README figure redrawn with you and GitHub lanes (no task; docs only, no version bump).
+- README figure redrawn with you and GitHub lanes, then all three figures restyled with their own look (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
@@ -11,6 +11,10 @@ Times are local.
 ## 2026-11-19: README figure shows you and GitHub
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 16:56: README figures restyled
+- `docs/figures.py`: same layout and words, new look for all three figures: a solid status band instead of pills, a colored top edge and a big number on each card, a line icon per stage, dark command chips, a red bar and person icon for the "you" lane, a branch icon for "on GitHub", sharper corners, normal-case headings. Runs: solid step circles and a solid red Stop. `docs/workflow.html` is unchanged and keeps its own palette.
+- **DECISION 2026-11-19 16:56:** the figures keep their cards and color coding but get their own palette, icons and solid shapes, because the pastel chips, pills and spaced caps looked like a generic AI template; a paper-figure style (no cards, one accent) and a hand-drawn style were tried and dropped as less visual and harder to read (user)
+- **DECISION 2026-11-19 16:56:** `docs/workflow.html` no longer shares the figures' colors, because restyling that page was not asked for; the docstring in `docs/figures.py` now says so
 ### 14:59: life-of-a-task figure redrawn
 - `docs/figures.py` `flow()`: two lanes under the cards (what you do, what you see on GitHub), Finalize drawn as the gate into `planned`, review shown per step and per branch, a record-keeping row for the two logs, `/sandbox` and "change the plan" in an any-time row. `docs/workflow.html` matches it (lanes, gate, `/sandbox` note). README: new alt text, a "Review in small pieces" bullet, a line on experiments and `/write-results`.
 - **DECISION 2026-11-19 14:59:** the life-of-a-task figure shows a "you" lane and an "on GitHub" lane under the five stages, because the old figure hid the issue, its checklist, the sub-issues and the PRs, which are how the user follows and reviews Claude's work in small pieces (user review of the README)
