@@ -2,6 +2,8 @@
 
 **Claude skills for research repos.** You plan with Claude over days, and every session picks up where the last one stopped. Claude builds the plan step by step and stops where you said you want to look.
 
+**Site:** [giulianonetto.github.io/research-workflow](https://giulianonetto.github.io/research-workflow/), everything on one page, with a worked example.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/flow-dark.svg">
   <img src="docs/img/flow-light.svg" alt="The life of a task: start a plan, shape it, finalize it, build it in runs, close it. The draft lives in tmp/ until you approve it, then moves to plans/ on a task branch, linked from the issue. Finalize checks that every step is ready to build (one commit, or sub-steps) and becomes planned only after you approve the plan and its stops. Claude reviews each step before its commit and the whole branch before the PR; you review and merge the PR. Under each stage: what you do and what you see on GitHub. Every session starts with /project-refresher and ends with /progress. Record keeping: PROGRESS.md at the root, the folder log (one per project), logs active tasks, status changes, PRs and releases; plans/<task>/PROGRESS.md, the task log (one per task), logs the work of each step, its DECISION lines and what is next. Any time: /sandbox to check by hand, or change the plan.">
@@ -66,7 +68,7 @@ An **experiment** (try something out, end in an answer) is a task too: start it 
 
 The plan can change at any time: just say what to change. All rules live in one file in your project, `plans/README.md`. All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 
-More: [examples](docs/examples.html): one task from idea to merged PR, then a new repo, an open issue, coming back to a draft, and an experiment. Download it and open it in a browser.
+More examples [on the site](https://giulianonetto.github.io/research-workflow/#example): one task from idea to merged PR, then a new repo, an open issue, coming back to a draft, and an experiment.
 
 <details>
 <summary><b>What it writes in a project</b></summary>

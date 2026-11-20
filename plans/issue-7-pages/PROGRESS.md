@@ -2,14 +2,16 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
 
 ## Current state (updated 2026-11-20)
-- `in-progress`: steps 1-3 done. The new repo is public; the old one is `research-workflow-old` (private, archived).
-- `docs/index.html` is the one page (README content, figures, commands, the examples); `docs/examples.html` is deleted.
-- Waiting on the user: open the page locally and judge it (step 3's Stop). Then step 4: README links, `.nojekyll`, `CLAUDE.md`.
+- `in-progress`: steps 1-4 done. The new repo is public; the old one is `research-workflow-old` (private, archived).
+- `docs/index.html` is the one page; the README links to the site; `docs/.nojekyll` added.
+- Next: step 5, turn on Pages, then review the branch and open the PR into main.
 
 ## 2026-11-20: plan started
 Started from the user's question on how to show `docs/examples.html` on GitHub.
 ### Next
-- The user opens `docs/index.html` in a browser (light and dark mode, phone width) and judges it. Then `/implement-next` for `PLAN.md` step 4 (README, notes, checks).
+- `PLAN.md` step 5: turn on Pages (`gh api -X POST repos/giulianonetto/research-workflow/pages`), review the branch, open the PR into main.
+### 16:01: step 4: README, notes, checks
+- README: a site link under the intro; the "More" line links to the site's example instead of the download note. `docs/.nojekyll`; `CLAUDE.md` names `docs/index.html`. The `check_skills.py` bullet was done in step 3.
 ### 15:33: step 3: one page with everything
 - `docs/index.html`: the README's content, its three figures (light and dark), the commands, and the examples page folded in, with a section nav and the examples' look; footer with credits and links to the repo, changelog and Development. The wide figures scroll sideways in their box at phone width. `docs/examples.html` deleted.
 - Moved from step 4: `tests/check_skills.py` scans `docs/index.html`, because the check read the deleted page and would fail. The user made the new repo public before this step.
