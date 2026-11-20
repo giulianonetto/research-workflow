@@ -1,16 +1,18 @@
 # Progress log
 
 ## Current state (updated 2026-11-20)
-- **Now:** no active task.
+- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `drafting`: publish the examples page with GitHub Pages.
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
 - README figures restyled with their own look; `docs/workflow.html` deleted; `docs/examples.html` rewritten, shorter (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
 
-## 2026-11-20: figure and README touch-ups
+## 2026-11-20: figure and README touch-ups; #7 started
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 11:25: #7 started
+- Issue [#7](https://github.com/giulianonetto/research-workflow/issues/7) and task [issue-7-pages](plans/issue-7-pages/PROGRESS.md), status `drafting`; its decisions are logged there.
 ### 10:20: examples page rewritten
 - `docs/examples.html` (550 → 291 lines): one story from idea to merged PR in five days (a row per step: who, one or two sentences, what you say or see, status changes), then four short cases (new repo, an open issue, back after a week, an experiment). Longer details (what finalize and the review check, the folder after setup, `run.sh`, outputs in git, dropping an experiment) sit in closed "more" sections. The figures' look, a dark mode, system fonts (no web fonts). The "What to remember" table is gone; it links to the README's command table. README's "More" line names the new parts. A "How the work lands on GitHub" section (a branch diagram: task branch, a big step's branch and PR, stops, the PR into main; four one-line rules) comes before the cases; Day 5 has a small mock issue checklist linking to it. The "you" step in the build says what to review (Claude's summary, one commit per step, the result), not only plots.
 - **DECISION 2026-11-20 10:20:** the examples page tells one task start to finish and gives the other situations as short cases, with details folded away, replacing five long step-by-step workflows, because the old page was overwhelming: long paragraphs on Claude's internals in every step, and the same flow told five times (user chose the shape)
