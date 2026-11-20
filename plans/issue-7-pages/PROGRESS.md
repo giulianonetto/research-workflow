@@ -1,15 +1,15 @@
 # Progress: Publish a project site with GitHub Pages (#7)
-**Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
+**Status:** done · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
 
 ## Current state (updated 2026-11-20)
-- `in-progress`: all 5 steps done. The new repo is public; the old one is `research-workflow-old` (private, archived).
-- Pages is on (`main`, `/docs`); the site goes live when the PR into main is merged.
-- Waiting on the user: review and merge the PR into main.
+- None: task done. See the [folder log](../../PROGRESS.md).
 
 ## 2026-11-20: plan started
 Started from the user's question on how to show `docs/examples.html` on GitHub.
 ### Next
-- The user reviews and merges the PR into main. After the merge: open https://giulianonetto.github.io/research-workflow/ in light and dark mode and at phone width, check the README links, then `/progress` "merged, mark done".
+- None: task done. See the [folder log](../../PROGRESS.md).
+### 16:06: PR #8 merged; done
+- [PR #8](https://github.com/giulianonetto/research-workflow/pull/8) merged into `main` (`f1d02f5`); #7 closed by it. Pages built from `f1d02f5`: https://giulianonetto.github.io/research-workflow/ and its figures return 200. Status `in-progress` → `done` (user).
 ### 16:02: step 5: Pages on
 - Pages turned on with `gh api` (source `main`, `/docs`, HTTPS enforced). Until the merge, `main` has no `docs/index.html`, so the site root gives 404.
 ### 16:01: step 4: README, notes, checks

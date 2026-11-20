@@ -1,16 +1,19 @@
 # Progress log
 
 ## Current state (updated 2026-11-20)
-- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `in-progress`: publish a project site with GitHub Pages; [PR #8](https://github.com/giulianonetto/research-workflow/pull/8) into `main` open (the site goes live on merge). The repo is public, with a cleaned history.
+- **Now:** no active task.
+- Project site live: https://giulianonetto.github.io/research-workflow/ (`docs/index.html`, served from `main` `/docs`). The repo is public, with a cleaned history ([#7](plans/issue-7-pages/PROGRESS.md)).
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
-- README figures restyled with their own look; `docs/workflow.html` deleted; `docs/examples.html` rewritten, shorter (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
 
-## 2026-11-20: figure and README touch-ups; #7 started and planned
+## 2026-11-20: figure and README touch-ups; #7 done: a project site
+[#7](plans/issue-7-pages/PROGRESS.md) done: one landing page, `docs/index.html`, served by GitHub Pages; the repo is public.
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 16:06: #7 done; PR #8 merged
+- [#7](plans/issue-7-pages/PROGRESS.md): [PR #8](https://github.com/giulianonetto/research-workflow/pull/8) merged into `main` (`f1d02f5`); status `done`. The site is live at https://giulianonetto.github.io/research-workflow/.
 ### 14:50: #7 in-progress
 - [#7](plans/issue-7-pages/PROGRESS.md): step 1 built; status `planned` → `in-progress`.
 ### 13:36: #7 planned
