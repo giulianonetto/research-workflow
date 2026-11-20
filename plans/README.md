@@ -117,7 +117,7 @@ All decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 
 ## Tasks in this repo
 
-- [issue-7-pages](issue-7-pages/): publish the examples page with GitHub Pages (#7), started 2026-11-20
+- [issue-7-pages](issue-7-pages/): publish a project site with GitHub Pages (#7), started 2026-11-20
 - [issue-5-build-runs](issue-5-build-runs/): build in runs that stop where the plan says, with lighter build rules (#5), started 2026-11-18
 - [issue-2-right-size-build](issue-2-right-size-build/): simplify the workflow and right-size the build (#2), started 2026-11-17
 - [initial-design](initial-design/): initial design of the workflow, started 2026-10-29

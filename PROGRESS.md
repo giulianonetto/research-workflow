@@ -1,7 +1,7 @@
 # Progress log
 
 ## Current state (updated 2026-11-20)
-- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `drafting`: publish the examples page with GitHub Pages.
+- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `drafting`: publish a project site with GitHub Pages.
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
 - README figures restyled with their own look; `docs/workflow.html` deleted; `docs/examples.html` rewritten, shorter (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
