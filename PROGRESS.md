@@ -1,9 +1,9 @@
 # Progress log
 
-## Current state (updated 2026-11-19)
+## Current state (updated 2026-11-20)
 - **Now:** no active task.
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
-- README figure redrawn with you and GitHub lanes, then all three figures restyled with their own look (no task; docs only, no version bump).
+- README figures restyled with their own look; `docs/workflow.html` deleted; `docs/examples.html` rewritten, shorter (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
@@ -11,6 +11,13 @@ Times are local.
 ## 2026-11-20: figure and README touch-ups
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 10:20: examples page rewritten
+- `docs/examples.html` (550 → 291 lines): one story from idea to merged PR in five days (a row per step: who, one or two sentences, what you say or see, status changes), then four short cases (new repo, an open issue, back after a week, an experiment). Longer details (what finalize and the review check, the folder after setup, `run.sh`, outputs in git, dropping an experiment) sit in closed "more" sections. The figures' look, a dark mode, system fonts (no web fonts). The "What to remember" table is gone; it links to the README's command table. README's "More" line names the new parts. A "How the work lands on GitHub" section (a branch diagram: task branch, a big step's branch and PR, stops, the PR into main; four one-line rules) comes before the cases; Day 5 has a small mock issue checklist linking to it. The "you" step in the build says what to review (Claude's summary, one commit per step, the result), not only plots.
+- **DECISION 2026-11-20 10:20:** the examples page tells one task start to finish and gives the other situations as short cases, with details folded away, replacing five long step-by-step workflows, because the old page was overwhelming: long paragraphs on Claude's internals in every step, and the same flow told five times (user chose the shape)
+- **DECISION 2026-11-20 10:20:** the experiment details (`run.sh`, which outputs go to git, stopping without an answer) stay on the page, folded under the experiment case, because they are the only user-facing explanation outside the skills (user)
+### 09:20: workflow page deleted
+- `docs/workflow.html` deleted. README's "More" line links only to `docs/examples.html`; `tests/check_skills.py` no longer scans the page; the `docs/figures.py` docstring no longer names it.
+- **DECISION 2026-11-20 09:20:** delete `docs/workflow.html`, replacing yesterday's "keeps its own palette", because once restyled like the figures it only repeated the README's flow figure (same stages, lanes and rows, a few longer card texts), had to be kept in step by hand, and asked readers to download it; its notes on experiments and the DECISION `grep` are already in the README (user)
 ### 08:41: figure colors, README edits
 - `docs/figures.py`: no beige: command chips in dark mode are slate (were cream), the light GitHub lane and file chips are cool grey; the "every session" middle box says "plan or build" (was "work on the plan"), because a session can also build steps; the "you" box under Shape it says "Answer questions, improve the plan." because the user also edits the plan, not only answers; command chips and log file names use the code font a bit bigger and less bold (13 px, weight 500; was 12 px bold), because the small bold letters were hard on the eyes (user picked it from four versions).
 - README (by hand): `gh auth` line for a private repo removed from the Claude Code install; the Development summary is bold.

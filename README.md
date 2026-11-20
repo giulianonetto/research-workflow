@@ -66,7 +66,7 @@ An **experiment** (try something out, end in an answer) is a task too: start it 
 
 The plan can change at any time: just say what to change. All rules live in one file in your project, `plans/README.md`. All past decisions: `grep -rn '^- \*\*DECISION' PROGRESS.md plans/*/PROGRESS.md`
 
-More: [the workflow on one page](docs/workflow.html) and [step-by-step examples](docs/examples.html) (new repo, new task, existing issue, continuing a draft). Download them and open them in a browser.
+More: [examples](docs/examples.html): one task from idea to merged PR, then a new repo, an open issue, coming back to a draft, and an experiment. Download it and open it in a browser.
 
 <details>
 <summary><b>What it writes in a project</b></summary>

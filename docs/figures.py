@@ -4,8 +4,8 @@
 Writes docs/img/flow-{light,dark}.svg (the life of a task), docs/img/runs-{light,dark}.svg
 (a build in runs, with its stops) and docs/img/start-{light,dark}.svg (get started).
 The figures have their own look: solid status colors, dark command chips, a line icon per stage.
-docs/workflow.html keeps its own palette. Text does not wrap in SVG, so every line is written
-by hand: keep card and lane lines under about 20 characters.
+Text does not wrap in SVG, so every line is written by hand: keep card and lane lines
+under about 20 characters.
 """
 from pathlib import Path
 
