@@ -48,7 +48,7 @@ Times are local.
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
 ### 15:05: #5 done; 0.3.0 merged and tagged
-- [#5](plans/issue-5-build-runs/PROGRESS.md): [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`8c4c736`); status `done`; tag `v0.3.0` pushed for the release workflow.
+- [#5](plans/issue-5-build-runs/PROGRESS.md): [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`1dfb2e3`); status `done`; tag `v0.3.0` pushed for the release workflow.
 ### 14:09: #5 in-progress
 - [#5](plans/issue-5-build-runs/PROGRESS.md): step 1 built; status `planned` → `in-progress`.
 ### 14:04: #5 planned
@@ -56,7 +56,7 @@ Times are local.
 ### 12:58: #5 started
 - Issue [#5](https://github.com/giulianonetto/research-workflow/issues/5) and task [issue-5-build-runs](plans/issue-5-build-runs/PROGRESS.md), status `drafting`; its decisions are logged there.
 ### 12:25: #2 done; 0.2.0 merged and tagged
-- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`37d63c5`); [#2](plans/issue-2-right-size-build/PROGRESS.md) `done`; tag `v0.2.0` pushed for the release workflow.
+- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`b4e518d`); [#2](plans/issue-2-right-size-build/PROGRESS.md) `done`; tag `v0.2.0` pushed for the release workflow.
 ### 12:22: #2 PR opened
 - [#2](plans/issue-2-right-size-build/PROGRESS.md): [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened (0.2.0).
 ### 11:56: #2 in-progress
@@ -73,7 +73,7 @@ Times are local.
 
 ## 2026-11-04: version 0.1.1 (no Next on done tasks)
 ### 16:24: 0.1.1 merged and tagged
-- [PR #1](https://github.com/giulianonetto/research-workflow/pull/1) merged into `main` (`f889652`); checks pass on `main`. Tag `v0.1.1` pushed for the release workflow.
+- [PR #1](https://github.com/giulianonetto/research-workflow/pull/1) merged into `main` (`c9f4585`); checks pass on `main`. Tag `v0.1.1` pushed for the release workflow.
 ### 16:30: PR for 0.1.1
 - Found on a real project: after "mark done", `progress` left a stale **Next** in the done task's log. `progress` step 3 and 5, `plans/README.md` template (and this repo's copy), CHANGELOG, examples page; version 0.1.1. Checks pass.
 - **DECISION 2026-11-04 16:30:** a `done` or `dropped` task keeps no Next (`None: task <status>.`, link to the folder log) and follow-up work goes in the folder log's Next, because a Next in a closed task's log is never read again, so nothing shows when it goes stale (user)

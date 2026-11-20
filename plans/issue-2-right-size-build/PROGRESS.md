@@ -2,7 +2,7 @@
 **Status:** done · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#2](https://github.com/giulianonetto/research-workflow/issues/2)
 
 ## Current state (updated 2026-11-18)
-- Done: all 10 steps built; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`37d63c5`); released as 0.2.0 (tag `v0.2.0`).
+- Done: all 10 steps built; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` (`b4e518d`); released as 0.2.0 (tag `v0.2.0`).
 - None: task done. Follow-up ([#3](https://github.com/giulianonetto/research-workflow/issues/3)) is in the [folder log](../../PROGRESS.md).
 
 ## 2026-11-18: workflow review; plan rewritten
@@ -10,7 +10,7 @@ Removing `/update-plan` led to a review of the whole workflow against the real p
 ### Next
 - None: task done. Follow-up work is in the [folder log](../../PROGRESS.md).
 ### 12:25: merged, done, 0.2.0
-- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` by Claude on the user's "you can merge using gh" (merge commit `37d63c5`, checks green); issue #2 closed by it; its plan link now points to `main`.
+- [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) merged into `main` by Claude on the user's "you can merge using gh" (merge commit `b4e518d`, checks green); issue #2 closed by it; its plan link now points to `main`.
 - Status `in-progress` → `done`, tag `v0.2.0` pushed, branch `issue-2-right-size-build` deleted (user: "yes, both, and delete the branch").
 ### 12:22: PR #4 opened
 - Pushed the branch; issue #2 checklist: steps 2-10 ticked; [PR #4](https://github.com/giulianonetto/research-workflow/pull/4) into `main` opened with `Closes #2` (user: "yes, push, tick the boxes, open the PR").

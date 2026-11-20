@@ -9,7 +9,7 @@ Started from building #2 and the talk after it, in this session and in a second 
 ### Next
 - None: task done. Follow-up work is in the [folder log](../../PROGRESS.md).
 ### 15:05: merged, done
-- [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`8c4c736`); #5 closed by the merge, its plan link now points to `main`. Status `in-progress` → `done`. Tag `v0.3.0` pushed for the release workflow.
+- [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) merged into `main` (`1dfb2e3`); #5 closed by the merge, its plan link now points to `main`. Status `in-progress` → `done`. Tag `v0.3.0` pushed for the release workflow.
 ### 15:02: PR into main opened
 - [PR #6](https://github.com/giulianonetto/research-workflow/pull/6) opened from `issue-5-build-runs` into `main`, `Closes #5`.
 ### 14:59: step 6, README round 3

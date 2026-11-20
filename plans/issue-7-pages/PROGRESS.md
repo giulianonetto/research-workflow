@@ -2,14 +2,18 @@
 **Status:** in-progress · **Kind:** task · **Plan:** [PLAN.md](PLAN.md) · **Folder log:** [../../PROGRESS.md](../../PROGRESS.md) · **Issue:** [#7](https://github.com/giulianonetto/research-workflow/issues/7)
 
 ## Current state (updated 2026-11-20)
-- `in-progress`: step 1 (check before going public) done; it found personal details in old commits and tags.
-- Plan change: new step 2 rewrites the history and moves to a new repo with the same name; old steps 2-4 are now 3-5.
-- Next stop: after step 2, the user checks the new repo and makes it public.
+- `in-progress`: steps 1-2 done. The history is rewritten and lives in a new private repo with the same name; the old one is `research-workflow-old` (private, archived).
+- Waiting on the user: check the new repo and make it public (step 2's Stop).
+- Then step 3: one page with everything (`docs/index.html`).
 
 ## 2026-11-20: plan started
 Started from the user's question on how to show `docs/examples.html` on GitHub.
 ### Next
-- `PLAN.md` step 2: clean the history and move to a new repo (`/implement-next`).
+- The user checks https://github.com/giulianonetto/research-workflow and makes it public (Settings → General → Change visibility). Then `/implement-next` for `PLAN.md` step 3 (one page with everything, `docs/index.html`).
+### 15:09: step 2: history cleaned, moved to a new repo
+- `git filter-repo` on all branches and tags (replace list outside the repo; one author, noreply email), pushed to a new private repo; issues #2, #3, #5, #7 moved with their numbers (placeholders #1, #4, #6); the release workflow made the three releases again; old repo renamed, archived; commit hashes in the logs updated.
+- Not in the plan: pushes went over SSH (the `gh` token has no `workflow` scope); the `v0.1.1` tag was pushed twice (the first push ran no workflow) and `v0.3.0` set back to Latest; the local branches already merged into `main` were deleted.
+- **DECISION 2026-11-20 15:09:** the one author name is `giulianonetto`, the GitHub login, because it matches the noreply address (Claude)
 ### 15:03: plan change: clean the history, move to a new repo
 - `PLAN.md`: new step 2 (rewrite all branches and tags, move to a new repo with the same name); old steps 2-4 become 3-5; open question 1 settled and removed.
 - **DECISION 2026-11-20 15:03 (plan change):** rewrite the history with `git filter-repo` and push it to a new repo with the same name, with the old repo renamed `research-workflow-old`, kept private and archived, because personal details sit in old commits and tags, and GitHub keeps merged PRs' commits in `refs/pull/*`, which a force-push cannot remove; the plan missed: what the history holds (step 1 check)
