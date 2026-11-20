@@ -1,7 +1,7 @@
 # Progress log
 
 ## Current state (updated 2026-11-20)
-- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `planned`: publish a project site with GitHub Pages.
+- **Now:** [#7](plans/issue-7-pages/PROGRESS.md) `in-progress`: publish a project site with GitHub Pages.
 - Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
 - README figures restyled with their own look; `docs/workflow.html` deleted; `docs/examples.html` rewritten, shorter (no task; docs only, no version bump).
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
@@ -11,6 +11,8 @@ Times are local.
 ## 2026-11-20: figure and README touch-ups; #7 started and planned
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 14:50: #7 in-progress
+- [#7](plans/issue-7-pages/PROGRESS.md): step 1 built; status `planned` → `in-progress`.
 ### 13:36: #7 planned
 - [#7](plans/issue-7-pages/PROGRESS.md) finalized: status `planned`, two small plan gaps fixed; checklist in the issue.
 ### 11:25: #7 started
