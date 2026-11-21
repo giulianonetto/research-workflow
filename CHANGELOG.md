@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2026-11-20)
+
+A project site and new figures ([#7](https://github.com/giulianonetto/research-workflow/issues/7)). The skills and templates are the same as in 0.3.0.
+
+- **Site:** one landing page, `docs/index.html`, served by GitHub Pages at https://giulianonetto.github.io/research-workflow/. The repo is public.
+- **Figures:** the README figures get their own look (solid colors, icons, a lane for you and one for GitHub), drawn by `docs/figures.py`.
+- **Removed:** `docs/workflow.html` and `docs/examples.html`; the site replaces them.
+
 ## 0.3.0 (2026-11-18)
 
 Build in runs that stop where the plan says, with lighter build rules ([#5](https://github.com/giulianonetto/research-workflow/issues/5)).

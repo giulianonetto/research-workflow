@@ -1,6 +1,6 @@
 # Plans
 
-Workflow version: 0.3.0 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
+Workflow version: 0.4.0 ([research-workflow](https://github.com/giulianonetto/research-workflow)). `/setup-workflow` compares this line with its own to offer updates.
 
 This file holds all the rules of the workflow. One folder per task: `plans/<task>/PLAN.md` (what and how) and `plans/<task>/PROGRESS.md` (what was done and decided). Optional `plans/<task>/sandbox/`: code for manual inspection, indexed in its `README.md`; its outputs go to `tmp/sandbox/<task>/` (not in git). The flow is in the [README](../README.md#development-workflow).
 

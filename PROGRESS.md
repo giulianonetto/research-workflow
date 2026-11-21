@@ -12,6 +12,8 @@ Times are local.
 [#7](plans/issue-7-pages/PROGRESS.md) done: one landing page, `docs/index.html`, served by GitHub Pages; the repo is public.
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
+### 17:02: version 0.4.0
+- `plugin.json`, both `Workflow version:` lines and a CHANGELOG section bumped to 0.4.0, for the site and the new figures; no skill or template changed since 0.3.0. Not tagged yet.
 ### 16:06: #7 done; PR #8 merged
 - [#7](plans/issue-7-pages/PROGRESS.md): [PR #8](https://github.com/giulianonetto/research-workflow/pull/8) merged into `main` (`f1d02f5`); status `done`. The site is live at https://giulianonetto.github.io/research-workflow/.
 ### 14:50: #7 in-progress
