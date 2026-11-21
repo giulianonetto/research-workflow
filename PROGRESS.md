@@ -3,17 +3,17 @@
 ## Current state (updated 2026-11-20)
 - **Now:** no active task.
 - Project site live: https://giulianonetto.github.io/research-workflow/ (`docs/index.html`, served from `main` `/docs`). The repo is public, with a cleaned history ([#7](plans/issue-7-pages/PROGRESS.md)).
-- Last release: 0.3.0 (tag `v0.3.0`): build in runs that stop where the plan says, lighter build rules, a shorter README with figures ([#5](plans/issue-5-build-runs/PROGRESS.md)).
+- Last release: 0.4.0 (tag `v0.4.0`): the project site and new figures; skills and templates the same as 0.3.0.
 - Open: [#3](https://github.com/giulianonetto/research-workflow/issues/3), clear done tasks and old log entries at a release.
 
 Times are local.
 
-## 2026-11-20: figure and README touch-ups; #7 done: a project site
+## 2026-11-20: figure and README touch-ups; #7 done: a project site; version 0.4.0
 [#7](plans/issue-7-pages/PROGRESS.md) done: one landing page, `docs/index.html`, served by GitHub Pages; the repo is public.
 ### Next
 - [#3](https://github.com/giulianonetto/research-workflow/issues/3): clear done tasks and old log entries at a release (`/new-plan` when it is worth starting).
 ### 17:02: version 0.4.0
-- `plugin.json`, both `Workflow version:` lines and a CHANGELOG section bumped to 0.4.0, for the site and the new figures; no skill or template changed since 0.3.0. Not tagged yet.
+- `plugin.json`, both `Workflow version:` lines and a CHANGELOG section bumped to 0.4.0, for the site and the new figures; no skill or template changed since 0.3.0. Commit `e78f0f6` on `main`; tag `v0.4.0` pushed, the release workflow published release v0.4.0 as Latest.
 ### 16:06: #7 done; PR #8 merged
 - [#7](plans/issue-7-pages/PROGRESS.md): [PR #8](https://github.com/giulianonetto/research-workflow/pull/8) merged into `main` (`f1d02f5`); status `done`. The site is live at https://giulianonetto.github.io/research-workflow/.
 ### 14:50: #7 in-progress
